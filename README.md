@@ -32,14 +32,15 @@
 
 ## 免费实用工具
 
-全部在浏览器本地计算，不收集输入内容。入口：[实用工具](https://vpntizi.blog/tools/)
+计算类工具全部在浏览器本地运行，不收集输入内容。入口：[实用工具](https://vpntizi.blog/tools/)
 
 | 工具 | 用途 |
 |---|---|
 | [流量使用量估算器](https://vpntizi.blog/tools/liuliang-gusuan/) | 按网页、视频清晰度、AI 对话和下载时长，估算每月需要多少 GB |
 | [每GB套餐价格计算器](https://vpntizi.blog/tools/meigb-jiage/) | 算出折合月价与每GB成本，多个套餐并排比较 |
 | [客户端选择助手](https://vpntizi.blog/tools/kehuduan-xuanze/) | 回答设备和使用习惯，得到推荐的客户端与教程 |
-| [故障排查助手](https://vpntizi.blog/tools/guzhang-paicha/) | 按症状排查订阅导入失败、节点超时、网页打不开 |
+| [订阅导入与连接故障排查助手](https://vpntizi.blog/tools/guzhang-paicha/) | 按症状排查订阅导入失败、节点超时、网页打不开 |
+| [机场资料核验与更新记录](https://vpntizi.blog/tools/ziliao-hezhe/) | 查看 34 家机场的核验状态、核实与整理日期和历次更新记录 |
 
 ## 精选内容
 
