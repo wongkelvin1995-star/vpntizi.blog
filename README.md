@@ -1,169 +1,101 @@
-# VPN梯子指南（vpntizi.blog）：2026 机场推荐、VPN梯子推荐与 Clash 教程
+# VPN梯子指南 2026｜机场推荐、VPN梯子推荐与 Clash 教程
 
-<p align="center"><a href="https://vpntizi.blog/"><b>👉 打开网站：vpntizi.blog</b></a> · <a href="https://vpntizi.blog/jichang-paihangbang/">完整榜单</a> · <a href="https://vpntizi.blog/jichang-tuijian/">机场推荐</a> · <a href="https://vpntizi.blog/jiaocheng/">客户端教程</a> · <a href="https://vpntizi.blog/tools/">实用工具</a> · <a href="https://t.me/+cKCtour4mqM1NTA9">Telegram</a></p>
+**VPN梯子指南（vpntizi.blog）** 是一个面向中文用户的 VPN、机场选择及网络工具知识博客。
 
-**[VPN梯子指南](https://vpntizi.blog/)** 是面向中文新手的 **VPN梯子 / 机场推荐** 导航与教程站：整理了 34 家机场（梯子）的套餐价格、线路与客户端支持，按“选什么、怎么买、怎么装、出问题怎么办”的顺序，讲清 **VPN 和机场的区别**、**梯子推荐与选购标准**、**性价比机场**怎么比、**机场节点**怎么选，以及 **Clash Verge、Shadowrocket（小火箭）、v2rayN** 等**梯子工具**的安装与订阅导入。
+网站整理了 34 家机场服务的资料，包括套餐价格、线路类型、节点地区、客户端支持和选购方法，并收录 26 篇新手教程与 5 项实用工具。我们希望帮助第一次接触 VPN 或机场的读者理解不同工具的区别，选择适合自己的服务，并学会客户端安装、订阅导入和常见连接问题的排查。
 
-**关键词：** VPN梯子 · VPN · 梯子 · 梯子推荐 · 机场推荐 · 机场推荐 Clash · 机场节点 · 性价比机场 · 免费梯子 · 梯子工具 · 翻墙 · 科学上网 · 稳定机场 · 专线机场 IEPL / IPLC · ChatGPT 机场 · Clash 教程 · 小火箭教程 · v2rayN 教程
+### 👉 [访问官方网站：vpntizi.blog](https://vpntizi.blog/)
 
-> 推广披露：网站上的“官网注册”按钮含推广合作（AFF）链接，推荐顺序是编辑推荐展示顺序，**不是测速排名**。价格以官网为准，每家资料都注明整理或核实日期。详见 [推广披露与推荐方法](https://vpntizi.blog/tuiguang-pilu/)。
-
-## 网站有什么
-
-| 栏目 | 内容 |
-|---|---|
-| [首页：VPN梯子推荐指南 2026](https://vpntizi.blog/) | 七章入门流程：基础概念 → 选择标准 → 套餐比较 → 节点地区 → 客户端 → 订阅导入 → 故障排查 |
-| [机场推荐](https://vpntizi.blog/jichang-tuijian/) | 按稳定、便宜、专线、AI、流媒体等需求挑机场 |
-| [完整榜单](https://vpntizi.blog/jichang-paihangbang/) | 34 家机场完整名单，逐家资料页 |
-| [客户端教程](https://vpntizi.blog/jiaocheng/) | Clash Verge Rev、ClashParty、Shadowrocket、v2rayN / v2rayNG、sing-box、Hiddify、Karing |
-| [新手知识](https://vpntizi.blog/zhishi/) | 线路、流量、节点延迟、订阅导入、安全与法律 |
-| [实用工具](https://vpntizi.blog/tools/) | 流量估算、每GB价格计算、客户端选择、故障排查 |
-
-## 重点推荐（前五）
-
-| 推荐位 | 机场 | 月付起步 | 最大月流量 | 线路 | 资料页 |
-|---|---|---|---|---|---|
-| 1 | **灵动云** | ¥20（100GB/月） | 1500GB | BGP、IPLC 专线 | [灵动云怎么样](https://vpntizi.blog/jichang/lingdongyun/) |
-| 2 | **暮光加速** | ¥20（120GB/月） | 1500GB | BGP 智能路由、专线出口 | [暮光加速怎么样](https://vpntizi.blog/jichang/muguang-jiasu/) |
-| 3 | **微风网络 Breezenet** | ¥27（200GB/月） | 1200GB | IPLC 专线、三网优化入口 | [微风网络怎么样](https://vpntizi.blog/jichang/breezenet/) |
-| 4 | **飞猫云** | ¥25（150GB/月） | 1000GB | IEPL 专线 | [飞猫云怎么样](https://vpntizi.blog/jichang/feimaoyun/) |
-| 5 | **大佬云** | ¥23（130GB/月） | 600GB | IEPL 专线 | [大佬云怎么样](https://vpntizi.blog/jichang/dalaoyun/) |
-
-## 完整榜单（34 家）
-
-顺序为本站推荐展示顺序，含推广合作，不代表测速结果。点名称进入资料页，可查看全部套餐、折合月价、每GB价格、节点地区、协议、客户端与购买限制。
-
-| # | 机场 | 月付起步 | 最大月流量 | 资料状态 |
-|---|---|---|---|---|
-| 1 | [灵动云](https://vpntizi.blog/jichang/lingdongyun/) | ¥20（100GB/月） | 1500GB | 资料整理于 2026-10-20 |
-| 2 | [暮光加速](https://vpntizi.blog/jichang/muguang-jiasu/) | ¥20（120GB/月） | 1500GB | 资料整理于 2026-10-20 |
-| 3 | [微风网络 Breezenet](https://vpntizi.blog/jichang/breezenet/) | ¥27（200GB/月） | 1200GB | 资料整理于 2026-10-20 |
-| 4 | [飞猫云](https://vpntizi.blog/jichang/feimaoyun/) | ¥25（150GB/月） | 1000GB | 资料整理于 2026-10-20 |
-| 5 | [大佬云](https://vpntizi.blog/jichang/dalaoyun/) | ¥23（130GB/月） | 600GB | 资料整理于 2026-10-20 |
-| 6 | [飞V](https://vpntizi.blog/jichang/feiv/) | ¥9.9（15GB/月） | 3000GB | 官网已核实 2026-10-20 |
-| 7 | [梯子云 LadderCloud](https://vpntizi.blog/jichang/tiziyun/) | ¥25（125GB/月） | 1600GB | 资料整理于 2026-10-20 |
-| 8 | [浪网 WaveNet](https://vpntizi.blog/jichang/wavenet/) | ¥30（150GB/月） | 2000GB | 官网已核实 2026-10-20 |
-| 9 | [隐形人](https://vpntizi.blog/jichang/yinxingren/) | ¥24（144GB/月） | 1600GB | 资料整理于 2026-10-20 |
-| 10 | [星岛梦 StarDream](https://vpntizi.blog/jichang/xingdaomeng/) | ¥25（150GB/月） | 1000GB | 资料整理于 2026-10-20 |
-| 11 | [光速云 LightSpeed](https://vpntizi.blog/jichang/guangsuyun/) | ¥17（110GB/月） | 900GB | 资料整理于 2026-10-20 |
-| 12 | [唯兔云（V2云）](https://vpntizi.blog/jichang/weituyun/) | ¥14.9（100GB/月） | 1000GB | 资料整理于 2026-10-20 |
-| 13 | [U1S1（有一说一）](https://vpntizi.blog/jichang/u1s1/) | ¥20（120GB/月） | 1500GB | 资料整理于 2026-10-20 |
-| 14 | [极连云](https://vpntizi.blog/jichang/jilianyun/) | ¥15.5（100GB/月） | 500GB | 官网已核实 2026-10-20 |
-| 15 | [全球云](https://vpntizi.blog/jichang/quanqiuyun/) | ¥20（120GB/月） | 1500GB | 资料整理于 2026-10-20 |
-| 16 | [光年梯](https://vpntizi.blog/jichang/guangnianti/) | ¥18（110GB/月） | 900GB | 资料整理于 2026-10-20 |
-| 17 | [Sogo云](https://vpntizi.blog/jichang/sogoyun/) | ¥25（120GB/月） | 1000GB | 资料整理于 2026-10-20 |
-| 18 | [宇宙云 YuZhou](https://vpntizi.blog/jichang/yuzhouyun/) | ¥12.5（50GB/月） | 1000GB | 资料整理于 2026-10-20 |
-| 19 | [二猫云 2mao](https://vpntizi.blog/jichang/ermaoyun/) | ¥13（60GB/月） | 850GB | 资料整理于 2026-10-20 |
-| 20 | [一翻云 1fly](https://vpntizi.blog/jichang/yifanyun/) | ¥20（150GB/月） | 1200GB | 资料整理于 2026-10-20 |
-| 21 | [边缘节点 EdgeNova](https://vpntizi.blog/jichang/edgenova/) | ¥15（50GB/月） | 1000GB | 资料整理于 2026-10-20 |
-| 22 | [可信云](https://vpntizi.blog/jichang/kexinyun/) | ¥15（60GB/月） | 1200GB | 资料整理于 2026-10-20 |
-| 23 | [速界 SuJie](https://vpntizi.blog/jichang/sujie/) | ¥15（50GB/月） | 1000GB | 资料整理于 2026-10-20 |
-| 24 | [快狸 KuaiLi](https://vpntizi.blog/jichang/kuaili/) | ¥15（50GB/月） | 1000GB | 资料整理于 2026-10-20 |
-| 25 | [无忧](https://vpntizi.blog/jichang/wuyou/) | ¥19（100GB/月） | 1024GB | 资料整理于 2026-10-20 |
-| 26 | [灵猫](https://vpntizi.blog/jichang/lingmao/) | ¥25（150GB/月） | 300GB | 资料整理于 2026-10-20 |
-| 27 | [闪跃 FlashLeap](https://vpntizi.blog/jichang/flashleap/) | ¥24（150GB/月） | 1000GB | 资料整理于 2026-10-20 |
-| 28 | [飞为（Firefly）](https://vpntizi.blog/jichang/feiwei/) | ¥25（150GB/月） | 1000GB | 资料整理于 2026-10-20 |
-| 29 | [跨界云](https://vpntizi.blog/jichang/kuajie/) | ¥20（120GB/月） | 1800GB | 官网已核实 2026-10-20 |
-| 30 | [榴莲云](https://vpntizi.blog/jichang/liulianyun/) | ¥24（140GB/月） | 750GB | 资料整理于 2026-10-20 |
-| 31 | [闪电云](https://vpntizi.blog/jichang/shandianyun/) | ¥22（120GB/月） | 500GB | 资料整理于 2026-10-20 |
-| 32 | [环球云](https://vpntizi.blog/jichang/huanqiuyun/) | ¥22（120GB/月） | 600GB | 资料整理于 2026-10-20 |
-| 33 | [神行云](https://vpntizi.blog/jichang/shenxingyun/) | ¥23（120GB/月） | 520GB | 资料整理于 2026-10-20 |
-| 34 | [云界云](https://vpntizi.blog/jichang/yunjieyun/) | ¥25（150GB/月） | 600GB | 资料整理于 2026-10-20 |
-
-资料总表更新：2026-10-22。完整核验状态与修改记录见 [资料核验与更新记录](https://vpntizi.blog/tools/ziliao-hezhe/)。
-
-## 文章（26 篇）
-
-**机场推荐**
-
-- [按量计费机场：不限时流量包适合谁](https://vpntizi.blog/anliang-jifei-jichang/)
-- [ChatGPT机场推荐：AI工具节点怎么选](https://vpntizi.blog/chatgpt-jichang-tuijian/)
-- [Clash机场推荐：Clash Verge订阅怎么选](https://vpntizi.blog/clash-jichang-tuijian/)
-- [高速机场推荐：4K与大文件下载怎么选](https://vpntizi.blog/gaosu-jichang-tuijian/)
-- [流媒体解锁机场：Netflix机场推荐指南](https://vpntizi.blog/liumeiti-jiesuo-jichang/)
-- [便宜机场推荐：高性价比机场怎么挑](https://vpntizi.blog/pianyi-jichang-tuijian/)
-- [Shadowrocket机场推荐：小火箭订阅怎么选](https://vpntizi.blog/shadowrocket-jichang-tuijian/)
-- [梯子怎么选？新手第一次买梯子的步骤与避坑](https://vpntizi.blog/tizi-tuijian/)
-- [v2rayN机场推荐：通用订阅机场怎么选](https://vpntizi.blog/v2rayn-jichang-tuijian/)
-- [翻墙VPN推荐2026：商业VPN和机场怎么选](https://vpntizi.blog/vpn-tuijian/)
-- [稳定机场推荐：晚高峰不掉线怎么选](https://vpntizi.blog/wending-jichang-tuijian/)
-- [专线机场推荐：IEPL与IPLC机场怎么选](https://vpntizi.blog/zhuanxian-jichang-tuijian/)
-
-**客户端教程**
-
-- [Clash Verge Rev教程：下载、导入订阅与设置](https://vpntizi.blog/clash-verge-jiaocheng/)
-- [ClashParty教程：安装、导入订阅与常用设置](https://vpntizi.blog/clashparty-jiaocheng/)
-- [Hiddify与Karing教程：全平台客户端入门](https://vpntizi.blog/hiddify-karing-jiaocheng/)
-- [Shadowrocket教程：小火箭下载与订阅导入](https://vpntizi.blog/shadowrocket-jiaocheng/)
-- [sing-box教程：SFA、SFI、SFM图形客户端入门](https://vpntizi.blog/sing-box-jiaocheng/)
-- [v2rayN与v2rayNG教程：订阅导入与设置](https://vpntizi.blog/v2rayn-v2rayng-jiaocheng/)
-
-**新手知识**
-
-- [机场订阅导入失败怎么办？原因与解决方法](https://vpntizi.blog/dingyue-daoru-wenti/)
-- [IEPL和IPLC有什么区别？专线机场线路科普](https://vpntizi.blog/iepl-iplc-qubie/)
-- [机场流量怎么估算？每月需要多少GB](https://vpntizi.blog/jichang-liuliang-guji/)
-- [机场节点怎么选？延迟与稳定性判断方法](https://vpntizi.blog/jichang-yanchi-wendingxing/)
-- [梯子工具有哪些？科学上网与翻墙工具分类](https://vpntizi.blog/kexue-shangwang-gongju/)
-- [VPN和机场有什么区别？新手一文看懂](https://vpntizi.blog/vpn-jichang-qubie/)
-
-**安全与法律**
-
-- [免费梯子能用吗？免费VPN的风险与低成本替代](https://vpntizi.blog/mianfei-vpn/)
-- [使用VPN和机场的隐私、安全与法律注意事项](https://vpntizi.blog/yinsi-anquan-falv/)
-
-## 实用工具
-
-- [流量使用量估算器](https://vpntizi.blog/tools/liuliang-gusuan/)：按刷网页、视频清晰度、AI 对话和下载时长，估算每月需要多少 GB 流量。
-- [每GB套餐价格计算器](https://vpntizi.blog/tools/meigb-jiage/)：输入实际付款、周期和流量，算出折合月价与每GB成本，多套餐并排比较。
-- [客户端选择助手](https://vpntizi.blog/tools/kehuduan-xuanze/)：回答设备和使用习惯三个问题，得到推荐的客户端与对应教程。
-- [订阅导入与连接故障排查助手](https://vpntizi.blog/tools/guzhang-paicha/)：按症状一步步排查订阅导入失败、节点超时、能连但打不开网页等问题。
-- [机场资料核验与更新记录](https://vpntizi.blog/tools/ziliao-hezhe/)：查看 34 家机场的资料核验状态、核实与整理日期和历次更新记录。
-
-## 联系
-
-- 网站：[vpntizi.blog](https://vpntizi.blog/)
-- Telegram：<https://t.me/+cKCtour4mqM1NTA9>
-- 邮箱：wongkelvin1995@gmail.com
-- [关于本站](https://vpntizi.blog/guanyu/) · [隐私说明](https://vpntizi.blog/yinsi-shuoming/) · [免责声明](https://vpntizi.blog/mianze-shengming/)
-
-> 内容仅用于网络知识科普。不同国家和地区对国际联网与代理工具的规定不同，请遵守所在地法律法规，详见 [隐私、安全与法律注意事项](https://vpntizi.blog/yinsi-anquan-falv/)。
+完整文章、最新资料、套餐比较和互动工具都在官方网站上。
 
 ---
 
-<details>
-<summary><b>开发者说明（技术栈、目录、脚本）</b></summary>
+## 网站能帮你解决什么
 
-Astro 7 + TypeScript + Markdown 纯静态站点，部署在 Cloudflare Pages，针对 Bing（兼顾 Google）做了技术 SEO：独立 title / description / canonical、JSON-LD、sitemap、robots、IndexNow。
+- **VPN 和机场有什么区别**，自己该选哪一种
+- **机场怎么选**：线路类型、晚高峰表现、流量规则、设备数与售后
+- **性价比机场怎么比**：分清实际付款、折合月价和每GB价格
+- **机场节点怎么选**：延迟、带宽与稳定性分别看什么，IEPL 与 IPLC 专线有什么不同
+- **客户端怎么装**：Clash Verge、Shadowrocket、v2rayN 教程与订阅导入
+- **连不上怎么办**：订阅导入失败、节点超时、能连但网页打不开
 
-```bash
-npm ci
-npm run dev          # 本地开发 http://localhost:4321
-npm test             # 数据校验 + 构建 + SEO 检查 + 搜索测试 + 链接检查
-npm run prelaunch    # 上线前严格检查
-```
+## 四大栏目
 
-| 路径 | 内容 |
+| 栏目 | 内容 | 官网入口 |
+|---|---|---|
+| 机场推荐 | 按稳定、便宜、专线、AI、流媒体等需求挑选机场，含 2026 机场推荐与 Clash 机场推荐 | [打开机场推荐](https://vpntizi.blog/jichang-tuijian/) |
+| 完整榜单 | 34 家机场完整名单，每家都有独立资料页与套餐表 | [打开完整榜单](https://vpntizi.blog/jichang-paihangbang/) |
+| 客户端教程 | Clash Verge Rev、ClashParty、Shadowrocket、v2rayN / v2rayNG、sing-box、Hiddify、Karing | [打开客户端教程](https://vpntizi.blog/jiaocheng/) |
+| 新手知识 | VPN 和机场区别、线路、流量估算、节点延迟、订阅导入、安全与法律 | [打开新手知识](https://vpntizi.blog/zhishi/) |
+
+全部 26 篇文章按栏目列在 [全部文章](https://vpntizi.blog/wenzhang/)。
+
+## 免费实用工具
+
+全部在浏览器本地计算，不收集输入内容。入口：[实用工具](https://vpntizi.blog/tools/)
+
+| 工具 | 用途 |
 |---|---|
-| `src/data/airports.json` | 34 家机场资料（录入说明见 `docs/DATA-ENTRY.md`） |
-| `src/data/changelog.ts` | 资料核验与更新记录 |
-| `src/data/keywords.ts` | 关键词 → 唯一主页面映射 |
-| `src/data/site.ts` | 站点名称、联系方式、验证码、推广声明 |
-| `src/content/articles/` | 26 篇原创文章（Markdown） |
-| `src/pages/tools/` | 5 个实用工具 |
-| `scripts/` | 数据校验、SEO 审计、搜索测试、链接与点击检查、手机检查、IndexNow、Bing 状态 |
-| `docs/` | 部署、Bing、检查清单、90 天计划、关键词表 |
+| [流量使用量估算器](https://vpntizi.blog/tools/liuliang-gusuan/) | 按网页、视频清晰度、AI 对话和下载时长，估算每月需要多少 GB |
+| [每GB套餐价格计算器](https://vpntizi.blog/tools/meigb-jiage/) | 算出折合月价与每GB成本，多个套餐并排比较 |
+| [客户端选择助手](https://vpntizi.blog/tools/kehuduan-xuanze/) | 回答设备和使用习惯，得到推荐的客户端与教程 |
+| [故障排查助手](https://vpntizi.blog/tools/guzhang-paicha/) | 按症状排查订阅导入失败、节点超时、网页打不开 |
 
-| 命令 | 作用 |
-|---|---|
-| `npm run check:data` / `check:data:strict` | 34 家、前五顺序、AFF 唯一、套餐字段 |
-| `npm run check:seo` | title/description/H1/canonical、noindex、sitemap、robots、IndexNow、关键词竞争、FAQ |
-| `npm run test:search` | 中文搜索 34 个回归用例 |
-| `npm run links` | 全站链接与锚点检查 |
-| `node scripts/mobile-test.mjs` | 11 种屏幕宽度手机 / 平板检查 |
-| `npm run indexnow:diff` / `indexnow:submit` / `indexnow:all` | IndexNow 新增 / 更新 / 删除通知 |
-| `npm run bing:status` / `bing:queries` | Bing 收录与搜索词（需 `BING_API_KEY`） |
+## 精选内容
 
-部署：推送到 `main` 后 GitHub Actions 自动校验、构建并部署到 Cloudflare Pages（需要仓库 Secrets `CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID`），详见 `docs/DEPLOY-CLOUDFLARE.md`。
+### 新手第一次买梯子：怎么选、怎么避坑
+第一次买梯子，最容易踩的坑是直接照着名单下单。这篇把顺序理清楚：先判断要机场还是传统 VPN，再按设备选客户端，最后按预算挑套餐，并建议先买月付、在晚高峰实测几天再续长周期。适合完全没有经验的读者。
+[阅读完整文章 →](https://vpntizi.blog/tizi-tuijian/)
 
-</details>
+### Clash Verge Rev 使用教程（Windows / macOS）
+电脑上最常用的 Clash 系客户端之一。教程从官方 GitHub 下载讲起，依次说明导入 Clash 订阅、选择规则模式与节点、开启系统代理，以及部分软件不走代理时如何打开 TUN 模式，并附常见报错处理。
+[阅读完整文章 →](https://vpntizi.blog/clash-verge-jiaocheng/)
+
+### Shadowrocket（小火箭）使用教程
+iPhone 和 iPad 用户最常用的代理客户端。文章说明为什么要用外区 Apple ID 下载、如何一键导入或手动添加订阅、全局路由该选什么，以及首次连接时添加 VPN 配置和订阅自动更新的设置。
+[阅读完整文章 →](https://vpntizi.blog/shadowrocket-jiaocheng/)
+
+### v2rayN / v2rayNG 使用教程
+v2rayN 用于 Windows，v2rayNG 用于安卓，都适合导入机场的通用订阅。教程覆盖添加订阅、更新订阅、测试真连接延迟、设置“绕过大陆”路由与系统代理，以及 Xray 和 sing-box 内核的切换。
+[阅读完整文章 →](https://vpntizi.blog/v2rayn-v2rayng-jiaocheng/)
+
+### IEPL 和 IPLC 有什么区别？
+机场宣传里常见的专线名词到底指什么？文章解释 IEPL、IPLC 与普通中转、直连的差别，为什么专线晚高峰更稳却更贵，以及对普通用户来说，带宽和超售程度往往比名字更重要。
+[阅读完整文章 →](https://vpntizi.blog/iepl-iplc-qubie/)
+
+### 机场流量怎么估算？每月要买多少 GB
+按网页、AI 对话、短视频、1080p 与 4K 视频的常见消耗，帮你估出每月流量需求：只查资料和用 AI 每月 15–30GB 一般够用，每天看 1 小时 1080p 约需 100GB。另附规则分流等省流量方法。
+[阅读完整文章 →](https://vpntizi.blog/jichang-liuliang-guji/)
+
+### 稳定机场推荐：晚高峰不掉线的梯子有哪些特点
+“稳定”包含连接稳定和经营稳定两层。文章从线路类型、节点冗余、晚高峰实测、运营时间和退款政策五个方面教你判断，并给出降低停运损失的做法：先买短周期、备一份按量流量包。
+[阅读完整文章 →](https://vpntizi.blog/wending-jichang-tuijian/)
+
+### ChatGPT 机场推荐：用 AI 工具该怎么选节点
+能打开 Google 不代表能用 ChatGPT。AI 服务对节点出口 IP 要求更高，香港节点也不在支持范围内。文章说明如何选择支持地区、固定登录地区以减少风控，以及用 AI 时流量与套餐怎么选。
+[阅读完整文章 →](https://vpntizi.blog/chatgpt-jichang-tuijian/)
+
+## GitHub 上的导读
+
+- [专题文章：新手如何选择机场、安装 Clash 并连接网络？](https://github.com/wongkelvin1995-star/vpntizi.blog/issues/1)（Issue #1）
+- [机场怎么选：五个判断标准与新手注意事项](docs/public-guides/airport-selection.md)
+- [客户端入门导航：Clash Verge Rev、Shadowrocket、v2rayN 怎么选](docs/public-guides/client-setup.md)
+- [VPN 和机场有什么区别：节点、流量、订阅基础知识](docs/public-guides/vpn-beginner-guide.md)
+- [网站目录：34 家机场完整榜单、全部文章与工具](docs/public-guides/site-directory.md)
+
+---
+
+## 资料更新、推广披露与安全提示
+
+- **资料怎么来、多久更新**：4 家机场的套餐价格已在官网核对并标注“官网已核实”，其余按公开的套餐信息整理并标注整理日期。每次修改都记录在 [资料核验与更新记录](https://vpntizi.blog/tools/ziliao-hezhe/)。
+- **推广披露**：网站上的“官网注册”按钮含推广合作（AFF）链接。推荐顺序是编辑推荐展示顺序，**不是测速排名**，详见 [推广披露与推荐方法](https://vpntizi.blog/tuiguang-pilu/)。本仓库的链接全部指向博客文章，不直接放推广注册链接。
+- **安全与法律**：客户端只从官方渠道下载，订阅链接不要外传，第一次购买选短周期。不同国家和地区对国际联网与代理工具的规定不同，请遵守所在地法律法规，详见 [隐私、安全与法律注意事项](https://vpntizi.blog/yinsi-anquan-falv/)。
+- **联系**：邮箱 wongkelvin1995@gmail.com · [Telegram](https://t.me/+cKCtour4mqM1NTA9) · [关于本站](https://vpntizi.blog/guanyu/) · [隐私说明](https://vpntizi.blog/yinsi-shuoming/)
+
+## 技术与开发
+
+本仓库是 vpntizi.blog 的源码：Astro 7 + TypeScript 纯静态站点，部署在 Cloudflare Pages。安装、脚本与部署说明见 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)。
+
+---
+
+### 👉 [访问 VPN梯子指南官方网站：vpntizi.blog](https://vpntizi.blog/)
