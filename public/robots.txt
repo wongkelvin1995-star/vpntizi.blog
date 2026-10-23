@@ -1,0 +1,10 @@
+# vpntizi.blog
+User-agent: *
+Allow: /
+Disallow: /search/
+
+User-agent: bingbot
+Allow: /
+Disallow: /search/
+
+Sitemap: https://vpntizi.blog/sitemap-index.xml

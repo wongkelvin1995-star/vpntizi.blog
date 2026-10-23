@@ -1,0 +1,175 @@
+---
+import { jsonForScript } from '../lib/json';
+import '@fontsource/nunito/latin-700.css';
+import '@fontsource/nunito/latin-800.css';
+import '../styles/global.css';
+import { SITE, NAV, FOOTER_LINKS } from '../data/site';
+import { airports } from '../lib/airports';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+export interface Crumb { name: string; href: string }
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>[];
+  breadcrumbs?: Crumb[];
+  ogType?: 'website' | 'article';
+  published?: Date;
+  updated?: Date;
+}
+
+const { title, description, noindex = false, jsonLd = [], breadcrumbs = [], ogType = 'website', published, updated } = Astro.props;
+const path = Astro.props.path ?? Astro.url.pathname;
+const canonical = new URL(path, SITE.url).href;
+const fullTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
+const current = Astro.url.pathname;
+
+const crumbLd = breadcrumbs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: c.name,
+        item: new URL(c.href, SITE.url).href,
+      })),
+    }
+  : null;
+const allLd = [...(crumbLd ? [crumbLd] : []), ...jsonLd];
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta http-equiv="content-language" content="zh-CN" />
+  <link rel="canonical" href={canonical} />
+  <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
+  <meta name="theme-color" content="#fbf7f2" />
+  <meta name="color-scheme" content="light" />
+  {SITE.bingVerification && <meta name="msvalidate.01" content={SITE.bingVerification} />}
+  {SITE.googleVerification && <meta name="google-site-verification" content={SITE.googleVerification} />}
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={`${SITE.url}/og-default.png`} />
+  <meta name="twitter:card" content="summary_large_image" />
+  {published && <meta property="article:published_time" content={published.toISOString()} />}
+  {updated && <meta property="article:modified_time" content={updated.toISOString()} />}
+  <slot name="head" />
+  {allLd.map((ld) => <script type="application/ld+json" set:html={jsonForScript(ld)} />)}
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="container bar">
+      <a class="logo" href="/" aria-label={`${SITE.name} 首页`}>
+        <span class="logo-mark" aria-hidden="true"></span>{SITE.name}
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="菜单" title="菜单"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="l1" d="M4 7h16"/><path class="l2" d="M4 12h16"/><path class="l3" d="M4 17h16"/></svg></button>
+      <nav id="site-nav" class="nav" aria-label="主导航">
+        {NAV.map((n) => (
+          <a href={n.href} aria-current={(n.href === '/' ? current === '/' : current.startsWith(n.href)) ? 'page' : undefined}>{n.label}</a>
+        ))}
+      </nav>
+      <div class="social" aria-label="搜索、社群与源码">
+        <button class="social-btn search" type="button" data-open-search title="站内中文搜索" aria-label="打开站内搜索">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        <a class="social-btn tg" href={SITE.telegram} target="_blank" rel="noopener" title="加入 Telegram 群" aria-label="加入 Telegram 群">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.7 19.5c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.2l-4.8-1.5c-1-.3-1.1-1 .2-1.5L20.4 3c.9-.3 1.7.2 1.5 1.3Z"/></svg>
+        </a>
+        {SITE.github ? (
+          <a class="social-btn gh" href={SITE.github} target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.34-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+          </a>
+        ) : (
+          <span class="social-btn gh is-off" role="img" title="GitHub（即将开放）" aria-label="GitHub（即将开放）">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.34-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+          </span>
+        )}
+      </div>
+    </div>
+  </header>
+
+  <!-- 右侧固定入口：中文搜索 + Telegram（只在 1380px 以上的宽屏显示，窄屏用顶部按钮，避免压住正文） -->
+  <aside class="rail" aria-label="快捷入口">
+    <button class="rail-btn" type="button" data-open-search title="站内中文搜索" aria-label="打开站内搜索">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="lbl">搜索</span>
+    </button>
+    <a class="rail-btn tg" href={SITE.telegram} target="_blank" rel="noopener" title="Telegram 联系我们" aria-label="Telegram 联系">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.7 19.5c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.2l-4.8-1.5c-1-.3-1.1-1 .2-1.5L20.4 3c.9-.3 1.7.2 1.5 1.3Z"/></svg>
+      <span class="lbl">Telegram</span>
+    </a>
+  </aside>
+
+  <main id="main">
+    <div class="container">
+      {breadcrumbs.length > 1 && <Breadcrumb items={breadcrumbs} />}
+      <slot />
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-mark">VPN梯子指南 <span>·</span> 新手学堂</p>
+      <div class="cols">
+        <div>
+          <h2>关于{SITE.name}</h2>
+          <p class="footer-about">{SITE.name}（{SITE.domain}）是一个面向中文新手的机场与 VPN 梯子导航与教程站。我们整理了 {airports.length} 家机场的套餐价格、线路和客户端支持，编写 Clash、Shadowrocket、v2rayN 等客户端的使用教程，并提供流量估算、每GB价格计算等免费工具。每家机场资料都注明整理或核实日期，并持续更新。<a href="/guanyu/">了解本站</a></p>
+          <p class="footer-note">推荐顺序含推广合作，不是测速排名，详见<a href="/tuiguang-pilu/">推广披露</a>。内容仅用于网络知识科普，请遵守所在地法律法规，详见<a href="/yinsi-anquan-falv/">隐私、安全与法律注意事项</a>。</p>
+        </div>
+        <div>
+          <h2>常用入口</h2>
+          <ul>{NAV.slice(1).map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+        </div>
+        <div>
+          <h2>站点信息</h2>
+          <ul>
+            {FOOTER_LINKS.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+            <li><a href={SITE.telegram} target="_blank" rel="noopener">Telegram 联系</a></li>
+            <li><a href={`mailto:${SITE.email}`}>邮箱：{SITE.email}</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="small" style="margin-top:1.5rem">© {new Date().getFullYear()} {SITE.domain}</p>
+    </div>
+  </footer>
+
+  <dialog class="search-dialog" id="search-dialog" aria-label="站内搜索">
+    <form class="search-box" method="get" action="/search/" role="search">
+      <label for="search-input" class="skip">搜索关键词</label>
+      <input id="search-input" name="q" type="search" placeholder="搜索：小火箭、Clash 订阅、IEPL、ChatGPT…" autocomplete="off" />
+      <button class="btn btn-ghost" type="button" data-close-search aria-label="关闭搜索">Esc</button>
+    </form>
+    <ul class="search-results" id="search-results" aria-live="polite"></ul>
+    <p class="search-hint" id="search-hint">支持中文、品牌名、英文别名与常见口语（如“梯子”“翻墙”“小火箭”）。</p>
+  </dialog>
+
+  <script>
+    import { initSearchDialog } from '../lib/search-client';
+    initSearchDialog();
+    const t = document.querySelector<HTMLButtonElement>('.nav-toggle');
+    const n = document.getElementById('site-nav');
+    t?.addEventListener('click', () => {
+      const open = n?.classList.toggle('open');
+      t.setAttribute('aria-expanded', String(!!open));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && n?.classList.contains('open')) { n.classList.remove('open'); t?.setAttribute('aria-expanded', 'false'); t?.focus(); }
+    });
+  </script>
+</body>
+</html>

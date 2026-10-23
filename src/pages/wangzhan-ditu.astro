@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getArticles, articleUrl, CATEGORY } from '../lib/content';
+import { namedAirports, airportUrl } from '../lib/airports';
+import { TOOLS } from '../data/tools';
+const arts = await getArticles();
+const groups = (['recommend', 'tutorial', 'knowledge', 'safety'] as const).map((c) => ({ c, label: CATEGORY[c].label, items: arts.filter((a) => a.data.category === c) }));
+const path = '/wangzhan-ditu/';
+---
+<BaseLayout title="网站地图：全部文章、教程与机场资料" description="VPN梯子指南网站地图：列出全部机场推荐专题、客户端教程、新手知识文章、机场资料页与实用工具，方便快速找到需要的内容。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '网站地图', href: path }]}>
+  <h1>网站地图</h1>
+  <div class="grid grid-2">
+    <section class="panel"><h2>核心页面</h2><ul>
+      <li><a href="/">首页</a></li><li><a href="/jichang-tuijian/">机场推荐总览</a></li><li><a href="/jichang-paihangbang/">完整机场榜单</a></li>
+      <li><a href="/jiaocheng/">客户端教程</a></li><li><a href="/zhishi/">新手知识</a></li><li><a href="/tools/">实用工具</a></li>
+      <li><a href="/guanyu/">关于本站</a></li><li><a href="/tuiguang-pilu/">推广披露</a></li><li><a href="/mianze-shengming/">免责声明</a></li><li><a href="/yinsi-shuoming/">隐私说明</a></li>
+    </ul></section>
+    {groups.map((g) => <section class="panel"><h2>{g.label}</h2><ul>{g.items.map((a) => <li><a href={articleUrl(a)}>{a.data.h1}</a></li>)}</ul></section>)}
+    <section class="panel"><h2>机场资料</h2><ul>{namedAirports.map((a) => <li><a href={airportUrl(a)}>{a.rank}. {a.name}</a></li>)}</ul></section>
+    <section class="panel"><h2>实用工具</h2><ul>{TOOLS.map((t) => <li><a href={t.href}>{t.name}</a></li>)}</ul></section>
+  </div>
+</BaseLayout>

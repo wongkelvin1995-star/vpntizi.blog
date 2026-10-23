@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="站内搜索" description="VPN梯子指南站内中文搜索：可搜索文章正文、机场品牌、英文别名、客户端名称与常见口语，如小火箭、梯子、订阅导入失败等。" path="/search/" noindex breadcrumbs={[{ name: '首页', href: '/' }, { name: '站内搜索', href: '/search/' }]}>
+  <h1>站内搜索</h1>
+  <form class="search-box panel" method="get" action="/search/" role="search" style="padding:.8rem">
+    <label for="q" class="skip">搜索关键词</label>
+    <input id="q" name="q" type="search" placeholder="例如：小火箭 订阅、Clash Verge、IEPL、ChatGPT 节点" autocomplete="off" />
+    <button class="btn btn-primary" type="submit">搜索</button>
+  </form>
+  <p class="search-hint" id="page-hint">输入关键词开始搜索。</p>
+  <ul class="search-results panel" id="page-results" style="padding:.4rem"></ul>
+  <noscript><p class="notice">搜索需要启用 JavaScript。你也可以浏览 <a href="/wangzhan-ditu/">网站地图</a>。</p></noscript>
+  <script>
+    import { loadIndex, renderResults } from '../lib/search-client';
+    const input = document.getElementById('q') as HTMLInputElement;
+    const list = document.getElementById('page-results')!;
+    const hint = document.getElementById('page-hint');
+    const q = new URLSearchParams(location.search).get('q') ?? '';
+    input.value = q;
+    const run = async () => {
+      renderResults(list, hint, await loadIndex(), input.value);
+      const u = new URL(location.href);
+      if (input.value) u.searchParams.set('q', input.value); else u.searchParams.delete('q');
+      history.replaceState(null, '', u);
+    };
+    if (q) run();
+    let t: number | undefined;
+    input.addEventListener('input', () => { clearTimeout(t); t = window.setTimeout(run, 150); });
+    input.form?.addEventListener('submit', (e) => { e.preventDefault(); run(); });
+  </script>
+</BaseLayout>

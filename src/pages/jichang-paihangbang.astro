@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Disclosure from '../components/Disclosure.astro';
+import AffButton from '../components/AffButton.astro';
+import FaqList from '../components/FaqList.astro';
+import { airports, airportUrl, LAST_REVIEWED, PENDING, fmtCNY, monthlyEquivalent, statusLabel } from '../lib/airports';
+import { SITE } from '../data/site';
+
+const path = '/jichang-paihangbang/';
+const named = airports.filter((a) => a.status !== 'placeholder');
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: '机场排行榜（本站推荐展示顺序）',
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    numberOfItems: airports.length,
+    itemListElement: named.map((a) => ({ '@type': 'ListItem', position: a.rank, name: a.name, url: SITE.url + airportUrl(a) })),
+  },
+];
+const faq = [
+  { q: '这个排行榜是按速度排的吗？', a: '不是。这是本站的推荐展示顺序，前五固定，含推广合作。我们没有在多地区、多时段做可复现的独立测速，因此不会把顺序称为速度排名。' },
+  { q: '为什么第 6 名以后顺序会变化？', a: '前五名固定不变；第 6 至 34 名会随资料核实进度、套餐变化等情况调整展示顺序，但不会删除或重复任何一家。' },
+  { q: '如何判断哪家适合我？', a: '先用流量估算器确定用量，再在资料页对比“实际付款”“折合月价”和“每GB价格”，并留意设备数、退款与流量重置规则。' },
+];
+---
+<BaseLayout
+  title="机场排行榜：34 家机场完整名单与资料"
+  description="机场排行榜完整名单：收录 34 家机场，前五固定为本站重点推荐展示，逐家标注核实状态、起步价、线路类型与核实日期，未核实数据不虚构。"
+  path={path}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: '首页', href: '/' }, { name: '完整榜单', href: path }]}
+>
+  <h1>机场排行榜：{airports.length} 家机场完整名单</h1>
+  <p class="meta">资料更新：{LAST_REVIEWED} · 前五固定 · 其余 {airports.length - 5} 家按资料进度展示</p>
+  <Disclosure />
+  <p style="margin-top:1rem">下表是本站收录的 {airports.length} 家梯子（机场）完整名单，排列顺序为本站推荐位顺序，不是测速排名。点击名称进入独立资料页，可以查看套餐表、节点地区、协议与客户端、AI 与流媒体兼容性、适用与不适用人群、购买限制和资料说明。想先了解怎么挑，请看 <a href="/jichang-tuijian/">机场推荐总览</a>。</p>
+
+  <div class="table-wrap section">
+    <table>
+      <thead><tr><th>#</th><th>机场</th><th>资料状态</th><th>起步折合月价</th><th>线路类型</th><th>资料日期</th><th>注册</th></tr></thead>
+      <tbody>
+        {airports.map((a) => {
+          const c = [...a.plans].filter((p) => monthlyEquivalent(p) != null).sort((x, y) => (monthlyEquivalent(x)! - monthlyEquivalent(y)!))[0];
+          return (
+            <tr id={`rank-${a.rank}`}>
+              <td class="num">{a.rank}</td>
+              <td>{a.status === 'placeholder' ? a.name : <a href={airportUrl(a)}>{a.name}</a>}{a.rank <= 5 && <span class="tag" style="margin-left:.4rem">重点推荐</span>}</td>
+              <td>{statusLabel(a)}</td>
+              <td class="num">{c ? fmtCNY(monthlyEquivalent(c)) : <span class="pending">{PENDING}</span>}</td>
+              <td>{a.lineTypes.join('、') || <span class="pending">{PENDING}</span>}</td>
+              <td class="num">{a.verifiedAt ?? a.collectedAt ?? '—'}</td>
+              <td><AffButton airport={a} label="官网注册" /></td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+
+  <section class="section prose">
+    <h2>看榜单时要注意什么</h2>
+    <ul>
+      <li><strong>折合月价不是月付价。</strong>年付 ¥120 折合 ¥10/月，但下单要一次付 ¥120。</li>
+      <li><strong>流量是否每月重置。</strong>“年付 1200 GB”和“每月 100 GB”总量一样，体验却不同：前者可能前几个月就用完。</li>
+      <li><strong>线路类型影响晚高峰。</strong>专线（IEPL/IPLC）通常更稳但更贵，直连或普通中转更便宜但高峰期波动更大，详见 <a href="/iepl-iplc-qubie/">IEPL 和 IPLC 的区别</a>。</li>
+    </ul>
+  </section>
+
+  <FaqList items={faq} />
+</BaseLayout>

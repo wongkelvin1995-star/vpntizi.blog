@@ -1,0 +1,100 @@
+/**
+ * 关键词 → 唯一主页面映射（防止内部关键词竞争）。
+ * 规则：
+ * 1. 每个关键词只能指向一个 URL，seo-audit 会检查目标页 title 或 H1 中包含核心词。
+ * 2. 其他页面可以自然提及并内链到目标页，但 title 不得再使用同一核心词。
+ * 3. 新增文章前先在这里登记，若意图相同就更新原页面而不是新建。
+ */
+export interface KeywordTarget {
+  keyword: string;
+  /** 用于在 title/H1 里检测的核心片段 */
+  core: string;
+  url: string;
+  intent: string;
+}
+
+export const KEYWORD_MAP: KeywordTarget[] = [
+  { keyword: 'VPN梯子指南', core: 'VPN梯子指南', url: '/', intent: '站点品牌词：直接搜索站名' },
+  { keyword: 'VPN 梯子', core: 'VPN梯子', url: '/', intent: '品牌/总入口：了解 VPN 梯子是什么、去哪里找推荐和教程' },
+  { keyword: 'VPN', core: 'VPN', url: '/', intent: '大词：由首页总入口承接，再分流到 VPN 推荐与免费 VPN 页' },
+  { keyword: '梯子', core: '梯子', url: '/', intent: '大词：由首页总入口承接' },
+  { keyword: '机场推荐', core: '机场推荐', url: '/jichang-tuijian/', intent: '综合挑选机场' },
+  { keyword: '机场推荐 2026', core: '机场推荐', url: '/jichang-tuijian/', intent: '同上，带年份的时效搜索' },
+  { keyword: '2026 机场推荐', core: '机场推荐', url: '/jichang-tuijian/', intent: '同上' },
+  { keyword: '机场排行榜', core: '排行榜', url: '/jichang-paihangbang/', intent: '查看完整名单' },
+  { keyword: '稳定机场推荐', core: '稳定机场推荐', url: '/wending-jichang-tuijian/', intent: '优先稳定性、少掉线' },
+  { keyword: '便宜机场推荐', core: '便宜机场推荐', url: '/pianyi-jichang-tuijian/', intent: '低预算' },
+  { keyword: '便宜稳定机场', core: '便宜', url: '/pianyi-jichang-tuijian/', intent: '低预算但不想常断线' },
+  { keyword: '性价比机场', core: '性价比机场', url: '/pianyi-jichang-tuijian/', intent: '按每GB成本比较' },
+  { keyword: '高性价比机场推荐', core: '性价比', url: '/pianyi-jichang-tuijian/', intent: '按每GB成本比较' },
+  { keyword: '专线机场推荐', core: '专线机场推荐', url: '/zhuanxian-jichang-tuijian/', intent: '寻找专线线路' },
+  { keyword: 'IEPL 机场推荐', core: 'IEPL', url: '/zhuanxian-jichang-tuijian/', intent: '专线细分' },
+  { keyword: 'IPLC 机场推荐', core: 'IPLC', url: '/zhuanxian-jichang-tuijian/', intent: '专线细分' },
+  { keyword: '高速机场推荐', core: '高速机场推荐', url: '/gaosu-jichang-tuijian/', intent: '大带宽、下载/4K' },
+  { keyword: '按量计费机场', core: '按量计费机场', url: '/anliang-jifei-jichang/', intent: '不限时、用多少买多少' },
+  { keyword: 'Clash 机场推荐', core: 'Clash 机场推荐', url: '/clash-jichang-tuijian/', intent: '用 Clash 系客户端的订阅' },
+  { keyword: '机场推荐 Clash', core: 'Clash机场推荐', url: '/clash-jichang-tuijian/', intent: '同上（词序不同的搜索）' },
+  { keyword: 'Clash Verge 机场推荐', core: 'Clash Verge', url: '/clash-jichang-tuijian/', intent: '同上' },
+  { keyword: 'Shadowrocket 机场推荐', core: 'Shadowrocket 机场推荐', url: '/shadowrocket-jichang-tuijian/', intent: 'iPhone 用户' },
+  { keyword: 'v2rayN 机场推荐', core: 'v2rayN 机场推荐', url: '/v2rayn-jichang-tuijian/', intent: 'Windows v2rayN 用户' },
+  { keyword: 'ChatGPT 机场推荐', core: 'ChatGPT 机场推荐', url: '/chatgpt-jichang-tuijian/', intent: 'AI 工具访问' },
+  { keyword: 'Netflix 机场推荐', core: 'Netflix', url: '/liumeiti-jiesuo-jichang/', intent: '看 Netflix' },
+  { keyword: '流媒体解锁机场', core: '流媒体解锁机场', url: '/liumeiti-jiesuo-jichang/', intent: '多平台流媒体' },
+  { keyword: '梯子推荐', core: '梯子推荐', url: '/', intent: '新手泛需求：首页标题即“VPN梯子推荐指南”，由首页承接' },
+  { keyword: '2026 梯子推荐', core: '梯子推荐', url: '/', intent: '同上' },
+  { keyword: '梯子怎么选', core: '梯子怎么选', url: '/tizi-tuijian/', intent: '第一次买梯子的选购步骤与避坑' },
+  { keyword: '新手买梯子', core: '梯子怎么选', url: '/tizi-tuijian/', intent: '同上' },
+  { keyword: '梯子工具', core: '梯子工具', url: '/kexue-shangwang-gongju/', intent: '了解有哪些梯子 / 翻墙工具' },
+  { keyword: '翻墙工具', core: '翻墙工具', url: '/kexue-shangwang-gongju/', intent: '同上' },
+  { keyword: '科学上网工具', core: '科学上网工具', url: '/kexue-shangwang-gongju/', intent: '了解工具种类' },
+  { keyword: '魔法上网', core: '魔法上网', url: '/kexue-shangwang-gongju/', intent: '口语化同义词' },
+  { keyword: 'VPN 推荐', core: 'VPN推荐', url: '/vpn-tuijian/', intent: '商业 VPN 与机场怎么选' },
+  { keyword: '翻墙 VPN', core: '翻墙VPN', url: '/vpn-tuijian/', intent: '同上' },
+  { keyword: '翻墙', core: '翻墙', url: '/vpn-tuijian/', intent: '大词：翻墙用 VPN 还是机场' },
+  { keyword: '免费 VPN', core: '免费VPN', url: '/mianfei-vpn/', intent: '免费 VPN 能否使用、风险与替代' },
+  { keyword: '免费梯子', core: '免费梯子', url: '/mianfei-vpn/', intent: '同上（口语化）' },
+  { keyword: 'VPN 梯子 免费', core: '免费梯子', url: '/mianfei-vpn/', intent: '同上' },
+  { keyword: '机场节点', core: '机场节点', url: '/jichang-yanchi-wendingxing/', intent: '节点怎么选：延迟、稳定性、地区' },
+  { keyword: '机场节点怎么选', core: '机场节点', url: '/jichang-yanchi-wendingxing/', intent: '同上' },
+  // —— 34 个品牌词：每个品牌只由自己的资料页承接（“XX怎么样”“XX官网”“XX机场”等长尾）——
+  { keyword: '灵动云', core: '灵动云', url: '/jichang/lingdongyun/', intent: '品牌词：灵动云怎么样、价格、注册入口' },
+  { keyword: '暮光加速', core: '暮光加速', url: '/jichang/muguang-jiasu/', intent: '品牌词：暮光加速怎么样、价格、注册入口' },
+  { keyword: '飞猫云', core: '飞猫云', url: '/jichang/feimaoyun/', intent: '品牌词：飞猫云怎么样、价格、注册入口' },
+  { keyword: '大佬云', core: '大佬云', url: '/jichang/dalaoyun/', intent: '品牌词：大佬云怎么样、价格、注册入口' },
+  { keyword: '微风网络', core: '微风网络', url: '/jichang/breezenet/', intent: '品牌词：微风网络怎么样、价格、注册入口' },
+  { keyword: '飞V', core: '飞V', url: '/jichang/feiv/', intent: '品牌词：飞V怎么样、价格、注册入口' },
+  { keyword: '梯子云', core: '梯子云', url: '/jichang/tiziyun/', intent: '品牌词：梯子云怎么样、价格、注册入口' },
+  { keyword: '浪网', core: '浪网', url: '/jichang/wavenet/', intent: '品牌词：浪网怎么样、价格、注册入口' },
+  { keyword: '隐形人', core: '隐形人', url: '/jichang/yinxingren/', intent: '品牌词：隐形人怎么样、价格、注册入口' },
+  { keyword: '星岛梦', core: '星岛梦', url: '/jichang/xingdaomeng/', intent: '品牌词：星岛梦怎么样、价格、注册入口' },
+  { keyword: '光速云', core: '光速云', url: '/jichang/guangsuyun/', intent: '品牌词：光速云怎么样、价格、注册入口' },
+  { keyword: '唯兔云', core: '唯兔云', url: '/jichang/weituyun/', intent: '品牌词：唯兔云怎么样、价格、注册入口' },
+  { keyword: 'U1S1', core: 'U1S1', url: '/jichang/u1s1/', intent: '品牌词：U1S1怎么样、价格、注册入口' },
+  { keyword: '极连云', core: '极连云', url: '/jichang/jilianyun/', intent: '品牌词：极连云怎么样、价格、注册入口' },
+  { keyword: '全球云', core: '全球云', url: '/jichang/quanqiuyun/', intent: '品牌词：全球云怎么样、价格、注册入口' },
+  { keyword: '光年梯', core: '光年梯', url: '/jichang/guangnianti/', intent: '品牌词：光年梯怎么样、价格、注册入口' },
+  { keyword: 'Sogo云', core: 'Sogo云', url: '/jichang/sogoyun/', intent: '品牌词：Sogo云怎么样、价格、注册入口' },
+  { keyword: '宇宙云', core: '宇宙云', url: '/jichang/yuzhouyun/', intent: '品牌词：宇宙云怎么样、价格、注册入口' },
+  { keyword: '二猫云', core: '二猫云', url: '/jichang/ermaoyun/', intent: '品牌词：二猫云怎么样、价格、注册入口' },
+  { keyword: '一翻云', core: '一翻云', url: '/jichang/yifanyun/', intent: '品牌词：一翻云怎么样、价格、注册入口' },
+  { keyword: '边缘节点', core: '边缘节点', url: '/jichang/edgenova/', intent: '品牌词：边缘节点怎么样、价格、注册入口' },
+  { keyword: '可信云', core: '可信云', url: '/jichang/kexinyun/', intent: '品牌词：可信云怎么样、价格、注册入口' },
+  { keyword: '速界', core: '速界', url: '/jichang/sujie/', intent: '品牌词：速界怎么样、价格、注册入口' },
+  { keyword: '快狸', core: '快狸', url: '/jichang/kuaili/', intent: '品牌词：快狸怎么样、价格、注册入口' },
+  { keyword: '无忧', core: '无忧', url: '/jichang/wuyou/', intent: '品牌词：无忧怎么样、价格、注册入口' },
+  { keyword: '灵猫', core: '灵猫', url: '/jichang/lingmao/', intent: '品牌词：灵猫怎么样、价格、注册入口' },
+  { keyword: '闪跃', core: '闪跃', url: '/jichang/flashleap/', intent: '品牌词：闪跃怎么样、价格、注册入口' },
+  { keyword: '飞为', core: '飞为', url: '/jichang/feiwei/', intent: '品牌词：飞为怎么样、价格、注册入口' },
+  { keyword: '跨界云', core: '跨界云', url: '/jichang/kuajie/', intent: '品牌词：跨界云怎么样、价格、注册入口' },
+  { keyword: '榴莲云', core: '榴莲云', url: '/jichang/liulianyun/', intent: '品牌词：榴莲云怎么样、价格、注册入口' },
+  { keyword: '闪电云', core: '闪电云', url: '/jichang/shandianyun/', intent: '品牌词：闪电云怎么样、价格、注册入口' },
+  { keyword: '环球云', core: '环球云', url: '/jichang/huanqiuyun/', intent: '品牌词：环球云怎么样、价格、注册入口' },
+  { keyword: '神行云', core: '神行云', url: '/jichang/shenxingyun/', intent: '品牌词：神行云怎么样、价格、注册入口' },
+  { keyword: '云界云', core: '云界云', url: '/jichang/yunjieyun/', intent: '品牌词：云界云怎么样、价格、注册入口' },
+  // —— 2026-10-23 梯子延伸词（只登记 title / H1 已承接的词，其余放在正文与 FAQ） ——
+  { keyword: '梯子是什么', core: '梯子是什么', url: '/vpn-jichang-qubie/', intent: '概念入门：梯子、VPN、机场的关系' },
+  { keyword: '用梯子安全吗', core: '用梯子安全吗', url: '/yinsi-anquan-falv/', intent: '安全与法律风险' },
+  { keyword: 'iPhone 梯子', core: 'iPhone 梯子', url: '/shadowrocket-jiaocheng/', intent: '苹果手机用什么梯子客户端' },
+  { keyword: '梯子软件', core: '梯子软件', url: '/jiaocheng/', intent: '按设备选梯子客户端' },
+  { keyword: '稳定的梯子', core: '不掉线的梯子', url: '/wending-jichang-tuijian/', intent: '晚高峰不掉线' },
+];

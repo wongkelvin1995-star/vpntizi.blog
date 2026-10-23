@@ -1,0 +1,79 @@
+---
+import { jsonForScript } from '../../lib/json';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqList from '../../components/FaqList.astro';
+const path = '/tools/kehuduan-xuanze/';
+
+const CLIENTS = [
+  { id: 'cvr', name: 'Clash Verge Rev', os: ['windows', 'macos', 'linux'], fmt: ['clash', 'unknown'], level: 'easy', href: '/clash-verge-jiaocheng/', note: '桌面端最常用的 Clash（mihomo 内核）图形客户端，规则分流成熟，界面清晰。' },
+  { id: 'cp', name: 'ClashParty', os: ['windows', 'macos', 'linux'], fmt: ['clash', 'unknown'], level: 'easy', href: '/clashparty-jiaocheng/', note: '同样基于 mihomo 内核，设置项集中、对新手友好，可作为 Clash Verge Rev 的替代。' },
+  { id: 'v2n', name: 'v2rayN', os: ['windows', 'linux', 'macos'], fmt: ['general', 'unknown'], level: 'mid', href: '/v2rayn-v2rayng-jiaocheng/', note: '适合机场提供“通用订阅 / V2Ray 订阅”的情况，支持 Xray、sing-box 等多种内核。' },
+  { id: 'v2ng', name: 'v2rayNG', os: ['android'], fmt: ['general', 'unknown'], level: 'easy', href: '/v2rayn-v2rayng-jiaocheng/', note: '安卓上导入通用订阅最简单的选择之一，体积小、耗电低。' },
+  { id: 'cmfa', name: 'Clash Meta for Android', os: ['android'], fmt: ['clash'], level: 'mid', href: '/clash-jichang-tuijian/', note: '安卓上的 mihomo 内核 Clash 客户端，适合拿到 Clash 订阅、需要规则分流的用户。' },
+  { id: 'sr', name: 'Shadowrocket（小火箭）', os: ['ios', 'macos'], fmt: ['general', 'clash', 'unknown'], level: 'easy', href: '/shadowrocket-jiaocheng/', note: 'iPhone / iPad 上最常用的付费客户端，需要非中国大陆区 Apple ID 购买。' },
+  { id: 'sb', name: 'sing-box（SFA / SFI / SFM）', os: ['android', 'ios', 'macos'], fmt: ['singbox'], level: 'hard', href: '/sing-box-jiaocheng/', note: '官方图形客户端，配置灵活、性能好，但需要 sing-box 格式配置，适合愿意折腾的用户。' },
+  { id: 'hd', name: 'Hiddify', os: ['windows', 'macos', 'linux', 'android', 'ios'], fmt: ['clash', 'general', 'singbox', 'unknown'], level: 'easy', href: '/hiddify-karing-jiaocheng/', note: '全平台、能识别多种订阅格式，适合想在所有设备上用同一个软件的人。' },
+  { id: 'kr', name: 'Karing', os: ['windows', 'macos', 'android', 'ios'], fmt: ['clash', 'general', 'singbox', 'unknown'], level: 'easy', href: '/hiddify-karing-jiaocheng/', note: '基于 sing-box 内核、兼容 Clash 与 V2Ray 订阅，界面中文化较好。' },
+];
+const faq = [
+  { q: '我怎么知道自己的订阅是什么格式？', a: '登录机场用户中心，通常会有“复制 Clash 订阅”“复制通用订阅”“Shadowrocket 订阅”等按钮，按钮名称就是格式。不确定时选“不确定”，助手会优先推荐兼容多种格式的客户端。' },
+  { q: '可以同时装多个客户端吗？', a: '可以安装，但同一时间只开启一个，否则系统代理或虚拟网卡会互相冲突，导致无法上网。' },
+  { q: '这些客户端安全吗？', a: '请只从项目官方 GitHub 发布页或官方应用商店下载，不要使用来路不明的“破解版”“汉化版”。详见《隐私、安全与法律注意事项》。' },
+];
+---
+<BaseLayout title="客户端选择助手：Clash、小火箭还是v2rayN" description="代理客户端选择助手：根据你的设备（Windows、Mac、安卓、iPhone）、机场订阅格式和使用习惯，推荐 Clash Verge Rev、Shadowrocket、v2rayN、Hiddify 等合适客户端与教程。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '客户端选择助手', href: path }]}>
+  <h1>客户端选择助手</h1>
+  <p>回答三个问题，得到适合你的客户端和对应教程。</p>
+  <form class="panel tool-form" id="cf">
+    <fieldset class="field" style="border:0;padding:0;margin:0"><legend>1. 你要在什么设备上用？</legend>
+      <div class="choice-group">
+        {[['windows', 'Windows'], ['macos', 'macOS'], ['linux', 'Linux'], ['android', '安卓'], ['ios', 'iPhone / iPad']].map(([v, l], i) => <label><input type="radio" name="os" value={v} checked={i === 0} /><span>{l}</span></label>)}
+      </div>
+    </fieldset>
+    <fieldset class="field" style="border:0;padding:0;margin:0"><legend>2. 机场给你的是哪种订阅？</legend>
+      <div class="choice-group">
+        {[['unknown', '不确定'], ['clash', 'Clash 订阅'], ['general', '通用 / V2Ray 订阅'], ['singbox', 'sing-box 订阅']].map(([v, l], i) => <label><input type="radio" name="fmt" value={v} checked={i === 0} /><span>{l}</span></label>)}
+      </div>
+    </fieldset>
+    <fieldset class="field" style="border:0;padding:0;margin:0"><legend>3. 你更在意什么？</legend>
+      <div class="choice-group">
+        {[['easy', '越简单越好'], ['multi', '所有设备用同一个软件'], ['power', '功能多、可折腾']].map(([v, l], i) => <label><input type="radio" name="pref" value={v} checked={i === 0} /><span>{l}</span></label>)}
+      </div>
+    </fieldset>
+  </form>
+  <div class="section" id="cf-out" aria-live="polite"></div>
+
+  <section class="section">
+    <h2>全部客户端一览</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>客户端</th><th>平台</th><th>适合的订阅</th><th>上手难度</th><th>说明</th></tr></thead>
+      <tbody>{CLIENTS.map((c) => <tr><td><a href={c.href}>{c.name}</a></td><td>{c.os.join(' / ')}</td><td>{c.fmt.filter((f) => f !== 'unknown').join(' / ')}</td><td>{({ easy: '简单', mid: '中等', hard: '较难' } as const)[c.level as 'easy' | 'mid' | 'hard']}</td><td>{c.note}</td></tr>)}</tbody>
+    </table></div>
+  </section>
+  <FaqList items={faq} />
+  <script type="application/json" id="clients-data" set:html={jsonForScript(CLIENTS)} />
+  <script>
+    const C = JSON.parse(document.getElementById('clients-data')!.textContent!) as { id: string; name: string; os: string[]; fmt: string[]; level: string; href: string; note: string }[];
+    const form = document.getElementById('cf') as HTMLFormElement;
+    const out = document.getElementById('cf-out')!;
+    function run() {
+      const fd = new FormData(form);
+      const os = String(fd.get('os')); const fmt = String(fd.get('fmt')); const pref = String(fd.get('pref'));
+      const ranked = C.filter((c) => c.os.includes(os)).map((c) => {
+        let s = 0;
+        if (c.fmt.includes(fmt)) s += 5; else if (fmt !== 'unknown') s -= 4;
+        if (pref === 'easy') s += c.level === 'easy' ? 3 : c.level === 'hard' ? -3 : 0;
+        if (pref === 'multi') s += c.os.length >= 4 ? 4 : 0;
+        if (pref === 'power') s += c.level === 'hard' ? 3 : c.level === 'mid' ? 2 : 0;
+        return { c, s };
+      }).sort((a, b) => b.s - a.s);
+      if (!ranked.length) { out.innerHTML = '<p class="notice">没有匹配的客户端。</p>'; return; }
+      const [first, ...rest] = ranked;
+      out.innerHTML = `<div class="panel" style="border-color:var(--accent)"><span class="tag green">首选</span><h3 style="margin:.4rem 0">${first.c.name}</h3><p>${first.c.note}</p><a class="btn btn-primary" href="${first.c.href}">查看教程</a></div>`
+        + (rest.length ? `<p style="margin-top:1rem">备选：${rest.slice(0, 3).map((r) => `<a href="${r.c.href}">${r.c.name}</a>`).join('、')}</p>` : '')
+        + (os === 'ios' ? '<p class="small muted">提示：iOS 客户端大多需要非中国大陆区 Apple ID 才能下载。</p>' : '');
+    }
+    form.addEventListener('change', run);
+    run();
+  </script>
+</BaseLayout>

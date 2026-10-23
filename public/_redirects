@@ -1,0 +1,8 @@
+# Cloudflare Pages _redirects 只支持站内相对路径。
+# www → 根域名 的跳转请在 Cloudflare 控制台用“Redirect Rules / Bulk Redirects”配置（见 docs/DEPLOY-CLOUDFLARE.md）。
+/index.html / 301
+/sitemap.xml /sitemap-index.xml 301
+/paihangbang/ /jichang-paihangbang/ 301
+/tuijian/ /jichang-tuijian/ 301
+/clash-verge-rev-jiaocheng/ /clash-verge-jiaocheng/ 301
+/mihomo-party-jiaocheng/ /clashparty-jiaocheng/ 301

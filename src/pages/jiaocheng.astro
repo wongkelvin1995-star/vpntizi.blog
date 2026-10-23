@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getArticles, articleUrl } from '../lib/content';
+const list = (await getArticles()).filter((a) => a.data.category === 'tutorial');
+const path = '/jiaocheng/';
+---
+<BaseLayout title="客户端教程合集：Windows、Mac、安卓、iOS" description="代理客户端教程合集：Clash Verge Rev、ClashParty、Shadowrocket、v2rayN / v2rayNG、sing-box、Hiddify 与 Karing 的下载、订阅导入和常见设置，按设备分类。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '客户端教程', href: path }]}>
+  <h1>客户端教程：梯子软件按设备怎么选</h1>
+  <p>机场只提供订阅链接，真正负责连接的是客户端，也就是常说的梯子 App。下面的教程都按“下载 → 导入订阅 → 选择节点 → 开启代理 → 排查问题”的顺序写，不确定该用哪个，请先用 <a href="/tools/kehuduan-xuanze/">客户端选择助手</a>。</p>
+  <div class="table-wrap section">
+    <table>
+      <thead><tr><th>设备</th><th>常用客户端</th></tr></thead>
+      <tbody>
+        <tr><td>Windows</td><td><a href="/clash-verge-jiaocheng/">Clash Verge Rev</a>、<a href="/clashparty-jiaocheng/">ClashParty</a>、<a href="/v2rayn-v2rayng-jiaocheng/">v2rayN</a>、<a href="/hiddify-karing-jiaocheng/">Hiddify / Karing</a></td></tr>
+        <tr><td>macOS</td><td><a href="/clash-verge-jiaocheng/">Clash Verge Rev</a>、<a href="/clashparty-jiaocheng/">ClashParty</a>、<a href="/sing-box-jiaocheng/">sing-box（SFM）</a>、<a href="/shadowrocket-jiaocheng/">Shadowrocket（M 芯片）</a></td></tr>
+        <tr><td>Android</td><td><a href="/v2rayn-v2rayng-jiaocheng/">v2rayNG</a>、<a href="/hiddify-karing-jiaocheng/">Hiddify / Karing</a>、<a href="/sing-box-jiaocheng/">sing-box（SFA）</a></td></tr>
+        <tr><td>iPhone / iPad</td><td><a href="/shadowrocket-jiaocheng/">Shadowrocket</a>、<a href="/sing-box-jiaocheng/">sing-box（SFI）</a>、<a href="/hiddify-karing-jiaocheng/">Karing</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h2 class="section">全部客户端教程（{list.length} 篇）</h2>
+  <div class="grid grid-3">{list.map((a) => <ArticleCard href={articleUrl(a)} title={a.data.h1} description={a.data.description} date={a.data.updated} />)}</div>
+  <p class="section">导入出问题？看 <a href="/dingyue-daoru-wenti/">订阅导入失败的原因与解决方法</a> 或使用 <a href="/tools/guzhang-paicha/">故障排查助手</a>。</p>
+</BaseLayout>

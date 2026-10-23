@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getArticles, articleUrl, CATEGORY } from '../lib/content';
+
+const articles = await getArticles();
+const path = '/wenzhang/';
+const CATS = [
+  { key: 'all', label: '全部', n: articles.length },
+  { key: 'recommend', label: '机场推荐', n: articles.filter((a) => a.data.category === 'recommend').length },
+  { key: 'tutorial', label: '客户端教程', n: articles.filter((a) => a.data.category === 'tutorial').length },
+  { key: 'knowledge', label: '新手知识', n: articles.filter((a) => a.data.category === 'knowledge').length },
+  { key: 'safety', label: '安全与法律', n: articles.filter((a) => a.data.category === 'safety').length },
+];
+const ORDER = { knowledge: 0, recommend: 1, tutorial: 2, safety: 3 } as const;
+const listed = [...articles].sort((x, y) => ORDER[x.data.category] - ORDER[y.data.category]);
+---
+<BaseLayout
+  title={`全部文章：机场选择、客户端教程与新手知识（${articles.length} 篇）`}
+  description={`VPN梯子指南全部 ${articles.length} 篇文章：VPN 与机场基础、机场选择与套餐比较、节点线路、Clash / Shadowrocket / v2rayN 客户端教程、订阅导入与故障排查，可按分类筛选。`}
+  path={path}
+  breadcrumbs={[{ name: '首页', href: '/' }, { name: '全部文章', href: path }]}
+>
+  <h1>全部文章（{articles.length} 篇）</h1>
+  <p class="lead">第一次接触的话，建议先按首页的 <a href="/#ch-basics">七章入门流程</a> 读，再回来按需要查阅。</p>
+
+  <div class="choice-group" role="group" aria-label="按分类筛选" style="margin:1rem 0 1.2rem">
+    {CATS.map((c, i) => (
+      <button class="cat-btn chip" type="button" data-filter={c.key} aria-pressed={i === 0 ? 'true' : 'false'} aria-controls="article-list"><span>{c.label}</span><span class="count">{c.n}</span></button>
+    ))}
+  </div>
+  <p class="small muted" id="list-status" aria-live="polite">共 {articles.length} 篇</p>
+
+  <ul class="article-list" id="article-list">
+    {listed.map((a) => (
+      <li class="article-item" data-cat={a.data.category}>
+        <a class="t" href={articleUrl(a)}>{a.data.h1}</a>
+        <span class="go" aria-hidden="true">阅读 →</span>
+        <p>{a.data.summary[0] ?? a.data.description}</p>
+        <div class="meta-line"><span class="tag">{CATEGORY[a.data.category].label}</span><span>更新于 {a.data.updated.toISOString().slice(0, 10)}</span></div>
+      </li>
+    ))}
+  </ul>
+
+  <script>
+    const btns = document.querySelectorAll<HTMLButtonElement>('.cat-btn');
+    const items = document.querySelectorAll<HTMLElement>('#article-list .article-item');
+    const status = document.getElementById('list-status');
+    btns.forEach((b) => b.addEventListener('click', () => {
+      const f = b.dataset.filter;
+      btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      let n = 0;
+      items.forEach((it) => { const on = f === 'all' || it.dataset.cat === f; it.hidden = !on; if (on) n++; });
+      if (status) status.textContent = f === 'all' ? `共 ${n} 篇` : `${b.querySelector('span')?.textContent}：${n} 篇`;
+    }));
+  </script>
+</BaseLayout>

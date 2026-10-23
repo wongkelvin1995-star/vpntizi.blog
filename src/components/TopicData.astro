@@ -1,0 +1,125 @@
+---
+/**
+ * 推荐类文章的数据区块：按文章主题从 34 家资料中筛选并计算，内容随数据自动更新。
+ * 排序依据是价格等客观数值，不是本站推荐顺序（推荐顺序见“前四家”区块）。
+ */
+import { airports, summarize, airportUrl, fmtCNY, pricePerGB, monthlyEquivalent, BILLING_LABEL, type Airport, type Plan } from '../lib/airports';
+import CompareTable from './CompareTable.astro';
+interface Props { topic: string }
+const { topic } = Astro.props;
+
+const named = airports.filter((a) => a.plans.length);
+const gb = (n: number | null) => (n == null ? '不限量' : n >= 1000 ? `${+(n / 1000).toFixed(2)}TB` : `${n}GB`);
+const notCustom = (p: Plan) => !/定制|独享|企业|Enterprise/.test(p.name);
+const has = (a: Airport, re: RegExp) => re.test([...a.lineTypes, ...a.clients, ...a.protocols, a.aiCompat, a.streamingCompat].join(' '));
+type Row = { a: Airport; p: Plan };
+const rows = (filter: (a: Airport, p: Plan) => boolean) => named.flatMap((a) => a.plans.filter((p) => notCustom(p) && filter(a, p)).map((p) => ({ a, p })));
+const byPerGB = (r: Row[]) => r.filter((x) => pricePerGB(x.p) != null).sort((x, y) => pricePerGB(x.p)! - pricePerGB(y.p)!);
+const bestPerBrand = (r: Row[]) => { const seen = new Set<string>(); return byPerGB(r).filter((x) => (seen.has(x.a.id) ? false : (seen.add(x.a.id), true))); };
+
+let heading = '';
+let intro = '';
+let planRows: Row[] = [];
+let brandList: Airport[] = [];
+let claimRows: { a: Airport; claim: string; extra: string }[] = [];
+let claimCols: [string, string] = ['', ''];
+
+switch (topic) {
+  case 'pianyi-jichang-tuijian':
+    heading = '34 家机场每GB最低价（按资料计算）';
+    intro = '每家只取每GB最便宜的一档周期套餐（不含不限时包和定制套餐），按每GB价格从低到高排列。注意：最低单价往往来自年付或大流量档，先确认自己用得完。';
+    planRows = bestPerBrand(rows((_, p) => p.billing !== 'payg')).slice(0, 15);
+    break;
+  case 'tizi-tuijian':
+    heading = '月付 ¥20 以内的入门套餐';
+    intro = '适合第一次购买、想先按月试用的新手。按月付价格从低到高排列；流量少于 50GB 的体验档也列出，购买前对照流量估算器确认够用。';
+    planRows = rows((_, p) => p.billing === 'month' && p.priceCNY <= 20).sort((x, y) => x.p.priceCNY - y.p.priceCNY || pricePerGB(x.p)! - pricePerGB(y.p)!);
+    break;
+  case 'anliang-jifei-jichang':
+    heading = '全部不限时流量包对比';
+    intro = '以下是资料中所有一次性、用完为止的流量包，按每GB价格从低到高排列。有效期以各家说明为准（例如环球云的按量包为购买后 365 天内有效）。';
+    planRows = byPerGB(rows((_, p) => p.billing === 'payg'));
+    break;
+  case 'zhuanxian-jichang-tuijian':
+    heading = '标注 IEPL / IPLC 专线的机场';
+    intro = '以下机场在资料中标注了 IEPL 或 IPLC 专线（部分只有个别套餐是专线，详见各家资料页）。线路标注来自服务商公开信息，本站未做线路追踪验证。';
+    brandList = named.filter((a) => has(a, /IEPL|IPLC/));
+    break;
+  case 'gaosu-jichang-tuijian':
+    heading = '月流量 1TB 及以上的大流量套餐';
+    intro = '看 4K、大文件下载的用户更关心大流量档的单价。下表列出每月 1000GB 及以上的周期套餐（取各档月付价），按每GB价格排列。';
+    planRows = byPerGB(rows((_, p) => p.billing === 'month' && (p.trafficGB ?? 0) >= 1000));
+    break;
+  case 'wending-jichang-tuijian':
+    heading = '写明设备数或退款规则的机场';
+    intro = '稳定性无法只靠资料判断，但购买规则写得清楚的机场，出问题时更容易处理。以下机场在资料中写明了设备数上限、退款条件或故障处理承诺。';
+    brandList = named.filter((a) => a.limits.some((l) => /退款：|退款支持|不满意退款|设备上限|同时在线设备|1 小时内修复/.test(l) && !/资料未说明/.test(l)));
+    break;
+  case 'chatgpt-jichang-tuijian':
+    heading = '资料中宣称支持 ChatGPT 的机场';
+    intro = '以下机场在公开资料中宣称可用于 ChatGPT。这些都是服务商说法，本站没有逐个检测；AI 服务会封禁部分机房 IP，结果随时间变化。';
+    claimCols = ['宣称支持的 AI 服务', '节点地区数'];
+    claimRows = named.filter((a) => /ChatGPT/i.test(a.aiCompat)).map((a) => ({ a, claim: (a.aiCompat.match(/(?:支持|用于|可解锁|列出[^，。]*?包括)\s*([^（。；]+)/) || [, a.aiCompat])[1].replace(/等.*$/, '').trim(), extra: a.regions.length && !/未列出/.test(a.regions.join('')) ? `${a.regions.length} 个` : '未列出' }))
+      .sort((x, y) => (parseInt(y.extra) || 0) - (parseInt(x.extra) || 0));
+    break;
+  case 'liumeiti-jiesuo-jichang':
+    heading = '资料中宣称支持 Netflix 的机场';
+    intro = '以下机场在资料中宣称支持 Netflix 等流媒体（未经本站检测）。解锁情况随节点 IP 变化，购买短周期后请自行确认想看的地区片库。';
+    claimCols = ['宣称支持的流媒体', '最大月流量 / 每GB'];
+    claimRows = named.filter((a) => /Netflix/i.test(a.streamingCompat)).map((a) => { const S = summarize(a); return { a, claim: (a.streamingCompat.match(/支持\s*([^（。；]+)/) || [, a.streamingCompat])[1].replace(/等.*$/, '').trim(), extra: `${gb(S.maxGB)} / ${S.bestPerGB ? fmtCNY(pricePerGB(S.bestPerGB), 3) : '—'}` }; })
+      .sort((x, y) => summarize(y.a).maxGB - summarize(x.a).maxGB);
+    break;
+  case 'clash-jichang-tuijian':
+    heading = '资料中列出 Clash 客户端的机场';
+    intro = '以下机场在资料中列出了 Clash 系客户端（Clash、Clash Meta、Clash Verge、ClashParty 等）或 Clash 订阅。部分机场的通用订阅需要联系客服获取，详见资料页。';
+    brandList = named.filter((a) => /clash|mihomo/i.test(a.clients.join(' ')));
+    break;
+  case 'shadowrocket-jichang-tuijian':
+    heading = '资料中列出 Shadowrocket 的机场';
+    intro = '以下机场在资料中列出了 Shadowrocket（小火箭）或提供小火箭下载账号。iOS 用户也可以选择支持 iOS 官方客户端的机场。';
+    brandList = named.filter((a) => /shadowrocket|小火箭/i.test(a.clients.join(' ')));
+    break;
+  case 'v2rayn-jichang-tuijian':
+    heading = '资料中列出 v2rayN 的机场';
+    intro = '以下机场在资料中列出了 v2rayN 或 v2rayNG。v2rayN 适合使用通用订阅，选购时确认用户中心提供“通用订阅”。';
+    brandList = named.filter((a) => /v2ray/i.test(a.clients.join(' ')));
+    break;
+}
+const show = planRows.length > 0 || brandList.length > 0 || claimRows.length > 0;
+---
+{show && (
+  <section class="section" aria-labelledby={`td-${topic}`}>
+    <h2 id={`td-${topic}`}>{heading}</h2>
+    <p>{intro}</p>
+    {planRows.length > 0 && (
+      <div class="table-wrap">
+        <table class="cmp">
+          <thead><tr><th>机场</th><th>套餐</th><th>付费方式</th><th>实际付款</th><th>流量</th><th>折合月价</th><th>每GB</th></tr></thead>
+          <tbody>
+            {planRows.map(({ a, p }) => (
+              <tr>
+                <td><a href={airportUrl(a)}>{a.name}</a></td>
+                <td>{p.name}</td>
+                <td>{BILLING_LABEL[p.billing]}</td>
+                <td class="num">{fmtCNY(p.priceCNY)}</td>
+                <td class="num">{gb(p.trafficGB)}{p.trafficPeriod === 'month' ? '/月' : '（总量）'}</td>
+                <td class="num">{monthlyEquivalent(p) != null ? fmtCNY(monthlyEquivalent(p)) : '—'}</td>
+                <td class="num">{pricePerGB(p) != null ? fmtCNY(pricePerGB(p), 3) : '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+    {brandList.length > 0 && <CompareTable airports={brandList} caption={heading} />}
+    {claimRows.length > 0 && (
+      <div class="table-wrap">
+        <table class="cmp">
+          <thead><tr><th>机场</th><th>{claimCols[0]}</th><th>{claimCols[1]}</th></tr></thead>
+          <tbody>{claimRows.map((r) => <tr><td><a href={airportUrl(r.a)}>{r.a.name}</a></td><td style="white-space:normal">{r.claim}</td><td class="num">{r.extra}</td></tr>)}</tbody>
+        </table>
+      </div>
+    )}
+    <p class="small muted" style="margin-top:.5rem">共 {planRows.length || brandList.length || claimRows.length} 条，按数据自动生成，排序不代表推荐顺序。整理日期与资料说明见各机场资料页。</p>
+  </section>
+)}

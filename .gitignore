@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.astro/
+.env
+.DS_Store
+reports/
+.indexnow-pending.json
+preview/
+preview-files.json
+
+# 本地审查报告与私有资料（含第三方资料站名称），不要推送
+PRE_LAUNCH_AUDIT.md
+*private-sources*.json

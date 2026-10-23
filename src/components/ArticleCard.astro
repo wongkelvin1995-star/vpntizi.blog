@@ -1,0 +1,10 @@
+---
+interface Props { href: string; title: string; description: string; tag?: string; date?: Date }
+const { href, title, description, tag, date } = Astro.props;
+---
+<a class="card" href={href}>
+  {tag && <span class="tag">{tag}</span>}
+  <h3>{title}</h3>
+  <p>{description}</p>
+  {date && <p class="small muted" style="margin-top:.5rem">更新：{date.toISOString().slice(0, 10)}</p>}
+</a>

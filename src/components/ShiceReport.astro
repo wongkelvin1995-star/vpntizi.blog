@@ -1,0 +1,68 @@
+---
+/** 品牌资料页：站长实测（截图 + 按地区汇总 + 结论） */
+import type { ShiceRecord } from '../data/shice';
+interface Props { record: ShiceRecord; name: string }
+const { record: r, name } = Astro.props;
+const hasSpeed = r.regions.some((g) => g.avgSpeed != null);
+const hasNodes = r.regions.some((g) => g.nodes != null);
+const isOnline = r.kind === 'online';
+const isSummary = r.imageType === 'summary';
+const imgWord = isSummary ? '整理汇总图' : '截图';
+const totalNodes = r.regions.reduce((n, g) => n + (g.nodes ?? 0), 0);
+const totalOnline = r.regions.reduce((n, g) => n + (g.online ?? 0), 0);
+const title = isOnline ? `本站检查：${name}节点在线情况（${r.date}）` : `本站实测：${name}节点测试（${r.date}）`;
+---
+<section class="section shice" id="shice" aria-labelledby="shice-h">
+  <h2 id="shice-h">{title}</h2>
+  <p class="shice-meta">
+    <span>{isOnline ? '检查' : '测试'}时间：{r.date} {r.time}</span>
+    <span>{isOnline ? '检查方式' : '测试工具'}：{r.tool}</span>
+    <span class:list={['shice-peak', { off: !r.peak }]}>{r.peak ? '晚高峰时段' : '非晚高峰时段'}</span>
+  </p>
+  {isSummary && <p class="notice" role="note"><strong>图片说明：</strong>本节配图是站长根据测试结果整理的汇总图，不是测速工具导出的原始截图；测试在 {r.time} 进行，{r.peak ? '属于' : '不在'} 20:00–23:00 晚高峰。</p>}
+  {isOnline
+    ? <p>检查项目：{r.items.join('、')}。共 {totalNodes} 个节点，{totalOnline} 个在线。这类检查只看节点能否连上，不测延迟和速度。</p>
+    : <p>测试项目：{r.items.join('、')}。下表按{imgWord}汇总各地区结果{hasSpeed ? '（平均速度按截图数值计算，不含基本不可用的节点）' : ''}，完整逐节点结果见{imgWord}。</p>}
+
+  {isOnline ? (
+    <div class="table-wrap">
+      <table class="cmp">
+        <thead><tr><th>地区</th><th>节点数</th><th>在线</th><th>倍率</th><th>本次观察</th></tr></thead>
+        <tbody>
+          {r.regions.map((g) => <tr><td>{g.region}</td><td class="num">{g.nodes}</td><td class="num">{g.online} / {g.nodes}</td><td class="num">{g.rate}</td><td>{g.note}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+  ) : (
+  <div class="table-wrap">
+    <table class="cmp">
+      <thead><tr><th>地区</th>{hasNodes && <th>节点数</th>}<th>平均 TLS 延迟</th>{!hasSpeed && <th>TLS 延迟范围</th>}<th>HTTP(S) 延迟范围</th>{hasSpeed && <th>平均速度</th>}{hasSpeed && <th>速度范围</th>}<th>本次观察</th></tr></thead>
+      <tbody>
+        {r.regions.map((g) => (
+          <tr>
+            <td>{g.region}</td>
+            {hasNodes && <td class="num">{g.nodes ?? '—'}</td>}
+            <td class="num">{g.avgTls}ms</td>
+            {!hasSpeed && <td class="num">{g.tlsRange?.[0]}–{g.tlsRange?.[1]}ms</td>}
+            <td class="num">{g.httpRange?.[0]}–{g.httpRange?.[1]}ms</td>
+            {hasSpeed && <td class="num">{g.avgSpeed != null ? `约 ${g.avgSpeed} MB/s` : '—'}</td>}
+            {hasSpeed && <td class="num">{g.speedRange ? `${g.speedRange[0]}–${g.speedRange[1]} MB/s` : '—'}</td>}
+            <td style="white-space:normal;min-width:12em">{g.note}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  )}
+
+  <h3 class="sub-h">{isOnline ? '检查结论' : '测试结论'}</h3>
+  <ul class="shice-findings">{r.findings.map((f) => <li>{f}</li>)}</ul>
+
+  <figure class:list={['shice-fig', { tall: r.height > r.width }]}>
+    <a href={r.image} target="_blank" rel="noopener" aria-label={`在新窗口查看${isSummary ? '测试整理汇总图' : '测试截图原图'}`}>
+      <img src={r.image} width={r.width} height={r.height} loading="lazy" decoding="async"
+        alt={`${name}节点${isOnline ? '在线检查' : '测试'}${imgWord}：${r.date} ${r.time}，${r.regions.map((g) => g.region).join('、')}节点的${r.items.slice(0, 4).join('、')}结果`} />
+    </a>
+    <figcaption>{name}节点{isOnline ? '在线检查' : '测试'}{imgWord}（{r.date} {r.time}，点击查看大图）。{isSummary && '此图由站长根据测试结果整理，非测速工具原始截图。'}结果只代表这一次、这一个网络环境，实际使用可能因地区、运营商和时段不同而有差异。</figcaption>
+  </figure>
+</section>

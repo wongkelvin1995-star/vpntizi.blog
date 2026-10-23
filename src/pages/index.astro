@@ -1,0 +1,324 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AirportCard from '../components/AirportCard.astro';
+import Disclosure from '../components/Disclosure.astro';
+import CompareTable from '../components/CompareTable.astro';
+import LingdongFeature from '../components/LingdongFeature.astro';
+import FaqList from '../components/FaqList.astro';
+import DeeperReading from '../components/DeeperReading.astro';
+import { SITE } from '../data/site';
+import { topFive, featuredPicks, airports, LAST_REVIEWED, fmtCNY, monthlyEquivalent, pricePerGB } from '../lib/airports';
+import { getArticles } from '../lib/content';
+import { TOOLS } from '../data/tools';
+
+const articles = await getArticles();
+const tutorials = articles.filter((a) => a.data.category === 'tutorial');
+const recommends = articles.filter((a) => a.data.category === 'recommend');
+const knowledge = articles.filter((a) => a.data.category === 'knowledge' || a.data.category === 'safety');
+const CAT_LINKS = [
+  { href: '/wenzhang/', label: '全部文章', n: articles.length },
+  { href: '/jichang-tuijian/', label: '机场推荐', n: recommends.length },
+  { href: '/jiaocheng/', label: '客户端教程', n: tutorials.length },
+  { href: '/zhishi/', label: '新手知识', n: knowledge.length },
+  { href: '/jichang-paihangbang/', label: '机场排行榜', n: airports.length },
+  { href: '/tools/', label: '实用工具', n: TOOLS.length },
+];
+
+const HOME_UPDATED = '2026-10-23';
+
+// —— 章节里用到的数据，全部由机场资料计算 ——
+const ld = airports.find((a) => a.id === 'lingdongyun')!;
+const ldMonth = ld.plans.find((p) => p.name === '拂风' && p.billing === 'month')!;
+const ldYear = ld.plans.find((p) => p.name === '拂风' && p.billing === 'year')!;
+const lineCount = airports.filter((a) => a.lineTypes.some((l) => /IEPL|IPLC/.test(l) && !/未注明/.test(l))).length;
+const devFree = airports.filter((a) => [...a.limits, ...a.plans.map((p) => `${p.deviceLimit ?? ''} ${p.note ?? ''}`)].some((t) => /不限设备|不限制设备|设备数量不限|设备数不限|不限在线|不限设备登录|不限同时|不限制同时|不限制在线|无限设备|设备连接数不限|^不限\s/.test(t))).length;
+const listed = airports.filter((a) => a.regions.length && !a.regions.some((r) => /未列出/.test(r)));
+const regionCount = (k: string, short: string) => listed.filter((a) => a.regions.some((r) => r.startsWith(k) || r === short)).length;
+const REGIONS = [
+  { name: '香港', short: '港', trait: '离大陆近、延迟最低', fit: '日常浏览、社交、看视频', note: 'ChatGPT、Claude 等 AI 服务不对香港开放，用 AI 时要换其他地区' },
+  { name: '日本', short: '日', trait: '延迟低、晚高峰较稳', fit: 'AI 工具、游戏、日本流媒体', note: '常作为香港之外的主力节点' },
+  { name: '新加坡', short: '新', trait: '延迟中等、线路资源多', fit: 'AI 工具、东南亚服务', note: '个别机场的部分节点 YouTube 显示为“送中”（被识别为中国大陆），看视频时留意' },
+  { name: '台湾', short: '台', trait: '延迟低', fit: '日常浏览、AI 工具、繁体中文内容', note: '与香港不同，主流 AI 服务对台湾开放，可作为低延迟的 AI 节点' },
+  { name: '美国', short: '美', trait: '延迟较高、服务最全', fit: 'AI 工具、美区内容、海外账号注册', note: '延迟高，不适合打游戏' },
+].map((r) => ({ ...r, n: regionCount(r.name, r.short) }));
+const faq = [
+  { q: '梯子哪个好？', a: '没有对所有人都最好的梯子。先按用途定类型：长期在国内每天用，多数人选机场；短期来华、不想折腾，选商业 VPN。再按第二章的五点比较：线路类型、晚高峰表现、流量规则、设备数和售后。本站前五推荐含推广合作，不是测速排名，第一次买建议先买月付，在晚上 8 点到 11 点实测几天再续费。' },
+  { q: '本站的推荐顺序是测速排名吗？', a: '不是。推荐顺序是本站编辑重点推荐展示顺序，含推广合作链接。我们不把它包装成独立测速排行榜，每家资料都注明整理或核实日期，官网核对过的会单独标注。' },
+  { q: '一份订阅能在几台设备上用？', a: '看套餐写明的“同时在线设备数”。不少机场标注不限设备，也有按档位限制的，例如飞V Basic 版同时 3 台、环球云学生套餐同时 3 台。各家规则见对应的机场资料页。' },
+  { q: '第一次买，选月付还是年付？', a: '先买月付或最短周期，在晚上 8 点到 11 点实测几天，常用网站、视频和 AI 工具都正常，再改年付。年付折合月价更低，但要一次付清，机场停运时剩余费用很难追回。' },
+  { q: '机场跑路了怎么办？怎么降低损失？', a: '机场多为小团队运营，停运时有发生。降低损失的办法：首次只买短周期、不预充大额余额、备一份不限时流量包作为备用、关注机场的公告频道，出现异常时及时切换。' },
+  { q: '使用这些工具有法律风险吗？', a: '不同国家和地区的法规不同。中国大陆对国际联网有明确管理规定，擅自建立或使用非法定信道进行国际联网可能被处罚。请先阅读《隐私、安全与法律注意事项》，并遵守你所在地的法律法规。' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    alternateName: ['VPN梯子', 'vpntizi', 'vpntizi.blog'],
+    url: SITE.url + '/',
+    inLanguage: 'zh-CN',
+    description: SITE.description,
+    potentialAction: { '@type': 'SearchAction', target: `${SITE.url}/search/?q={search_term_string}`, 'query-input': 'required name=search_term_string' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'VPN梯子推荐指南2026：从选机场到连上网，一站讲清楚',
+    url: SITE.url + '/',
+    inLanguage: 'zh-CN',
+    dateModified: HOME_UPDATED,
+    author: { '@type': 'Organization', name: `${SITE.name}编辑部`, url: SITE.url + '/guanyu/' },
+    audience: { '@type': 'Audience', audienceType: 'VPN新手、机场订阅用户、Clash初学者、需要比较套餐的用户' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.name,
+    alternateName: ['vpntizi', 'vpntizi.blog'],
+    description: SITE.description,
+    url: SITE.url + '/',
+    logo: `${SITE.url}/favicon.svg`,
+    email: SITE.email,
+    sameAs: [SITE.telegram, SITE.github],
+  },
+];
+---
+<BaseLayout
+  title="VPN梯子推荐指南2026：从选机场到连上网，一站讲清楚"
+  description="VPN梯子推荐指南2026：新手梯子导航，从机场与VPN的区别讲起，介绍机场选择标准、套餐与每GB价格比较、节点地区、Clash 等客户端安装、订阅导入和故障排查，附 34 家机场资料。"
+  path="/"
+  jsonLd={jsonLd}
+>
+  <section class="hb-hero" aria-labelledby="hero-h">
+    <p class="kicker">新手学堂 · 机场资料更新于 {LAST_REVIEWED}</p>
+    <h1 id="hero-h">VPN梯子推荐指南2026：从选机场到<em>连上网</em>，一站讲清楚</h1>
+    <dl class="byline">
+      <div><dt>更新日期</dt><dd><time datetime={HOME_UPDATED}>2026年10月22日</time></dd></div>
+      <div><dt>作者</dt><dd><a href="/guanyu/">VPN梯子指南编辑部</a></dd></div>
+      <div><dt>适合人群</dt><dd>VPN新手、机场订阅用户、Clash初学者、需要比较套餐的用户</dd></div>
+    </dl>
+    <div class="cta">
+      <a class="btn btn-primary" href="#ch-standard">从选机场开始</a>
+      <a class="btn btn-ghost" href="#top5-h">直接看推荐</a>
+      <button class="btn btn-ghost" type="button" data-open-search>站内搜索</button>
+    </div>
+  </section>
+
+  <div class="handbook">
+    <aside class="cat-nav" aria-labelledby="toc-h">
+      <h2 id="toc-h">本页目录</h2>
+      <ol class="page-toc">
+        <li><a href="#pre-h">前言</a></li>
+        <li><a href="#ch-basics"><b>1</b>基础概念</a></li>
+        <li><a href="#ch-standard"><b>2</b>机场选择标准</a></li>
+        <li class="star"><a href="#top5-h"><b>★</b>本站重点推荐</a></li>
+        <li><a href="#ch-plans"><b>3</b>套餐比较</a></li>
+        <li><a href="#ch-nodes"><b>4</b>节点地区</a></li>
+        <li><a href="#ch-clients"><b>5</b>客户端安装</a></li>
+        <li><a href="#ch-import"><b>6</b>订阅导入</a></li>
+        <li><a href="#ch-fix"><b>7</b>故障排查</a></li>
+        <li><a href="#tools-h"><b>+</b>实用工具</a></li>
+      </ol>
+      <div class="cat-links">
+        {CAT_LINKS.map((c) => <a href={c.href}>{c.label}（{c.n}）</a>)}
+      </div>
+    </aside>
+
+    <div>
+      <section class="chapter preface" aria-labelledby="pre-h">
+        <h2 id="pre-h"><span class="pre-label">前言</span>2026年，新手应该如何选择VPN和机场？</h2>
+        <div class="preface-body">
+          <p>进入2026年，VPN、梯子和机场服务依然是网络连接、远程办公、跨境学习和国际网络访问中经常被讨论的话题。</p>
+          <p>对于第一次接触机场服务的用户而言，最令人困惑的通常不是购买套餐，而是<a href="#ch-standard">什么样才算好用的梯子</a>，以及购买之后不知道该如何使用：<a href="#ch-basics">机场与VPN有什么区别</a>？<a href="#traffic">100GB流量够不够</a>？<a href="#clash">Clash是什么</a>？<a href="#ch-import">订阅链接应该在哪里导入</a>？<a href="#ch-fix">为什么客户端显示连接成功，网页却打不开</a>？</p>
+          <p>这篇《VPN梯子推荐指南2026》将从<a href="#ch-basics">基础概念</a>开始，介绍<a href="#ch-standard">机场选择标准</a>、<a href="#ch-plans">套餐比较</a>、<a href="#ch-nodes">节点地区</a>、<a href="#ch-clients">客户端安装</a>、<a href="#ch-import">订阅导入</a>和<a href="#ch-fix">故障排查</a>，帮助初学者建立完整的使用流程。</p>
+          <p class="notice">需要注意，网络服务的可用性会受到地区、运营商、网络环境和服务商配置影响。使用相关服务前，应了解所在地的法律法规及网络使用规定，详见<a href="/yinsi-anquan-falv/">隐私、安全与法律注意事项</a>。</p>
+        </div>
+      </section>
+
+      <!-- 第一章 基础概念 -->
+      <section class="chapter" id="ch-basics" aria-labelledby="ch-basics-h">
+        <div class="section-head"><span class="sec-num">第一章</span><h2 id="ch-basics-h">基础概念：先分清六个词</h2><span class="sec-sub">看懂这些词，后面的选购和设置都会顺很多</span></div>
+        <div class="table-wrap">
+          <table class="cmp terms">
+            <thead><tr><th>词</th><th>是什么</th><th>举个例子</th></tr></thead>
+            <tbody>
+              <tr><td>梯子</td><td>所有能访问境外网站的工具的统称，“科学上网”“魔法上网”说的都是它</td><td>机场、VPN 都算梯子</td></tr>
+              <tr><td>VPN</td><td>一条覆盖整台设备的加密隧道，装官方 App 一键连接</td><td>Astrill、ExpressVPN</td></tr>
+              <tr><td>机场</td><td>出售多节点订阅的服务商，需要配合客户端使用</td><td>本站收录的 {airports.length} 家</td></tr>
+              <tr><td>节点</td><td>一台境外代理服务器，名称里通常写着地区和线路</td><td>“香港 IEPL 01”</td></tr>
+              <tr><td>订阅</td><td>一条链接，客户端打开它就能拿到全部节点</td><td>用户中心的“复制订阅”</td></tr>
+              <tr><td>客户端</td><td>装在设备上、负责连接节点的软件</td><td>Clash Verge Rev、小火箭</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="split">
+          <div class="mini"><h3>长期在国内、每天使用</h3><p>多数人选<strong>机场</strong>：价格低、节点多，还能让国内网站直连、只让境外网站走代理。</p></div>
+          <div class="mini"><h3>短期来华、不想折腾</h3><p>选<strong>商业 VPN</strong>：装好即用，但要在入境前下载并付款，月付通常要 ¥90 以上。</p></div>
+        </div>
+        <DeeperReading group="dr1" items={[['vpn-jichang-qubie', 'VPN 和机场有什么区别？'], ['kexue-shangwang-gongju', '梯子工具有哪些'], ['vpn-tuijian', '翻墙 VPN 推荐 2026']]} />
+      </section>
+
+      <!-- 第二章 机场选择标准 -->
+      <section class="chapter" id="ch-standard" aria-labelledby="ch-standard-h">
+        <div class="section-head"><span class="sec-num">第二章</span><h2 id="ch-standard-h">机场选择标准：好梯子要看的五个地方</h2><span class="sec-sub">节点数量多不等于好用，下面五点才决定你用得顺不顺</span></div>
+        <ol class="std-list">
+          <li><h3>线路类型</h3><p class="std-what"><b>看什么：</b>节点名或资料里写的是 IEPL / IPLC 专线，还是普通中转、直连。</p><p class="std-why"><b>为什么：</b>专线的跨境段不走公网，晚高峰和敏感时期更稳；直连最便宜，但最容易卡。本站 {airports.length} 家中有 {lineCount} 家标注了专线。</p></li>
+          <li><h3>晚高峰表现</h3><p class="std-what"><b>看什么：</b>晚上 8 点到 11 点打开视频、测速，连续看几天。</p><p class="std-why"><b>为什么：</b>白天快不代表晚上快。只有高峰期也能用，才算真正稳定；一次测速截图说明不了问题。</p></li>
+          <li><h3>流量与重置规则</h3><p class="std-what"><b>看什么：</b>流量是每月重置、整个周期共用，还是一次性用完为止；节点有没有 2x 倍率。</p><p class="std-why"><b>为什么：</b>“年付 1200GB”和“每月 100GB”总量一样，但前者可能几个月就用完；2x 节点会让流量翻倍消耗。</p></li>
+          <li><h3>设备数与限速</h3><p class="std-what"><b>看什么：</b>同时能在几台设备上用、是否写明限速。</p><p class="std-why"><b>为什么：</b>手机、电脑、平板一起用，或全家共用时最容易超限；限速会让 4K 视频卡顿。本站有 {devFree} 家标注不限设备。</p></li>
+          <li><h3>运营与售后</h3><p class="std-what"><b>看什么：</b>运营了多久、有没有退款规则和公告频道、价格是否明显低于同行。</p><p class="std-why"><b>为什么：</b>机场多是小团队，停运时有发生。规则写得清楚、先买短周期，是控制损失最有效的办法。</p></li>
+        </ol>
+        <DeeperReading group="dr2" items={[['tizi-tuijian', '新手第一次买梯子：怎么选、怎么避坑'], ['wending-jichang-tuijian', '稳定机场推荐'], ['zhuanxian-jichang-tuijian', '专线机场推荐']]} />
+      </section>
+
+      <!-- 本站重点推荐 -->
+      <section class="chapter" aria-labelledby="top5-h">
+        <div class="section-head"><span class="sec-num">按标准挑选</span><h2 id="top5-h">本站重点推荐展示</h2><a href="/jichang-paihangbang/">梯子排行榜 →</a><span class="sec-sub">前五固定顺序，含推广合作；每家的线路、流量规则和设备数都写在资料页</span></div>
+        <LingdongFeature />
+        <Disclosure />
+        <div class="feature-grid" style="margin-top:1.6rem">
+          {topFive.map((a, i) => <AirportCard airport={a} featured={i < 4} />)}
+        </div>
+      </section>
+
+      <!-- 第三章 套餐比较 -->
+      <section class="chapter" id="ch-plans" aria-labelledby="ch-plans-h">
+        <div class="section-head"><span class="sec-num">第三章</span><h2 id="ch-plans-h">套餐比较：看懂三个价格</h2><span class="sec-sub">广告里的“每月几块钱”，往往不是你实际要付的钱</span></div>
+        <div class="split three">
+          <div class="mini"><h3>实际付款</h3><p>下单时一次付出的钱。年付套餐要一次付清一整年。</p></div>
+          <div class="mini"><h3>折合月价</h3><p>实际付款 ÷ 月数。用来比较，不代表可以按月买。</p></div>
+          <div class="mini"><h3>每GB价格</h3><p>实际付款 ÷ 总流量。比较不同流量档位时最公平。</p></div>
+        </div>
+        <div class="example">
+          <p class="example-title">算一个例子：{ld.name}“{ldMonth.name}”套餐（每月 {ldMonth.trafficGB}GB）</p>
+          <div class="table-wrap">
+            <table class="cmp">
+              <thead><tr><th>付费方式</th><th>实际付款</th><th>折合月价</th><th>每GB</th></tr></thead>
+              <tbody>
+                <tr><td>月付</td><td class="num">{fmtCNY(ldMonth.priceCNY, 0)}</td><td class="num">{fmtCNY(monthlyEquivalent(ldMonth), 0)}</td><td class="num">{fmtCNY(pricePerGB(ldMonth), 2)}</td></tr>
+                <tr><td>年付</td><td class="num">{fmtCNY(ldYear.priceCNY, 0)}</td><td class="num">{fmtCNY(monthlyEquivalent(ldYear), 0)}</td><td class="num">{fmtCNY(pricePerGB(ldYear), 2)}</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small muted" style="margin:.5rem 0 0">年付每月便宜 {fmtCNY(monthlyEquivalent(ldMonth)! - monthlyEquivalent(ldYear)!, 0)}，但要一次付 {fmtCNY(ldYear.priceCNY, 0)}。建议先月付试用，满意再续年付。</p>
+        </div>
+
+        <h3 id="traffic" class="sub-h">100GB 流量够不够？</h3>
+        <p>决定流量的主要是视频：1080p 每小时约 3GB，4K 约 7GB；刷网页、用 ChatGPT 一天通常只有几百 MB。</p>
+        <div class="table-wrap">
+          <table class="cmp">
+            <thead><tr><th>你的用法</th><th>每月大约</th><th>100GB 够吗</th></tr></thead>
+            <tbody>
+              <tr><td>只查资料、用 AI</td><td class="num">15–30GB</td><td>绰绰有余，可选更小的套餐</td></tr>
+              <tr><td>每天 1 小时 1080p 视频</td><td class="num">约 90GB</td><td>刚好够，略紧</td></tr>
+              <tr><td>每天 2 小时以上，或全家共用</td><td class="num">200GB 起</td><td>不够，建议 200–300GB 档</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="sub-h">{topFive.length + featuredPicks.length} 家机场价格对比</h3>
+        <p class="small muted">前五为本站重点推荐，其后 {featuredPicks.length} 家为编辑精选；排列顺序不代表测速结果。</p>
+        <CompareTable airports={[...topFive, ...featuredPicks]} caption={`${topFive.length + featuredPicks.length} 家机场价格对比`} />
+        <DeeperReading group="dr3" items={[['pianyi-jichang-tuijian', '便宜机场推荐'], ['jichang-liuliang-guji', '机场流量怎么估算'], ['anliang-jifei-jichang', '按量计费机场'], ['tools/meigb-jiage', '每GB价格计算器']]} />
+      </section>
+
+      <!-- 第四章 节点地区 -->
+      <section class="chapter" id="ch-nodes" aria-labelledby="ch-nodes-h">
+        <div class="section-head"><span class="sec-num">第四章</span><h2 id="ch-nodes-h">节点地区：不同地区适合做不同的事</h2><span class="sec-sub">在列出节点地区的 {listed.length} 家机场中统计</span></div>
+        <div class="table-wrap">
+          <table class="cmp">
+            <thead><tr><th>地区</th><th>特点</th><th>适合</th><th>要注意</th><th>提供的机场</th></tr></thead>
+            <tbody>
+              {REGIONS.map((r) => <tr><td>{r.name}</td><td>{r.trait}</td><td>{r.fit}</td><td style="white-space:normal;min-width:14em">{r.note}</td><td class="num">{r.n} / {listed.length}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <div class="node-name">
+          <p class="example-title">节点名怎么读</p>
+          <p><code>香港</code> <code>IEPL</code> <code>01</code> <code>1x</code> → 地区 · 线路类型 · 编号 · 倍率。倍率 1x 表示用 1GB 扣 1GB，2x 则扣 2GB。名称里写“剩余流量”“到期时间”的是提示信息，不是能连的节点。</p>
+        </div>
+        <DeeperReading group="dr4" items={[['iepl-iplc-qubie', 'IEPL 和 IPLC 有什么区别'], ['jichang-yanchi-wendingxing', '机场节点怎么选：延迟与稳定性'], ['chatgpt-jichang-tuijian', 'ChatGPT 机场推荐']]} />
+      </section>
+
+      <!-- 第五章 客户端安装 -->
+      <section class="chapter" id="ch-clients" aria-labelledby="ch-clients-h">
+        <div class="section-head"><span class="sec-num">第五章</span><h2 id="ch-clients-h">客户端安装：按设备选一个就够</h2><span class="sec-sub">同一时间只开一个客户端，避免互相冲突</span></div>
+        <div class="table-wrap">
+          <table class="cmp">
+            <thead><tr><th>设备</th><th>新手首选</th><th>备选</th><th>去哪里下载</th></tr></thead>
+            <tbody>
+              <tr><td>Windows</td><td><a href="/clash-verge-jiaocheng/">Clash Verge Rev</a></td><td><a href="/v2rayn-v2rayng-jiaocheng/">v2rayN</a>、<a href="/clashparty-jiaocheng/">ClashParty</a></td><td>项目官方 GitHub</td></tr>
+              <tr><td>macOS</td><td><a href="/clash-verge-jiaocheng/">Clash Verge Rev</a></td><td><a href="/clashparty-jiaocheng/">ClashParty</a>、<a href="/sing-box-jiaocheng/">sing-box（SFM）</a></td><td>官方 GitHub / App Store</td></tr>
+              <tr><td>安卓</td><td><a href="/v2rayn-v2rayng-jiaocheng/">v2rayNG</a></td><td><a href="/hiddify-karing-jiaocheng/">Hiddify</a>、Clash Meta for Android</td><td>官方 GitHub / Google Play</td></tr>
+              <tr><td>iPhone / iPad</td><td><a href="/shadowrocket-jiaocheng/">Shadowrocket（小火箭）</a></td><td><a href="/sing-box-jiaocheng/">sing-box（SFI）</a>、<a href="/hiddify-karing-jiaocheng/">Karing</a></td><td>非中国大陆区 App Store</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mini" id="clash" style="margin-top:1rem">
+          <h3>Clash 是什么？</h3>
+          <p>Clash 是一类按规则分流的代理客户端：国内网站直连，境外网站走代理，AI 和流媒体还能固定到某个地区。原版 Clash 已停止维护，现在常用的是基于 mihomo 内核的 Clash Verge Rev、ClashParty 和 Clash Meta for Android，需要机场提供“Clash 订阅”。</p>
+        </div>
+        <DeeperReading group="dr5" items={[['clash-verge-jiaocheng', 'Clash Verge Rev 使用教程'], ['shadowrocket-jiaocheng', '小火箭使用教程'], ['tools/kehuduan-xuanze', '客户端选择助手']]} />
+      </section>
+
+      <!-- 第六章 订阅导入 -->
+      <section class="chapter" id="ch-import" aria-labelledby="ch-import-h">
+        <div class="section-head"><span class="sec-num">第六章</span><h2 id="ch-import-h">订阅导入：梯子怎么用，三步连上网</h2><span class="sec-sub">订阅链接等于账号凭证，不要发给别人，也不要交给在线转换网站</span></div>
+        <ol class="steps">
+          <li><h3>复制对应格式的订阅</h3><p>登录机场用户中心，按你的客户端复制：Clash 系客户端用“Clash 订阅”，v2rayN / v2rayNG 用“通用订阅”，小火箭用通用订阅或一键导入。</p></li>
+          <li><h3>粘贴到客户端的订阅入口</h3><p>Clash Verge Rev 在左侧“订阅”页；小火箭点右上角“+”，类型选 Subscribe；v2rayN 在“订阅分组设置”里添加。</p></li>
+          <li><h3>更新订阅、选节点、打开代理</h3><p>点一次“更新订阅”让节点出现，模式选“规则”，选一个节点或“自动选择”，再打开系统代理（手机上允许添加 VPN 配置）。</p></li>
+        </ol>
+        <DeeperReading group="dr6" items={[['dingyue-daoru-wenti', '订阅导入失败的常见原因与解决方法'], ['v2rayn-v2rayng-jiaocheng', 'v2rayN / v2rayNG 教程']]} />
+      </section>
+
+      <!-- 第七章 故障排查 -->
+      <section class="chapter" id="ch-fix" aria-labelledby="ch-fix-h">
+        <div class="section-head"><span class="sec-num">第七章</span><h2 id="ch-fix-h">故障排查：五种常见情况</h2><span class="sec-sub">先按表格自查，大多数问题五分钟内能解决</span></div>
+        <div class="table-wrap">
+          <table class="cmp fix">
+            <thead><tr><th>遇到的情况</th><th>最常见原因</th><th>先试这个</th></tr></thead>
+            <tbody>
+              <tr><td>导入时报“解析失败”</td><td>订阅格式和客户端不对应</td><td>回用户中心换对应格式的订阅</td></tr>
+              <tr><td>节点全部超时</td><td>套餐到期、订阅过旧或系统时间不准</td><td>更新订阅，打开自动校时，升级客户端</td></tr>
+              <tr><td>显示已连接，网页却打不开</td><td>没开系统代理，或误选了直连模式</td><td>打开系统代理，模式改为“规则”</td></tr>
+              <tr><td>白天快、晚上卡</td><td>晚高峰线路拥堵</td><td>换专线或其他地区节点，用“自动选择”</td></tr>
+              <tr><td>ChatGPT 提示地区不支持</td><td>节点在香港等不开放地区</td><td>换日本、新加坡或美国节点，清除网站数据后重试</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <DeeperReading group="dr7" label="逐步排查" items={[['tools/guzhang-paicha', '订阅导入与连接故障排查助手'], ['jichang-yanchi-wendingxing', '机场节点怎么选：延迟与稳定性']]} />
+      </section>
+
+      <section class="chapter" aria-labelledby="tools-h">
+        <div class="section-head"><span class="sec-num">工具箱</span><h2 id="tools-h">实用工具</h2><a href="/tools/">全部工具 →</a><span class="sec-sub">全部在浏览器本地计算，不收集输入</span></div>
+        <div class="tool-chips">
+          {TOOLS.map((t) => <a href={t.href}><strong>{t.name}</strong><span>{t.desc}</span></a>)}
+        </div>
+        <div class="continue">
+          <p>读完这七章，你已经能独立完成从选机场到连上网的全过程。还有 {articles.length} 篇专题文章，覆盖各类机场推荐和每个客户端的详细教程。</p>
+          <a class="btn btn-primary" href="/wenzhang/">继续阅读全部 {articles.length} 篇文章 →</a>
+        </div>
+      </section>
+
+      <FaqList items={faq} />
+    </div>
+  </div>
+
+  <script>
+    // 目录高亮当前章节
+    const links = [...document.querySelectorAll<HTMLAnchorElement>('.page-toc a')];
+    const targets = links.map((a) => document.querySelector<HTMLElement>(a.getAttribute('href')!)).filter((x): x is HTMLElement => !!x);
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const id = '#' + e.target.id;
+          links.forEach((a) => a.classList.toggle('on', a.getAttribute('href') === id));
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      targets.forEach((t) => io.observe(t));
+    }
+  </script>
+</BaseLayout>

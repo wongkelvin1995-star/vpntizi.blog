@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import AffButton from '../../components/AffButton.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import { namedAirports, airportUrl, PENDING, BILLING_LABEL, statusLabel, shortName, summarize, monthlyEquivalent, pricePerGB, fmtCNY, type Airport } from '../../lib/airports';
+import FaqList from '../../components/FaqList.astro';
+import ShiceReport from '../../components/ShiceReport.astro';
+import { shiceFor } from '../../data/shice';
+import FeedbackList from '../../components/FeedbackList.astro';
+import { fankuiFor } from '../../data/fankui';
+import { SITE } from '../../data/site';
+
+export function getStaticPaths() {
+  return namedAirports.map((a) => ({ params: { id: a.id }, props: { a } }));
+}
+interface Props { a: Airport }
+const { a } = Astro.props;
+const path = airportUrl(a);
+const verified = a.status === 'verified';
+const others = [...namedAirports.filter((x) => x.rank <= 5 && x.id !== a.id), ...namedAirports.filter((x) => x.rank > 5 && x.id !== a.id && Math.abs(x.rank - a.rank) <= 3)].slice(0, 8);
+const sn = shortName(a);
+const fb = fankuiFor(a.id);
+const S = summarize(a);
+// 在 34 家中的位置（全部由数据计算，每页都不同）
+const all = namedAirports.map((x) => ({ x, s: summarize(x) }));
+const rankOf = (val: number | null, list: (number | null)[], asc = true) => {
+  if (val == null) return null;
+  const v = list.filter((n): n is number => n != null);
+  return { pos: v.filter((n) => (asc ? n < val : n > val)).length + 1, total: v.length };
+};
+const R = {
+  monthly: rankOf(S.monthly?.priceCNY ?? null, all.map((o) => o.s.monthly?.priceCNY ?? null)),
+  lowest: rankOf(S.lowestMonthly ? monthlyEquivalent(S.lowestMonthly) : null, all.map((o) => (o.s.lowestMonthly ? monthlyEquivalent(o.s.lowestMonthly) : null))),
+  perGB: rankOf(S.bestPerGB ? pricePerGB(S.bestPerGB) : null, all.map((o) => (o.s.bestPerGB ? pricePerGB(o.s.bestPerGB) : null))),
+  maxGB: rankOf(S.maxGB || null, all.map((o) => o.s.maxGB || null), false),
+};
+const near = S.monthly
+  ? all.filter((o) => o.x.id !== a.id && o.s.monthly).sort((p, q) => Math.abs(p.s.monthly!.priceCNY - S.monthly!.priceCNY) - Math.abs(q.s.monthly!.priceCNY - S.monthly!.priceCNY)).slice(0, 4)
+  : [];
+const gb = (n: number | null) => (n == null ? '不限量' : n >= 1000 ? `${+(n / 1000).toFixed(2)}TB` : `${n}GB`);
+const planTxt = (p: NonNullable<typeof S.monthly>) => `${p.name} ${fmtCNY(p.priceCNY)}（${gb(p.trafficGB)}${p.trafficPeriod === 'month' ? '/月' : '，用完为止'}）`;
+const priceLine = [
+  S.monthly && `月付最低 ${planTxt(S.monthly)}`,
+  S.yearly && `年付最低 ${fmtCNY(S.yearly.priceCNY)}（每月 ${gb(S.yearly.trafficGB)}，折合 ${fmtCNY(monthlyEquivalent(S.yearly))}/月，需一次付清）`,
+  S.paygBest && `不限时包 ${S.payg.length} 档，${planTxt(S.paygBest)}每GB约 ${fmtCNY(pricePerGB(S.paygBest), 2)}`,
+].filter(Boolean).join('；');
+const faq = [
+  { q: `${sn}多少钱？`, a: S.hasPlans ? `${priceLine}。以上为购买页标价，未叠加优惠码，实际以官网结算页为准。` : `本站暂未取得${sn}的可靠价格，请以官网为准。` },
+  { q: `${sn}流量每月重置吗？`, a: S.hasPlans ? [a.plans.some((p) => p.trafficPeriod === 'month') && '周期套餐（月付、季付、年付等）的流量按月提供，每月重置，未用完的不累计', S.payg.length > 0 && '不限时流量包一次性购买、用完为止，不按月清零'].filter(Boolean).join('；') + '。重置日以账户面板为准。' : '资料未说明，请以官网为准。' },
+  { q: `${sn}用的是什么线路？`, a: a.lineTypes.length ? `资料标注为：${a.lineTypes.join('、')}${a.regions.length ? `；节点地区：${a.regions.join('、')}` : ''}。线路名词含义见《IEPL 和 IPLC 有什么区别》。` : '资料未说明线路类型。' },
+  { q: `${sn}支持哪些客户端？`, a: a.clients.length ? `${a.clients.join('；')}。${a.protocols.length ? `协议：${a.protocols.join('、')}。` : ''}不确定用哪个，可以用本站的客户端选择助手。` : '资料未列出客户端，一般可在用户中心复制 Clash 或通用订阅导入常用客户端。' },
+  { q: `${sn}能用 ChatGPT 和 Netflix 吗？`, a: [a.aiCompat, a.streamingCompat].filter(Boolean).join(' ') || '资料没有给出 AI 与流媒体兼容情况。建议先买最短周期，自行测试常用的 AI 工具和流媒体。' },
+  { q: `${sn}适合什么样的人？`, a: a.suitableFor.length ? `适合：${a.suitableFor.join('；')}。${a.notSuitableFor.length ? `不太适合：${a.notSuitableFor.join('；')}。` : ''}` : '资料不足，暂无法判断。' },
+  { q: `${sn}的注册入口在哪里？`, a: `点击本页的“前往${a.name}官网注册”按钮即可进入注册页（本站推广链接，你支付的价格不变）。机场域名可能更换，第一次购买建议选最短周期试用。` },
+];
+
+const li = (arr: string[]) => (arr.length ? arr : null);
+const intro = a.intro || `${a.name}是本站收录的机场品牌（推荐位第 ${a.rank} 位）。本站暂未取得它可靠的套餐价格、节点地区、线路类型和兼容性资料，这些字段统一标为“待核实”，取得官网资料后会补充并注明日期。注册前请以官网实时信息为准。`;
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: a.name,
+    alternateName: a.nameEn || undefined,
+    serviceType: '网络代理订阅服务',
+    url: SITE.url + path,
+    description: intro.slice(0, 150),
+    provider: { '@type': 'Brand', name: a.name },
+    ...(verified && a.plans.length
+      ? {
+          offers: a.plans.map((p) => ({
+            '@type': 'Offer',
+            name: `${p.name}（${BILLING_LABEL[p.billing]}）`,
+            price: p.priceCNY.toFixed(2),
+            priceCurrency: 'CNY',
+            priceValidUntil: undefined,
+            url: SITE.url + path,
+          })),
+        }
+      : {}),
+  },
+];
+
+const title = `${sn}机场怎么样？2026 套餐价格与注册入口`;
+const desc = (S.hasPlans
+  ? `${sn}怎么样？${[S.monthly && `月付 ${fmtCNY(S.monthly.priceCNY, S.monthly.priceCNY % 1 ? 1 : 0)} 起（${gb(S.monthly.trafficGB)}/月）`, S.yearly && `年付 ${fmtCNY(S.yearly.priceCNY, 0)} 起`, a.lineTypes[0] && a.lineTypes[0].replace(/（.*?）/g, '')].filter(Boolean).join('，')}。整理${sn}全部套餐的实付价格、折合月价、每GB成本、流量规则、客户端与购买限制，注明整理日期。`
+  : `${sn}机场资料页：注册入口、套餐价格与线路资料整理，未核实项标注待核实。`).slice(0, 158);
+---
+<BaseLayout
+  title={title.length > 40 ? `${sn}机场怎么样？套餐价格与注册` : title}
+  description={desc}
+  path={path}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: '首页', href: '/' }, { name: '完整榜单', href: '/jichang-paihangbang/' }, { name: a.name, href: path }]}
+>
+  <div class="layout-2">
+    <article>
+      <span class="tag">推荐位 #{a.rank}</span>
+      <h1>{a.name}怎么样？2026 套餐价格、线路与注册入口</h1>
+      <div class="meta">
+        <span>资料状态：{statusLabel(a)}</span>
+        {a.nameEn && <span>英文名：{a.nameEn}</span>}
+        {a.aliases.length > 0 && <span>别名：{a.aliases.join(' / ')}</span>}
+      </div>
+      <Disclosure compact />
+      <div style="margin:1rem 0"><AffButton airport={a} /></div>
+
+      {S.hasPlans && (
+        <section class="panel section" aria-labelledby="sum-h">
+          <h2 id="sum-h" style="margin-top:0">{sn}要点速览</h2>
+          <dl class="kv">
+            {S.monthly && <><dt>月付门槛</dt><dd>{planTxt(S.monthly)}</dd></>}
+            {S.lowestMonthly && <><dt>最低折合月价</dt><dd>{fmtCNY(monthlyEquivalent(S.lowestMonthly))}/月（{S.lowestMonthly.name}，{BILLING_LABEL[S.lowestMonthly.billing]}实付 {fmtCNY(S.lowestMonthly.priceCNY)}）</dd></>}
+            {S.bestPerGB && <><dt>最低每GB</dt><dd>{fmtCNY(pricePerGB(S.bestPerGB), 3)}（{S.bestPerGB.name}，{BILLING_LABEL[S.bestPerGB.billing]}）</dd></>}
+            <dt>不限时流量包</dt><dd>{S.payg.length ? `有，${S.payg.length} 档` : '没有'}</dd>
+            <dt>付费周期</dt><dd>{S.billings.join('、')}</dd>
+            <dt>最大月流量</dt><dd>{gb(S.maxGB)}</dd>
+            <dt>线路</dt><dd>{a.lineTypes.join('、') || PENDING}</dd>
+          </dl>
+          <p class="small muted" style="margin:.6rem 0 0">由下方套餐表自动计算；资料状态：{statusLabel(a)}。</p>
+        </section>
+      )}
+
+      {S.hasPlans && (
+        <section class="section" aria-labelledby="rank-h">
+          <h2 id="rank-h">{sn}在 {all.length} 家机场中的位置</h2>
+          <ul>
+            {R.monthly && <li>月付门槛 {fmtCNY(S.monthly!.priceCNY)}，在 {R.monthly.total} 家提供月付的机场中排第 {R.monthly.pos} 低。</li>}
+            {!R.monthly && <li>{sn}资料中没有月付套餐，需要按季、按年或买流量包。</li>}
+            {R.lowest && <li>最低折合月价 {fmtCNY(monthlyEquivalent(S.lowestMonthly!))}，排第 {R.lowest.pos} 低（共 {R.lowest.total} 家）。</li>}
+            {R.perGB && <li>每GB 最低 {fmtCNY(pricePerGB(S.bestPerGB!), 3)}，排第 {R.perGB.pos} 低（共 {R.perGB.total} 家）。</li>}
+            {R.maxGB && <li>最大月流量 {gb(S.maxGB)}，排第 {R.maxGB.pos} 高（共 {R.maxGB.total} 家）。</li>}
+          </ul>
+          {near.length > 0 && <p>月付价格相近的机场：{near.map((o, i) => <>{i > 0 && '、'}<a href={airportUrl(o.x)}>{o.x.name}</a>（月付 {fmtCNY(o.s.monthly!.priceCNY)} / {gb(o.s.monthly!.trafficGB)}）</>)}。</p>}
+          <p class="small muted">排名只按价格和流量数字计算，不代表线路质量，也不是本站推荐顺序。</p>
+        </section>
+      )}
+
+      <section class="section"><h2>{sn}是什么机场</h2><p>简单说，{sn}是一款机场类梯子：按套餐订阅节点，在客户端里导入后使用。</p><p>{intro}</p></section>
+
+      <section class="section">
+        <h2>{sn}套餐价格表</h2>
+        <PlanTable airport={a} />
+      </section>
+
+      {shiceFor(a.id).map((r) => <ShiceReport record={r} name={sn} />)}
+      {fb && <FeedbackList set={fb} name={sn} />}
+
+      <section class="section">
+        <h2>节点地区与线路类型</h2>
+        <div class="grid grid-2">
+          <div class="panel"><h3>节点地区</h3><p>{li(a.regions)?.join('、') ?? <span class="pending">{PENDING}</span>}</p></div>
+          <div class="panel"><h3>线路类型</h3><p>{li(a.lineTypes)?.join('、') ?? <span class="pending">{PENDING}</span>}</p><p class="small muted">线路名词解释：<a href="/iepl-iplc-qubie/">IEPL 与 IPLC</a></p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>协议与客户端</h2>
+        <div class="grid grid-2">
+          <div class="panel"><h3>协议</h3><p>{li(a.protocols)?.join('、') ?? <span class="pending">{PENDING}</span>}</p></div>
+          <div class="panel"><h3>支持的客户端</h3><p>{li(a.clients)?.join('、') ?? <span class="pending">{PENDING}</span>}</p><p class="small muted"><a href="/tools/kehuduan-xuanze/">不知道选哪个客户端？</a></p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>AI 工具与流媒体兼容性</h2>
+        <div class="grid grid-2">
+          <div class="panel"><h3>AI 工具（ChatGPT 等）</h3><p>{a.aiCompat || <span class="pending">{PENDING}。AI 服务会封禁部分机房 IP，结果随时间变化，购买后请自行确认。</span>}</p></div>
+          <div class="panel"><h3>流媒体（Netflix 等）</h3><p>{a.streamingCompat || <span class="pending">{PENDING}。解锁情况随节点 IP 变化，本站不提供未经核实的解锁结论。</span>}</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>适合谁、不适合谁</h2>
+        <div class="grid grid-2">
+          <div class="panel"><h3>适用人群</h3>{li(a.suitableFor) ? <ul>{a.suitableFor.map((s) => <li>{s}</li>)}</ul> : <p class="pending">{PENDING}</p>}</div>
+          <div class="panel"><h3>不适用人群</h3>{li(a.notSuitableFor) ? <ul>{a.notSuitableFor.map((s) => <li>{s}</li>)}</ul> : <p class="pending">{PENDING}</p>}</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>重要购买限制</h2>
+        {li(a.limits) ? <ul>{a.limits.map((s) => <li>{s}</li>)}</ul> : <p><span class="pending">{PENDING}。</span>下单前请在官网确认：同时在线设备数、是否限速、流量是否按月重置、退款规则与到期后流量是否清零。</p>}
+      </section>
+
+      <section class="section">
+        <h2>资料说明与更新日期</h2>
+        {a.sources.length > 0 && <ul>{a.sources.map((s) => <li>{s.label}</li>)}</ul>}
+        <p>{a.status === 'verified'
+          ? `套餐价格已于 ${a.verifiedAt} 在官网核对。`
+          : `本页资料根据公开信息整理，整理日期 ${a.collectedAt ?? ''}，尚未在官网逐项复核。`}价格、线路与解锁情况以官网实时信息为准。修改记录见 <a href="/tools/ziliao-hezhe/">资料核验与更新记录</a>。</p>
+      </section>
+
+      <FaqList items={faq} heading={`${sn}常见问题`} />
+
+      <div class="panel section" style="text-align:center">
+        <p style="margin-bottom:.8rem">确认套餐适合自己后，通过本站专属入口前往官网注册：</p>
+        <AffButton airport={a} />
+      </div>
+    </article>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <h2 class="small" style="margin:0 0 .6rem">其他推荐机场</h2>
+        <ul class="list-plain">{others.map((o) => <li><a href={airportUrl(o)}>{o.rank}. {o.name}</a></li>)}</ul>
+        <p class="small" style="margin:.6rem 0 0"><a href="/jichang-paihangbang/">完整榜单 →</a></p>
+      </div>
+      <div class="panel small">
+        <h2 class="small" style="margin:0 0 .6rem">购买前工具</h2>
+        <ul class="list-plain">
+          <li><a href="/tools/liuliang-gusuan/">流量使用量估算器</a></li>
+          <li><a href="/tools/meigb-jiage/">每GB套餐价格计算器</a></li>
+          <li><a href="/tools/guzhang-paicha/">订阅导入故障排查</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</BaseLayout>

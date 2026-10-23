@@ -1,0 +1,34 @@
+---
+import type { Airport } from '../lib/airports';
+import { BILLING_LABEL, monthlyEquivalent, pricePerGB, cycleTrafficGB, fmtCNY, PENDING } from '../lib/airports';
+interface Props { airport: Airport }
+const { airport: a } = Astro.props;
+const periodLabel = { month: '每月重置', cycle: '周期内共用', total: '不重置' } as const;
+---
+<div class="table-wrap">
+  <table>
+    <caption class="skip">{a.name} 套餐价格表</caption>
+    <thead>
+      <tr><th>套餐名称</th><th>付费方式</th><th>实际付款</th><th>折合月价</th><th>套餐流量</th><th>每GB价格</th><th>备注</th></tr>
+    </thead>
+    <tbody>
+      {a.plans.length === 0 ? (
+        <tr><td colspan="7"><span class="pending">套餐与价格{PENDING}：本站尚未在官网完成核实，暂不展示任何价格数字，请以官网为准。</span></td></tr>
+      ) : a.plans.map((p) => (
+        <tr>
+          <td>{p.name}</td>
+          <td>{BILLING_LABEL[p.billing]}</td>
+          <td class="num">{fmtCNY(p.priceCNY)}</td>
+          <td class="num">{monthlyEquivalent(p) != null ? fmtCNY(monthlyEquivalent(p)) : '—'}</td>
+          <td class="num">{p.trafficGB == null ? '未写明' : `${p.trafficGB} GB（${periodLabel[p.trafficPeriod]}）`}{p.trafficPeriod === 'month' && cycleTrafficGB(p) !== p.trafficGB ? `，周期合计 ${cycleTrafficGB(p)} GB` : ''}</td>
+          <td class="num">{pricePerGB(p) != null ? fmtCNY(pricePerGB(p), 3) : '—'}</td>
+          <td>{[p.deviceLimit, p.note].filter(Boolean).join('；') || '—'}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+{a.plans.length > 0 && a.status !== 'verified' && (
+  <p class="notice" style="margin-top:.6rem">以上价格根据公开信息整理，为购买页标价、未叠加任何优惠码，尚未在官网逐项复核。下单前请以官网结算页为准。</p>
+)}
+<p class="small muted" style="margin-top:.5rem">“实际付款”是下单时一次性支付的金额；“折合月价”= 实际付款 ÷ 周期月数，仅用于比较，并非可以按月购买的价格。</p>

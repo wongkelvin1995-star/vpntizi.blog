@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { FIXED_TOP } from '../lib/airports';
+const path = '/tuiguang-pilu/';
+---
+<BaseLayout title="推广披露与推荐方法说明" description="VPN梯子指南的推广合作披露与推荐方法：推荐顺序如何确定、AFF 链接如何标注、资料如何核验、哪些数据不会发布，以及纠错与更新流程。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '推广披露', href: path }]}>
+  <div class="prose" style="max-width:780px">
+    <h1>推广披露与推荐方法</h1>
+    <h2>我们如何赚钱</h2>
+    <p>本站部分“官网注册”按钮是推广合作（AFF）链接：你通过这些链接注册或购买，本站可能获得佣金，你支付的价格不会因此增加。所有推广链接都带有 <code>rel="sponsored nofollow noopener"</code> 标记，并在新窗口打开。</p>
+    <h2>推荐顺序如何确定</h2>
+    <p>前五位固定为：{FIXED_TOP.map((n, i) => `${i + 1}. ${n}`).join('；')}。这是编辑设定的重点推荐展示顺序，包含商业合作因素。第 6 位以后会随资料核实进度调整展示顺序，但不会删除或重复。</p>
+    <p><strong>这不是性能排行榜。</strong>本站目前只发布单次测试截图并注明测试时间（见各机场资料页的“本站实测”），没有进行多地区、多时段的系统测速，因此不会发布速度分数、延迟排名或“实测第一”之类的结论。</p>
+    <h2>资料如何核验</h2>
+    <ol>
+      <li>价格与套餐：只采用品牌官网或用户中心公开页面的信息，记录来源网址与核实日期。</li>
+      <li>节点与线路：以官网公开说明为准，并注明“官网标称”。</li>
+      <li>AI 与流媒体兼容：只写服务商宣称或公开测评的说法，并提示本站未检测。</li>
+      <li>任何数据变更都会写入 <a href="/tools/ziliao-hezhe/">资料核验与更新记录</a>。</li>
+    </ol>
+    <h2>我们不会做的事</h2>
+    <ul>
+      <li>不复制其他网站的评分、榜单或测速数据。</li>
+      <li>不把折合月价写成月付价。</li>
+      <li>不为了排名堆砌关键词或制造雷同文章。</li>
+    </ul>
+  </div>
+</BaseLayout>

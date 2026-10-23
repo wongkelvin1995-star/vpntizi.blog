@@ -1,0 +1,30 @@
+---
+/** 机场横向对比表：数值全部由套餐数据计算 */
+import type { Airport } from '../lib/airports';
+import { summarize, airportUrl, fmtCNY, monthlyEquivalent, pricePerGB, PENDING } from '../lib/airports';
+interface Props { airports: Airport[]; caption?: string }
+const { airports, caption } = Astro.props;
+const gb = (n: number | null) => (n == null ? '不限量' : n >= 1000 ? `${+(n / 1000).toFixed(2)}TB` : `${n}GB`);
+---
+<div class="table-wrap">
+  <table class="cmp">
+    {caption && <caption class="skip">{caption}</caption>}
+    <thead><tr><th>机场</th><th>月付门槛</th><th>最低折合月价</th><th>最低每GB</th><th>不限时包</th><th>线路</th></tr></thead>
+    <tbody>
+      {airports.map((a) => {
+        const S = summarize(a);
+        return (
+          <tr>
+            <td><a href={airportUrl(a)}>{a.name}</a></td>
+            <td class="num">{S.monthly ? `${fmtCNY(S.monthly.priceCNY)} / ${gb(S.monthly.trafficGB)}` : (S.hasPlans ? '无月付' : PENDING)}</td>
+            <td class="num">{S.lowestMonthly ? `${fmtCNY(monthlyEquivalent(S.lowestMonthly))} / ${gb(S.lowestMonthly.trafficGB)}` : PENDING}</td>
+            <td class="num">{S.bestPerGB ? fmtCNY(pricePerGB(S.bestPerGB), 3) : PENDING}</td>
+            <td>{S.hasPlans ? (S.payg.length ? `${S.payg.length} 档` : '无') : PENDING}</td>
+            <td>{a.lineTypes.map((l) => l.replace(/（.*?）/g, '')).join('、') || PENDING}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</div>
+<p class="small muted" style="margin-top:.5rem">月付门槛 = 最便宜的月付套餐；最低折合月价 = 所有周期套餐中（实付 ÷ 月数）最低的一档，年付需一次付清；最低每GB 不含定制独享套餐。价格为购买页标价，未叠加优惠码。</p>

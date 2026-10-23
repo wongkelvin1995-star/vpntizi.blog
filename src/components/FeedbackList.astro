@@ -1,0 +1,18 @@
+---
+/** 品牌资料页：读者反馈（用户原话，不显示星级、不输出评价结构化数据） */
+import type { FeedbackSet } from '../data/fankui';
+interface Props { set: FeedbackSet; name: string }
+const { set, name } = Astro.props;
+---
+<section class="section fankui" id="fankui" aria-labelledby="fankui-h">
+  <h2 id="fankui-h">读者反馈：{name}使用感受</h2>
+  <p class="small muted">以下是站长于 {set.received} 收到的 {set.items.length} 条用户留言原话，只做了排版整理。反馈来自个人使用体验，未经本站独立核实，也不代表所有用户的情况；线路表现请以你自己的试用为准，建议先买月付在晚高峰实测。</p>
+  <div class="fankui-list">
+    {set.items.map((f) => (
+      <blockquote class="fankui-item">
+        <p class="fankui-title">{f.title}</p>
+        <p>{f.text}</p>
+      </blockquote>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,41 @@
+{
+  "name": "vpntizi-blog",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/postbuild.mjs",
+    "preview": "astro preview",
+    "check:data": "node scripts/check-data.mjs",
+    "check:data:strict": "node scripts/check-data.mjs --strict",
+    "check:seo": "node scripts/seo-audit.mjs",
+    "test:search": "node scripts/search-test.mjs",
+    "test:browser": "node scripts/browser-test.mjs",
+    "test:full-data": "node scripts/simulate-full-data.mjs",
+    "test": "npm run check:data && npm run build && npm run check:seo && npm run test:search && npm run links",
+    "prelaunch": "npm run check:data:strict && npm run build && npm run check:seo && npm run test:search && npm run links",
+    "indexnow:diff": "node scripts/indexnow.mjs --diff",
+    "indexnow:submit": "node scripts/indexnow.mjs --submit",
+    "indexnow:all": "node scripts/indexnow.mjs --all",
+    "bing:status": "node scripts/bing-status.mjs",
+    "bing:queries": "node scripts/bing-status.mjs --queries",
+    "links": "node scripts/make-preview.mjs && node scripts/link-check.mjs",
+    "test:click": "node scripts/click-test.mjs",
+    "test:preview": "node scripts/make-preview.mjs && node scripts/preview-router-test.mjs"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^8.1.0",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/nunito": "^5.2.5",
+    "astro": "^7.4.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.11",
+    "playwright-core": "^1.56.1",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}

@@ -1,0 +1,21 @@
+---
+import { topFour } from '../lib/airports';
+import AirportCard from './AirportCard.astro';
+import Disclosure from './Disclosure.astro';
+import CompareTable from './CompareTable.astro';
+interface Props { heading?: string; note?: string; showTable?: boolean }
+const { heading = '本站重点推荐的四家机场', note, showTable = false } = Astro.props;
+---
+<section class="section" id="top4" aria-labelledby="top4-h">
+  <h2 id="top4-h">{heading}</h2>
+  {note && <p>{note}</p>}
+  <Disclosure compact />
+  <div class="grid grid-2" style="margin-top:1rem">
+    {topFour.map((a) => <AirportCard airport={a} featured />)}
+  </div>
+  {showTable && <>
+    <h3 style="margin-top:1.4rem">四家价格对比</h3>
+    <CompareTable airports={topFour} caption="前四家机场价格对比" />
+  </>}
+  <p class="small muted" style="margin-top:.8rem">第 5 名及其余品牌见 <a href="/jichang-paihangbang/">完整机场榜单</a>；价格换算方法见 <a href="/tools/meigb-jiage/">每GB价格计算器</a>。</p>
+</section>

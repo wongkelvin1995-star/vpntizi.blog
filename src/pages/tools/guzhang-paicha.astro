@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const path = '/tools/guzhang-paicha/';
+
+const FLOWS = [
+  {
+    id: 'import', name: '订阅导入失败 / 更新订阅报错',
+    steps: [
+      ['确认订阅格式与客户端匹配', 'Clash 系客户端要用“Clash 订阅”，v2rayN / v2rayNG 用“通用订阅”，Shadowrocket 用通用或专用订阅。格式错了最常见的报错是“解析失败”“invalid config”。'],
+      ['重新完整复制订阅链接', '链接很长，手动选取容易漏字符。回到机场用户中心点击“复制”按钮，粘贴前先清空输入框，确认开头是 https:// 且末尾没有多余空格。'],
+      ['检查套餐是否到期或流量用尽', '套餐过期或流量用完后，很多机场返回空订阅或报错。登录用户中心看剩余天数和流量。'],
+      ['校准系统时间', '系统时间相差太多会导致 TLS 握手失败，订阅和节点都会报错。开启“自动设置时间”，时区选对。'],
+      ['更换网络后重试更新', '部分网络会干扰订阅域名。换手机热点或另一个网络再更新一次；若机场提供备用订阅域名，改用备用链接。'],
+      ['重置订阅链接', '如果怀疑链接泄露被滥用，在用户中心“重置订阅”，然后删除客户端里的旧订阅，重新导入新链接。'],
+    ],
+  },
+  {
+    id: 'timeout', name: '导入成功，但所有节点都超时',
+    steps: [
+      ['先看是否只是延迟测试失败', '有些客户端的“延迟测试”请求被屏蔽也会显示超时，但实际能用。选一个节点，打开代理后直接访问网页验证。'],
+      ['确认已经打开系统代理或 TUN', 'Clash Verge Rev 要打开“系统代理”或“TUN 模式”，v2rayN 要把“系统代理”设为“自动配置”，手机端要在系统弹窗里允许添加 VPN 配置。'],
+      ['关闭其他代理软件与加速器', '同时开两个代理软件、游戏加速器或部分安全软件，会抢占系统代理或虚拟网卡。'],
+      ['更新订阅获取最新节点', '机场更换服务器后旧节点会全部失效，更新订阅即可。'],
+      ['更新客户端或切换内核', '旧版本可能不支持新协议（如 Hysteria2、VLESS Reality），升级到最新版本，或在 v2rayN 中切换 sing-box / Xray 内核。'],
+      ['联系机场客服', '以上都正常仍全部超时，多半是机场线路故障，截图报错后联系客服或查看机场公告频道。'],
+    ],
+  },
+  {
+    id: 'noweb', name: '显示已连接，但网页打不开',
+    steps: [
+      ['检查代理模式', '使用“规则模式”而不是“直连模式”；如果规则模式不行，临时切到“全局模式”测试是否是规则问题。'],
+      ['确认浏览器没有设置别的代理', '浏览器插件（如 SwitchyOmega）或系统中残留的手动代理设置会覆盖客户端设置。'],
+      ['清理 DNS 缓存', 'Windows 可在命令提示符运行 ipconfig /flushdns；手机可开关一次飞行模式。'],
+      ['试试 TUN 模式', '部分软件不走系统代理（如一些命令行工具和游戏），需要开启 TUN 模式才能被代理。'],
+      ['换一个节点地区', '个别网站会屏蔽某些地区或机房 IP，换到其他地区节点再试。'],
+    ],
+  },
+  {
+    id: 'slow', name: '能用但很慢 / 晚高峰卡顿',
+    steps: [
+      ['在不同时段对比', '记录白天和晚上 20:00–23:00 的表现。只有晚高峰慢，通常是线路拥堵，换专线节点或换低负载节点。'],
+      ['不要只看延迟数字', '延迟低不等于速度快。用客户端的“测速”或打开视频看实际清晰度。方法见《机场延迟与稳定性怎么判断》。'],
+      ['检查是否有倍率或限速', '部分节点标有 2x、3x 倍率或限速说明，流量消耗更快或速度上限更低。'],
+      ['换协议或换节点', '同一机场不同协议（如 Trojan、VLESS、Hysteria2）在不同网络环境下表现差异较大，可以逐一测试。'],
+      ['排查本地网络', '关闭代理测试本地网速；Wi-Fi 信号差、路由器老旧也会导致卡顿。'],
+    ],
+  },
+  {
+    id: 'ai', name: 'ChatGPT / Netflix 打不开或提示地区不支持',
+    steps: [
+      ['换到服务支持的地区节点', 'AI 和流媒体服务都有地区限制。选择服务所支持国家或地区的节点，避开不支持的地区。'],
+      ['清除网站数据后重新登录', '服务会记住之前的 IP 地区，清除该网站的 Cookie 或用无痕窗口重试。'],
+      ['确认浏览器与系统都走同一节点', '规则模式下部分域名可能被分流到其他节点，临时开启全局模式测试。'],
+      ['查看机场是否标注解锁节点', '如果机场有专门的“解锁”或“AI”节点分组，优先使用；本站资料页会在核实后注明兼容性。'],
+    ],
+  },
+];
+---
+<BaseLayout title="订阅导入与连接故障排查助手" description="机场订阅导入失败、节点全部超时、已连接但打不开网页、晚高峰卡顿、ChatGPT 或 Netflix 地区不支持？按症状一步步排查，附每一步的原因与处理方法。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '故障排查助手', href: path }]}>
+  <h1>订阅导入与连接故障排查助手</h1>
+  <p>选择你遇到的症状，按顺序逐步检查。每完成一步，点击“已解决”或“没解决，下一步”。</p>
+  <div class="choice-group panel" id="flow-pick" role="radiogroup" aria-label="选择症状">
+    {FLOWS.map((f, i) => <label><input type="radio" name="flow" value={f.id} checked={i === 0} /><span>{f.name}</span></label>)}
+  </div>
+
+  {FLOWS.map((f) => (
+    <section class="section flow" data-flow={f.id} aria-labelledby={`f-${f.id}`}>
+      <h2 id={`f-${f.id}`}>{f.name}</h2>
+      <ol class="list-plain">
+        {f.steps.map(([t, d], i) => (
+          <li class="panel step" data-step={i}>
+            <h3 style="margin:0 0 .3rem"><span class="tag">STEP {i + 1}</span> {t}</h3>
+            <p style="margin:0 0 .6rem;color:var(--text-2)">{d}</p>
+            <div class="step-actions" hidden>
+              <button class="btn btn-primary" type="button" data-ok>已解决</button>
+              <button class="btn btn-ghost" type="button" data-next>没解决，下一步</button>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div class="notice info end" hidden>以上步骤都没解决？请把客户端日志截图发给机场客服，或通过右侧 Telegram 入口描述你的情况。</div>
+      <div class="notice info done" hidden>问题已解决。建议收藏本页，下次遇到问题可以直接排查。</div>
+    </section>
+  ))}
+
+  <section class="section prose">
+    <h2>延伸阅读</h2>
+    <ul>
+      <li><a href="/dingyue-daoru-wenti/">订阅导入失败的原因与解决方法</a></li>
+      <li><a href="/jichang-yanchi-wendingxing/">机场延迟与稳定性怎么判断</a></li>
+      <li><a href="/tools/kehuduan-xuanze/">客户端选择助手</a></li>
+    </ul>
+  </section>
+  <script>
+    const flows = document.querySelectorAll<HTMLElement>('.flow');
+    function show(id: string) {
+      flows.forEach((f) => {
+        const on = f.dataset.flow === id;
+        f.hidden = !on;
+        if (!on) return;
+        const steps = f.querySelectorAll<HTMLElement>('.step');
+        steps.forEach((s, i) => { s.hidden = i > 0; s.style.opacity = '1'; s.querySelector<HTMLElement>('.step-actions')!.hidden = i !== 0; });
+        f.querySelector<HTMLElement>('.end')!.hidden = true;
+        f.querySelector<HTMLElement>('.done')!.hidden = true;
+      });
+    }
+    document.getElementById('flow-pick')!.addEventListener('change', (e) => show((e.target as HTMLInputElement).value));
+    document.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+      const step = t.closest<HTMLElement>('.step'); if (!step) return;
+      const flow = step.closest<HTMLElement>('.flow')!;
+      if (t.matches('[data-ok]')) { step.querySelector<HTMLElement>('.step-actions')!.hidden = true; flow.querySelector<HTMLElement>('.done')!.hidden = false; }
+      if (t.matches('[data-next]')) {
+        step.querySelector<HTMLElement>('.step-actions')!.hidden = true; step.style.opacity = '.6';
+        const next = step.nextElementSibling as HTMLElement | null;
+        if (next) { next.hidden = false; next.querySelector<HTMLElement>('.step-actions')!.hidden = false; next.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        else flow.querySelector<HTMLElement>('.end')!.hidden = false;
+      }
+    });
+    show((document.querySelector('#flow-pick input:checked') as HTMLInputElement).value);
+  </script>
+</BaseLayout>

@@ -1,0 +1,120 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopFour from '../components/TopFour.astro';
+import TopicData from '../components/TopicData.astro';
+import FaqList from '../components/FaqList.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import AffButton from '../components/AffButton.astro';
+import { getArticles, articleUrl, CATEGORY, type Article } from '../lib/content';
+import { topFour } from '../lib/airports';
+import { SITE } from '../data/site';
+import { TOOLS } from '../data/tools';
+
+export async function getStaticPaths() {
+  const all = await getArticles();
+  return all.map((entry) => ({ params: { slug: entry.id }, props: { entry, all } }));
+}
+
+interface Props { entry: Article; all: Article[] }
+const { entry, all } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const cat = CATEGORY[d.category];
+const url = articleUrl(entry);
+const related = d.related.map((s) => all.find((a) => a.id === s)).filter((x): x is Article => !!x);
+const toc = headings.filter((h) => h.depth === 2);
+const isRecommend = d.category === 'recommend';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: d.h1,
+    description: d.description,
+    inLanguage: 'zh-CN',
+    datePublished: d.published.toISOString(),
+    dateModified: d.updated.toISOString(),
+    mainEntityOfPage: { '@type': 'WebPage', '@id': new URL(url, SITE.url).href },
+    author: { '@type': 'Organization', name: `${SITE.name}编辑部`, url: SITE.url + '/guanyu/' },
+    publisher: { '@type': 'Organization', name: SITE.name, logo: { '@type': 'ImageObject', url: `${SITE.url}/favicon.svg` } },
+    keywords: [...d.keywords].join(', ') || undefined,
+    articleSection: cat.label,
+  },
+];
+---
+<BaseLayout
+  title={d.title}
+  description={d.description}
+  path={url}
+  noindex={d.noindex}
+  ogType="article"
+  published={d.published}
+  updated={d.updated}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: '首页', href: '/' }, { name: cat.hubName, href: cat.hub }, { name: d.h1, href: url }]}
+>
+  <div class="layout-2">
+    <article>
+      <span class="tag">{cat.label}</span>
+      <h1>{d.h1}</h1>
+      <div class="meta">
+        <span>发布：<time datetime={d.published.toISOString()}>{d.published.toISOString().slice(0, 10)}</time></span>
+        <span>更新：<time datetime={d.updated.toISOString()}>{d.updated.toISOString().slice(0, 10)}</time></span>
+        <span>作者：{SITE.name}编辑部</span>
+      </div>
+      {d.summary.length > 0 ? (
+        <section class="panel answer" aria-label="快速答案">
+          <h2 class="small" style="margin:0 0 .5rem;color:var(--accent-2)">快速答案</h2>
+          <ul style="margin:0;padding-left:1.2rem">{d.summary.map((x) => <li>{x}</li>)}</ul>
+        </section>
+      ) : <p class="lead" style="color:var(--text-2)">{d.description}</p>}
+
+      {d.showTopFour && <TopFour />}
+
+      <div class="prose section">
+        <Content />
+      </div>
+
+      {isRecommend && <TopicData topic={entry.id} />}
+
+      <FaqList items={d.faq} />
+
+      {related.length > 0 && (
+        <section class="section" aria-labelledby="rel-h">
+          <h2 id="rel-h">相关阅读</h2>
+          <div class="grid grid-2">
+            {related.map((r) => <ArticleCard href={articleUrl(r)} title={r.data.h1} description={r.data.description} tag={CATEGORY[r.data.category].label} />)}
+          </div>
+        </section>
+      )}
+    </article>
+
+    <aside class="sidebar" aria-label="侧栏">
+      {toc.length > 2 && (
+        <nav class="panel toc" aria-label="本文目录">
+          <h2 class="small" style="margin:0 0 .5rem">本文目录</h2>
+          <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+        </nav>
+      )}
+      {!isRecommend && (
+        <div class="panel">
+          <h2 class="small" style="margin:0 0 .6rem">本站重点推荐</h2>
+          <ul class="list-plain">
+            {topFour.map((a) => (
+              <li style="display:flex;justify-content:space-between;align-items:center;gap:.5rem">
+                <span>{a.rank}. {a.name}</span>
+                <AffButton airport={a} label="注册" />
+              </li>
+            ))}
+          </ul>
+          <p class="small muted" style="margin:.6rem 0 0">推广展示顺序，非测速排名。<a href="/jichang-tuijian/">查看详情</a></p>
+        </div>
+      )}
+      <div class="panel">
+        <h2 class="small" style="margin:0 0 .6rem">实用工具</h2>
+        <ul class="list-plain small">{TOOLS.map((t) => <li><a href={t.href}>{t.name}</a></li>)}</ul>
+      </div>
+    </aside>
+  </div>
+</BaseLayout>

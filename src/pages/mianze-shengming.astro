@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const path = '/mianze-shengming/';
+---
+<BaseLayout title="免责声明" description="VPN梯子指南免责声明：内容用途、第三方服务责任、价格与资料时效、法律合规提醒及外部链接说明，使用本站前请仔细阅读。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '免责声明', href: path }]}>
+  <div class="prose" style="max-width:780px">
+    <h1>免责声明</h1>
+    <ol>
+      <li>本站内容用于网络知识科普、软件使用说明和消费信息参考，不构成法律、财务或安全建议。</li>
+      <li>本站收录的机场与客户端均为第三方产品或服务，本站不运营任何代理服务，也不对其可用性、稳定性、数据安全或售后承担责任。</li>
+      <li>价格、套餐与节点信息可能随时变化，页面标注的核实日期之后的变动请以官网为准。</li>
+      <li>不同国家和地区对国际联网、加密通信和代理工具的规定不同。请自行了解并遵守所在地法律法规，因违反当地法规产生的后果由使用者自行承担。</li>
+      <li>本站外部链接（包括推广链接）指向第三方网站，其内容与隐私政策由第三方负责。</li>
+    </ol>
+  </div>
+</BaseLayout>

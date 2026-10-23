@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { airports, airportUrl, hasAff, LAST_REVIEWED, statusLabel } from '../../lib/airports';
+import { CHANGELOG } from '../../data/changelog';
+const path = '/tools/ziliao-hezhe/';
+const stats = {
+  verified: airports.filter((a) => a.status === 'verified').length,
+  pending: airports.filter((a) => a.status === 'pending' && a.sourceType !== 'third-party').length,
+  third: airports.filter((a) => a.status === 'pending' && a.sourceType === 'third-party').length,
+  placeholder: airports.filter((a) => a.status === 'placeholder').length,
+  withPlans: airports.filter((a) => a.plans.length > 0).length,
+};
+const fieldsDone = (a: (typeof airports)[number]) =>
+  [a.intro, a.plans.length, a.regions.length, a.lineTypes.length, a.protocols.length, a.clients.length, a.aiCompat, a.streamingCompat, a.suitableFor.length, a.notSuitableFor.length, a.limits.length].filter(Boolean).length;
+---
+<BaseLayout title="机场资料核验状态与更新记录" description="公开 34 家机场资料的核验状态、核实与整理日期、字段完成度与历次修改记录，可按状态筛选，方便读者判断数据是否可靠、是否过期。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '资料核验与更新记录', href: path }]}>
+  <h1>机场资料核验与更新记录</h1>
+  <p>本页公开每家机场资料的核验进度。“官网已核实”表示价格与套餐已在官网核对；“公开资料整理”表示套餐数据按公开信息整理并注明整理日期，尚待官网复核；“暂无资料”表示品牌已收录、注册入口可用，但还没有可靠的套餐数据。资料总表最近检查：{LAST_REVIEWED}。</p>
+  <div class="grid grid-4 section">
+    <div class="panel"><div class="small muted">已核实</div><div class="result big" style="border:0;padding:0;background:none">{stats.verified}</div></div>
+    <div class="panel"><div class="small muted">公开资料整理</div><div class="result big" style="border:0;padding:0;background:none">{stats.third}</div></div>
+    <div class="panel"><div class="small muted">暂无资料</div><div class="result big" style="border:0;padding:0;background:none">{stats.pending}</div></div>
+    <div class="panel"><div class="small muted">已有套餐数据</div><div class="result big" style="border:0;padding:0;background:none">{stats.withPlans}</div></div>
+  </div>
+
+  <section class="section">
+    <h2>逐家核验状态</h2>
+    <div class="choice-group" id="filter" role="radiogroup" aria-label="按状态筛选">
+      {[['all', '全部'], ['verified', '官网已核实'], ['third', '公开资料整理'], ['pending', '暂无资料']].map(([v, l], i) => <label><input type="radio" name="st" value={v} checked={i === 0} /><span>{l}</span></label>)}
+    </div>
+    <div class="table-wrap" style="margin-top:.8rem">
+      <table id="status-table">
+        <thead><tr><th>#</th><th>机场</th><th>状态</th><th>字段完成度</th><th>核实 / 整理日期</th><th>注册链接</th></tr></thead>
+        <tbody>
+          {airports.map((a) => (
+            <tr data-status={a.status === 'pending' && a.sourceType === 'third-party' ? 'third' : a.status}>
+              <td class="num">{a.rank}</td>
+              <td>{a.status === 'placeholder' ? a.name : <a href={airportUrl(a)}>{a.name}</a>}</td>
+              <td>{statusLabel(a)}</td>
+              <td class="num">{fieldsDone(a)}/11</td>
+              <td class="num">{a.verifiedAt ?? a.collectedAt ?? '—'}</td>
+              <td>{hasAff(a) ? '已配置' : <span class="pending">待配置</span>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>更新记录</h2>
+    <ol class="list-plain">
+      {CHANGELOG.map((c) => (
+        <li class="panel">
+          <span class="tag">{c.type}</span> <time class="small muted" datetime={c.date}>{c.date}</time>
+          {c.airportId && <span class="small"> · {airports.find((a) => a.id === c.airportId)?.name}</span>}
+          <p style="margin:.4rem 0 0">{c.summary}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section prose">
+    <h2>核验规则</h2>
+    <ol>
+      <li>价格记录购买页公开标价（“实际付款”），不叠加优惠码，折合月价由系统计算；官网核对过的标注“官网已核实”。</li>
+      <li>流量注明是每月重置、周期共用还是不重置。</li>
+      <li>节点地区、线路类型和解锁情况都是服务商宣称或公开资料的说法，本站不作测速背书。</li>
+      <li>超过 90 天未复核的资料会重新核对。</li>
+      <li>发现错误可通过右侧 Telegram 入口反馈，采纳后记入本页。</li>
+    </ol>
+  </section>
+  <script>
+    document.getElementById('filter')!.addEventListener('change', (e) => {
+      const v = (e.target as HTMLInputElement).value;
+      document.querySelectorAll<HTMLTableRowElement>('#status-table tbody tr').forEach((r) => { r.hidden = v !== 'all' && r.dataset.status !== v; });
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import type { Airport } from '../lib/airports';
+import { airportUrl, monthlyEquivalent, pricePerGB, fmtCNY, PENDING, BILLING_LABEL, statusLabel, shortName } from '../lib/airports';
+import AffButton from './AffButton.astro';
+
+interface Props { airport: Airport; featured?: boolean; headingLevel?: 'h2' | 'h3'; showRank?: boolean }
+const { airport: a, featured = false, headingLevel = 'h3', showRank = true } = Astro.props;
+const H = headingLevel;
+
+const cheapest = [...a.plans].sort((x, y) => x.priceCNY - y.priceCNY)[0];
+const bestPerGB = a.plans.map((p) => pricePerGB(p)).filter((x): x is number => x != null).sort((x, y) => x - y)[0] ?? null;
+const placeholder = a.status === 'placeholder';
+const intro = a.intro || (placeholder
+  ? '该推荐位的品牌资料尚未录入。'
+  : `${a.name}已收录，注册入口可用。本站暂未取得可靠的套餐价格、节点与线路资料，相关字段显示“待核实”，请以官网实时信息为准。`);
+const list = (arr: string[]) => (arr.length ? arr.join('、') : PENDING);
+---
+<article class:list={['ap-card', { featured }]} id={`ap-${a.id}`}>
+  {showRank && <span class="ap-rank" aria-label={`推荐位 ${a.rank}`}>{String(a.rank).padStart(2, '0')}</span>}
+  <H>{placeholder ? a.name : <a href={airportUrl(a)}>{a.name}</a>}</H>
+  <div>
+    <span class:list={['tag', a.status === 'verified' ? 'green' : a.sourceType === 'third-party' ? 'violet' : 'warn']}>{statusLabel(a)}</span>
+  </div>
+  <p class="small" style="color:var(--text-2);margin:0">{intro}</p>
+  <dl>
+    <dt>起步价</dt>
+    <dd>{cheapest ? `${fmtCNY(cheapest.priceCNY)}（${BILLING_LABEL[cheapest.billing]}实付）` : <span class="pending">{PENDING}</span>}</dd>
+    <dt>折合月价</dt>
+    <dd>{cheapest && monthlyEquivalent(cheapest) != null ? fmtCNY(monthlyEquivalent(cheapest)) : <span class="pending">{PENDING}</span>}</dd>
+    <dt>最低每GB</dt>
+    <dd>{bestPerGB != null ? fmtCNY(bestPerGB, 3) : <span class="pending">{PENDING}</span>}</dd>
+    <dt>线路</dt><dd>{list(a.lineTypes)}</dd>
+    <dt>客户端</dt><dd>{list(a.clients)}</dd>
+  </dl>
+  <div class="actions">
+    <AffButton airport={a} label={`${shortName(a)}官网注册`} />
+    {!placeholder && <a class="btn btn-ghost" href={airportUrl(a)}>查看资料</a>}
+  </div>
+</article>

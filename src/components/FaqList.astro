@@ -1,0 +1,25 @@
+---
+import { jsonForScript } from '../lib/json';
+/** FAQ 全部展开展示（不使用 details 折叠），并输出 FAQPage 结构化数据 */
+interface Props { items: { q: string; a: string }[]; heading?: string; id?: string }
+const { items, heading = '常见问题', id = 'faq' } = Astro.props;
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })),
+};
+---
+{items.length > 0 && (
+  <section class="section" id={id} aria-labelledby={`${id}-h`}>
+    <h2 id={`${id}-h`}>{heading}</h2>
+    <div class="faq">
+      {items.map((i) => (
+        <div class="faq-item">
+          <h3>{i.q}</h3>
+          <p>{i.a}</p>
+        </div>
+      ))}
+    </div>
+    <script type="application/ld+json" set:html={jsonForScript(ld)} />
+  </section>
+)}

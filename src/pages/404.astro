@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="页面不存在（404）" description="你访问的页面不存在或已被移动。可以返回VPN梯子指南首页、打开站内中文搜索，或直接查看机场推荐、完整榜单与客户端教程。" path="/404/" noindex>
+  <h1>404：页面不存在</h1>
+  <p>这个地址可能已经更名或删除。可以试试：</p>
+  <div class="grid grid-3">
+    <a class="card" href="/"><h3>返回首页</h3><p>查看最新推荐与教程</p></a>
+    <a class="card" href="/jichang-tuijian/"><h3>机场推荐</h3><p>按需求挑选机场</p></a>
+    <a class="card" href="/wangzhan-ditu/"><h3>网站地图</h3><p>全部页面列表</p></a>
+  </div>
+  <p style="margin-top:1rem"><button class="btn btn-ghost" type="button" data-open-search>打开站内搜索</button></p>
+</BaseLayout>

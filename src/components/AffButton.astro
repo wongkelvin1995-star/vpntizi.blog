@@ -1,0 +1,13 @@
+---
+import type { Airport } from '../lib/airports';
+import { hasAff } from '../lib/airports';
+import { SITE } from '../data/site';
+interface Props { airport: Airport; label?: string; block?: boolean }
+const { airport, label, block = false } = Astro.props;
+const text = label ?? `前往${airport.name}官网注册`;
+---
+{hasAff(airport) ? (
+  <a class:list={['btn btn-primary', { 'btn-block': block }]} href={airport.affUrl} target="_blank" rel={SITE.affRel} data-aff={airport.id}>{text} ↗</a>
+) : (
+  <span class:list={['btn', { 'btn-block': block }]} aria-disabled="true" data-aff-missing={airport.id} title="站长尚未配置该品牌的专属注册链接">注册链接待配置</span>
+)}

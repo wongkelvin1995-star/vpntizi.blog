@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopFour from '../components/TopFour.astro';
+import AirportCard from '../components/AirportCard.astro';
+import FaqList from '../components/FaqList.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { airports, featuredPicks, LAST_REVIEWED } from '../lib/airports';
+import { getArticles, articleUrl } from '../lib/content';
+import { SITE } from '../data/site';
+
+const recommends = (await getArticles()).filter((a) => a.data.category === 'recommend');
+const fifth = airports[4];
+const picks = featuredPicks;
+const restCount = airports.length - 5 - picks.length;
+const path = '/jichang-tuijian/';
+
+const needs = [
+  { need: '最在意不掉线、晚高峰可用', href: '/wending-jichang-tuijian/', label: '稳定机场推荐' },
+  { need: '预算有限、看重每GB成本', href: '/pianyi-jichang-tuijian/', label: '便宜与高性价比机场' },
+  { need: '想要 IEPL / IPLC 专线', href: '/zhuanxian-jichang-tuijian/', label: '专线机场推荐' },
+  { need: '经常下载大文件、看 4K', href: '/gaosu-jichang-tuijian/', label: '高速机场推荐' },
+  { need: '用量少、不想按月付费', href: '/anliang-jifei-jichang/', label: '按量计费机场' },
+  { need: '主要用 ChatGPT 等 AI 工具', href: '/chatgpt-jichang-tuijian/', label: 'ChatGPT 机场推荐' },
+  { need: '看 Netflix 等流媒体', href: '/liumeiti-jiesuo-jichang/', label: '流媒体解锁机场' },
+  { need: '电脑用 Clash Verge / iPhone 用小火箭 / Windows 用 v2rayN', href: '/clash-jichang-tuijian/', label: '按客户端挑选' },
+  { need: '短期来华，想要装好就能用的商业 VPN', href: '/vpn-tuijian/', label: '翻墙 VPN 推荐' },
+  { need: '想先找免费的', href: '/mianfei-vpn/', label: '免费 VPN 能用吗' },
+];
+
+const faq = [
+  { q: '2026 年选机场最重要的指标是什么？', a: '对新手来说依次是：你常用的网站能否稳定打开、晚高峰（大约 20:00–23:00）速度是否够用、实际每GB成本、能否退款或先买短周期。节点数量多少不是关键，能稳定用的节点才有意义。' },
+  { q: '这些机场资料从哪里来？可靠吗？', a: '标“官网已核实”的已在机场官网核对并写明日期；其余按公开信息整理，注明整理日期，尚未在官网逐项复核。不同资料说法不一致时，会写在“重要购买限制”里。AI 与流媒体解锁都是服务商宣称或公开测评的说法，本站未逐一检测，建议先买月付实测。' },
+  { q: '应该买月付还是年付？', a: '第一次购买建议月付或最短周期。年付折合月价通常更低，但机场有跑路或线路变差的风险，先用一段时间确认稳定后再考虑长周期。' },
+  { q: '一个机场能同时在电脑和手机上用吗？', a: '大多数机场按“同时在线设备数”限制，一份订阅可以导入多个客户端。具体设备数以各家套餐说明为准，本站资料页会在核实后列出。' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: '机场推荐 2026',
+    url: SITE.url + path,
+    inLanguage: 'zh-CN',
+    dateModified: LAST_REVIEWED,
+    hasPart: recommends.map((a) => ({ '@type': 'BlogPosting', headline: a.data.h1, url: SITE.url + articleUrl(a) })),
+  },
+];
+---
+<BaseLayout
+  title="机场推荐 2026：新手按需求挑选机场与套餐"
+  description="2026 机场推荐总览：本站重点推荐灵动云、暮光加速、微风网络、飞猫云，并按稳定、便宜、专线、AI、流媒体等需求分类，附选购步骤与价格换算方法。"
+  path={path}
+  jsonLd={jsonLd}
+  breadcrumbs={[{ name: '首页', href: '/' }, { name: '机场推荐', href: path }]}
+>
+  <h1>2026 机场推荐：先看需求，再挑机场</h1>
+  <p class="meta">资料更新：{LAST_REVIEWED} · 共收录 {airports.length} 家机场</p>
+  <p>“机场”是提供多节点订阅的代理服务，也就是按月订阅的付费梯子，需要配合客户端使用。不同人需要的机场差别很大：只查资料、用 AI 的人每月 30 GB 就够，追剧的人可能要 200 GB 以上。所以这页不给一个笼统的“最好”，而是先给出本站重点推荐的四家，再按需求把你带到对应的专题页。</p>
+
+  <TopFour heading="本站重点推荐：前四家机场" showTable />
+
+  <section class="section">
+    <h2>第五推荐与更多精选机场</h2>
+    <p class="muted small">第五推荐为大佬云；下面另外 {picks.length} 家由编辑挑选展示，同样含推广合作链接，排列顺序不代表测速结果。</p>
+    <div class="grid grid-2">
+      <AirportCard airport={fifth} />
+      {picks.map((a) => <AirportCard airport={a} showRank={false} />)}
+    </div>
+    <p class="small" style="margin-top:1rem">其余 {restCount} 家的套餐与注册入口见 <a href="/jichang-paihangbang/">完整机场榜单</a>。</p>
+  </section>
+
+  <section class="section">
+    <h2>按需求选择专题</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>你的情况</th><th>建议阅读</th></tr></thead>
+        <tbody>{needs.map((n) => <tr><td>{n.need}</td><td><a href={n.href}>{n.label}</a></td></tr>)}</tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section prose">
+    <h2>新手选机场的五个步骤</h2>
+    <ol>
+      <li><strong>确定设备和客户端。</strong>Windows 常用 Clash Verge Rev 或 v2rayN，iPhone 常用 Shadowrocket，安卓常用 Clash Meta for Android、v2rayNG 或 Hiddify。不确定就用 <a href="/tools/kehuduan-xuanze/">客户端选择助手</a>。</li>
+      <li><strong>估算每月流量。</strong>用 <a href="/tools/liuliang-gusuan/">流量估算器</a> 算一下，买略高于估算值 20% 的套餐即可，避免月底不够用。</li>
+      <li><strong>按每GB成本比较。</strong>同样 ¥30，有的给 100 GB，有的给 300 GB；有的月付，有的要一次付一年。用 <a href="/tools/meigb-jiage/">每GB价格计算器</a> 把“实际付款”和“折合月价”分开看。</li>
+      <li><strong>先买短周期试用。</strong>重点测晚高峰、你常用的网站、AI 工具和视频是否正常。延迟数字怎么看，参考 <a href="/jichang-yanchi-wendingxing/">延迟与稳定性判断方法</a>。</li>
+      <li><strong>确认购买限制。</strong>留意设备数、是否限速、是否支持退款、流量是否按月重置，这些写在各家资料页的“重要购买限制”里。</li>
+    </ol>
+    <h2>本站如何决定推荐顺序</h2>
+    <p>推荐顺序由编辑设定，前五固定为灵动云、暮光加速、微风网络 Breezenet、飞猫云、大佬云，属于推广合作展示。我们不发布无法复现的“测速分数”，也不会把推荐顺序说成性能排名。资料核验方式和每次修改记录公开在 <a href="/tools/ziliao-hezhe/">资料核验与更新记录</a>。</p>
+  </section>
+
+  <section class="section">
+    <h2>全部机场推荐专题</h2>
+    <div class="grid grid-3">
+      {recommends.map((a) => <ArticleCard href={articleUrl(a)} title={a.data.h1} description={a.data.description} date={a.data.updated} />)}
+    </div>
+  </section>
+
+  <FaqList items={faq} />
+</BaseLayout>

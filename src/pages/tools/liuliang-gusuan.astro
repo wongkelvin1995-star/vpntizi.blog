@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqList from '../../components/FaqList.astro';
+const path = '/tools/liuliang-gusuan/';
+const rows = [
+  { id: 'web', label: '刷网页、社交、看图文', rate: 0.15, def: 2 },
+  { id: 'ai', label: 'ChatGPT 等 AI 文字对话', rate: 0.05, def: 1 },
+  { id: 'short', label: '短视频（自动清晰度）', rate: 0.8, def: 0.5 },
+  { id: 'v720', label: '视频 720p', rate: 1.5, def: 0 },
+  { id: 'v1080', label: '视频 1080p', rate: 3, def: 1 },
+  { id: 'v4k', label: '视频 4K', rate: 7, def: 0 },
+  { id: 'meet', label: '视频会议', rate: 1, def: 0 },
+];
+const faq = [
+  { q: '估算结果准确吗？', a: '这是按常见码率估算的参考值。实际流量取决于平台的清晰度策略、是否开启自动播放、是否走全局代理等，建议在结果基础上预留 20% 余量，购买后观察一周的实际用量再调整。' },
+  { q: '开了规则模式还会消耗这么多吗？', a: '规则模式下国内网站直连，不消耗机场流量；工具只需要填你“通过代理访问境外内容”的时长。如果你长期用全局模式，国内流量也会算进去，用量会明显变多。' },
+  { q: '流量是按上传加下载一起算吗？', a: '多数机场按上传加下载合计计算，少数只算下载或按倍率计算（如 0.5x、2x 节点），以各家规则为准。' },
+];
+---
+<BaseLayout title="机场流量使用量估算器：每月需要多少GB" description="在线估算每月机场流量需求：按刷网页、AI 对话、短视频、720p/1080p/4K 视频、视频会议时长与下载量计算，并给出建议套餐档位。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '流量估算器', href: path }]}>
+  <h1>流量使用量估算器</h1>
+  <p>填写你<strong>每天通过代理</strong>做各项活动的大致小时数，工具会算出每月需要的流量，并给出建议购买的套餐档位。数据只在本机计算。</p>
+  <form class="panel tool-form" id="traffic-form" onsubmit="return false">
+    <div class="field-row">
+      {rows.map((r) => (
+        <div class="field">
+          <label for={`h-${r.id}`}>{r.label}（小时/天，约 {r.rate} GB/小时）</label>
+          <input class="input" type="number" min="0" max="24" step="0.5" id={`h-${r.id}`} data-rate={r.rate} value={r.def} />
+        </div>
+      ))}
+      <div class="field"><label for="dl">每月下载 / 更新游戏（GB）</label><input class="input" type="number" min="0" step="1" id="dl" value="0" /></div>
+      <div class="field"><label for="days">每月使用天数</label><input class="input" type="number" min="1" max="31" id="days" value="30" /></div>
+      <div class="field"><label for="buffer">安全余量</label>
+        <select class="input" id="buffer"><option value="1.1">10%</option><option value="1.2" selected>20%</option><option value="1.3">30%</option></select>
+      </div>
+    </div>
+  </form>
+  <div class="result section" id="traffic-result" aria-live="polite">
+    <div>估算每月用量：<span class="big" id="r-base">—</span></div>
+    <div>含余量建议：<span class="big" id="r-buffer">—</span></div>
+    <div id="r-tier" style="margin-top:.6rem;color:var(--text-2)"></div>
+    <div id="r-breakdown" class="small muted" style="margin-top:.6rem"></div>
+  </div>
+  <section class="section prose">
+    <h2>码率参考说明</h2>
+    <p>表中每小时流量是常见平台默认码率的近似值：1080p 视频大约 3 GB/小时，4K 大约 7 GB/小时，网页浏览和 AI 文字对话则很少。看视频是决定套餐大小的主要因素。算好后可以到 <a href="/tools/meigb-jiage/">每GB价格计算器</a> 比较套餐，或阅读 <a href="/jichang-liuliang-guji/">机场流量怎么估算</a> 了解更多省流量技巧。</p>
+  </section>
+  <FaqList items={faq} />
+  <script>
+    const form = document.getElementById('traffic-form')!;
+    const $ = (id: string) => document.getElementById(id)!;
+    function calc() {
+      const days = Math.max(1, Number(($('days') as HTMLInputElement).value) || 30);
+      let total = 0; const parts: string[] = [];
+      form.querySelectorAll<HTMLInputElement>('input[data-rate]').forEach((i) => {
+        const gb = (Number(i.value) || 0) * Number(i.dataset.rate) * days;
+        if (gb > 0) parts.push(`${i.labels?.[0]?.textContent?.split('（')[0]}：${gb.toFixed(1)} GB`);
+        total += gb;
+      });
+      const dl = Number(($('dl') as HTMLInputElement).value) || 0;
+      if (dl) parts.push(`下载：${dl} GB`);
+      total += dl;
+      const buf = total * Number(($('buffer') as HTMLSelectElement).value);
+      $('r-base').textContent = `${total.toFixed(1)} GB`;
+      $('r-buffer').textContent = `${Math.ceil(buf)} GB`;
+      const tiers = [50, 100, 200, 300, 500, 1000];
+      const tier = tiers.find((t) => t >= buf);
+      $('r-tier').textContent = tier ? `建议选择每月约 ${tier} GB 的套餐。${buf < 30 ? '用量较少，也可以考虑按量计费套餐。' : ''}` : '用量超过 1000 GB/月，建议选择大流量或不限量套餐，并确认是否有限速。';
+      $('r-breakdown').textContent = parts.join(' · ');
+    }
+    form.addEventListener('input', calc);
+    calc();
+  </script>
+</BaseLayout>

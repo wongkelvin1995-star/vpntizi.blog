@@ -1,0 +1,116 @@
+---
+import { jsonForScript } from '../../lib/json';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqList from '../../components/FaqList.astro';
+import { airports } from '../../lib/airports';
+const path = '/tools/meigb-jiage/';
+const verifiedPlans = airports.flatMap((a) => (a.status === 'verified' ? a.plans.map((p) => ({ brand: a.name, ...p })) : []));
+const faq = [
+  { q: '折合月价和实际付款有什么区别？', a: '实际付款是下单时要一次付清的金额；折合月价 = 实际付款 ÷ 周期月数。年付 ¥240 折合 ¥20/月，但你需要一次付 ¥240，如果中途机场停运，剩余月份的钱可能拿不回来。' },
+  { q: '每GB价格越低越好吗？', a: '在线路质量相近时是这样。但专线套餐每GB通常更贵，换来的是晚高峰更稳定。建议先按需求确定线路类型，再在同类套餐中比较每GB价格。' },
+  { q: '不限量套餐怎么算？', a: '不限量套餐无法计算每GB价格，计算器会只显示折合月价。这类套餐要特别留意是否限速、是否有“合理使用”条款。' },
+];
+// 示例行在构建时直接写进 HTML（搜索引擎和关闭脚本的读者也能看到计算结果），页面脚本接管后可继续编辑
+const SAMPLE = [
+  { name: '示例 A 月付', price: 25, months: 1, gb: 200, mode: 'month' },
+  { name: '示例 B 年付', price: 199, months: 12, gb: 150, mode: 'month' },
+  { name: '示例 C 按量', price: 30, months: 0, gb: 500, mode: 'total' },
+];
+const MONTH_OPTS = [[1, '月付'], [3, '季付'], [6, '半年付'], [12, '年付'], [0, '按量/一次性']];
+const calcRow = (r: (typeof SAMPLE)[number]) => {
+  const total = r.gb == null ? null : r.mode === 'month' && r.months ? r.gb * r.months : r.gb;
+  const per = total ? r.price / total : null;
+  return { monthly: r.months ? `¥${(r.price / r.months).toFixed(2)}` : '—', total: total == null ? '不限量' : `${total} GB`, per, pergb: per == null ? '—' : `¥${per.toFixed(3)}` };
+};
+const sampleOut = SAMPLE.map((r) => ({ r, o: calcRow(r) }));
+const ranked = sampleOut.filter((x) => x.o.per != null && x.r.price > 0).sort((a, b) => (a.o.per ?? 0) - (b.o.per ?? 0));
+const bestFirst = ranked[0], bestLast = ranked[ranked.length - 1];
+const lo = bestFirst.o.per ?? 0, hi = bestLast.o.per ?? 1;
+const bestText = `${lo.toFixed(3)}/GB，比最高的 ${bestLast.r.name} 便宜 ${(100 - (lo / hi) * 100).toFixed(0)}%`;
+---
+<BaseLayout title="每GB套餐价格计算器：折合月价与单价对比" description="机场套餐每GB价格计算器：输入实际付款、付费周期和流量，自动计算折合月价、周期总流量和每GB成本，支持多个套餐并排比较，找出真正的高性价比套餐。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '每GB价格计算器', href: path }]}>
+  <h1>每GB套餐价格计算器</h1>
+  <p>把要比较的套餐逐行填进去：<strong>实际付款</strong>填下单要付的钱，<strong>流量</strong>填官网写的数字，并选择流量是每月重置还是整个周期共用。计算器会把“实际付款”和“折合月价”分开显示。</p>
+  <div class="table-wrap">
+    <table id="calc">
+      <thead><tr><th>套餐名称</th><th>实际付款 ¥</th><th>周期</th><th>流量 GB</th><th>流量方式</th><th>折合月价</th><th>周期总流量</th><th>每GB</th><th></th></tr></thead>
+      <tbody>
+        {sampleOut.map(({ r, o }) => (
+          <tr>
+            <td><input class="input" data-k="name" value={r.name} aria-label="套餐名称" /></td>
+            <td><input class="input" data-k="price" type="number" min="0" step="0.01" value={r.price} aria-label="实际付款" /></td>
+            <td><select class="input" data-k="months" aria-label="周期">{MONTH_OPTS.map(([v, l]) => <option value={v} selected={v === r.months}>{l}</option>)}</select></td>
+            <td><input class="input" data-k="gb" type="number" min="0" step="1" value={r.gb ?? ''} placeholder="不限量留空" aria-label="流量" /></td>
+            <td><select class="input" data-k="mode" aria-label="流量方式"><option value="month" selected={r.mode === 'month'}>每月重置</option><option value="total" selected={r.mode === 'total'}>周期共用/不重置</option></select></td>
+            <td class="num" data-o="monthly">{o.monthly}</td><td class="num" data-o="total">{o.total}</td><td class="num" data-o="pergb">{o.pergb}</td>
+            <td><button class="btn btn-ghost" type="button" data-del aria-label="删除此行">×</button></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem">
+    <button class="btn btn-ghost" type="button" id="add">+ 添加套餐</button>
+    {verifiedPlans.length > 0 && <button class="btn btn-ghost" type="button" id="load">载入本站已核实套餐（{verifiedPlans.length}）</button>}
+    <button class="btn btn-ghost" type="button" id="reset">恢复示例</button>
+  </div>
+  <p class="result section" id="best" aria-live="polite">每GB最低：<span class="big">{bestFirst.r.name}</span>，¥{bestText}</p>
+  <p class="small muted">示例数据仅用于演示计算方法，不代表任何机场的真实价格。</p>
+  <section class="section prose">
+    <h2>计算公式</h2>
+    <ul>
+      <li>折合月价 = 实际付款 ÷ 周期月数（月付 1、季付 3、半年付 6、年付 12）</li>
+      <li>周期总流量 = 每月流量 × 周期月数（每月重置）或 = 套餐流量（周期共用 / 按量）</li>
+      <li>每GB价格 = 实际付款 ÷ 周期总流量</li>
+    </ul>
+    <p>算出单价后，结合 <a href="/tools/liuliang-gusuan/">流量估算器</a> 的结果判断是否真的用得完：一个每GB很便宜但你只能用掉三成流量的大套餐，实际成本反而更高。更多挑选思路见 <a href="/pianyi-jichang-tuijian/">便宜机场推荐</a>。</p>
+  </section>
+  <FaqList items={faq} />
+  <script type="application/json" id="verified-plans" set:html={jsonForScript(verifiedPlans)} />
+  <script type="application/json" id="sample-rows" set:html={jsonForScript(SAMPLE)} />
+  <script>
+    type Row = { name: string; price: number; months: number; gb: number | null; mode: 'month' | 'total' };
+    const MONTH_OPTS: [number, string][] = [[1, '月付'], [3, '季付'], [6, '半年付'], [12, '年付'], [0, '按量/一次性']];
+    const SAMPLE: Row[] = JSON.parse(document.getElementById('sample-rows')!.textContent || '[]');
+    const tbody = document.querySelector('#calc tbody')!;
+    const best = document.getElementById('best')!;
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+    function rowHtml(r: Row) {
+      return `<tr>
+        <td><input class="input" data-k="name" value="${esc(r.name)}" aria-label="套餐名称"></td>
+        <td><input class="input" data-k="price" type="number" min="0" step="0.01" value="${r.price}" aria-label="实际付款"></td>
+        <td><select class="input" data-k="months" aria-label="周期">${MONTH_OPTS.map(([v, l]) => `<option value="${v}" ${v === r.months ? 'selected' : ''}>${l}</option>`).join('')}</select></td>
+        <td><input class="input" data-k="gb" type="number" min="0" step="1" value="${r.gb ?? ''}" placeholder="不限量留空" aria-label="流量"></td>
+        <td><select class="input" data-k="mode" aria-label="流量方式"><option value="month" ${r.mode === 'month' ? 'selected' : ''}>每月重置</option><option value="total" ${r.mode === 'total' ? 'selected' : ''}>周期共用/不重置</option></select></td>
+        <td class="num" data-o="monthly">—</td><td class="num" data-o="total">—</td><td class="num" data-o="pergb">—</td>
+        <td><button class="btn btn-ghost" type="button" data-del aria-label="删除此行">×</button></td></tr>`;
+    }
+    function setRows(rows: Row[]) { tbody.innerHTML = rows.map(rowHtml).join(''); calc(); }
+    function calc() {
+      const results: { name: string; per: number }[] = [];
+      tbody.querySelectorAll('tr').forEach((tr) => {
+        const v = (k: string) => (tr.querySelector(`[data-k="${k}"]`) as HTMLInputElement).value;
+        const price = Number(v('price')) || 0; const months = Number(v('months')); const gbRaw = v('gb'); const gb = gbRaw === '' ? null : Number(gbRaw); const mode = v('mode');
+        const out = (k: string, t: string) => { (tr.querySelector(`[data-o="${k}"]`) as HTMLElement).textContent = t; };
+        out('monthly', months ? `¥${(price / months).toFixed(2)}` : '—');
+        const total = gb == null ? null : mode === 'month' && months ? gb * months : gb;
+        out('total', total == null ? '不限量' : `${total} GB`);
+        const per = total ? price / total : null;
+        out('pergb', per == null ? '—' : `¥${per.toFixed(3)}`);
+        if (per != null && price > 0) results.push({ name: v('name') || '未命名', per });
+      });
+      results.sort((a, b) => a.per - b.per);
+      best.innerHTML = results.length ? `每GB最低：<span class="big">${esc(results[0].name)}</span>，¥${results[0].per.toFixed(3)}/GB` + (results.length > 1 ? `，比最高的 ${esc(results[results.length - 1].name)} 便宜 ${(100 - (results[0].per / results[results.length - 1].per) * 100).toFixed(0)}%` : '') : '填写价格和流量后显示比较结果';
+    }
+    tbody.addEventListener('input', calc);
+    tbody.addEventListener('click', (e) => { const b = (e.target as HTMLElement).closest('[data-del]'); if (b) { b.closest('tr')!.remove(); calc(); } });
+    document.getElementById('add')!.addEventListener('click', () => { tbody.insertAdjacentHTML('beforeend', rowHtml({ name: '', price: 0, months: 1, gb: 100, mode: 'month' })); calc(); });
+    document.getElementById('reset')!.addEventListener('click', () => setRows(SAMPLE));
+    document.getElementById('load')?.addEventListener('click', () => {
+      const plans = JSON.parse(document.getElementById('verified-plans')!.textContent || '[]');
+      const M: Record<string, number> = { month: 1, quarter: 3, halfyear: 6, year: 12, payg: 0, onetime: 0 };
+      setRows(plans.map((p: any) => ({ name: `${p.brand} ${p.name}`, price: p.priceCNY, months: M[p.billing], gb: p.trafficGB, mode: p.trafficPeriod === 'month' ? 'month' : 'total' })));
+    });
+    calc(); // 示例行已在 HTML 中，直接按当前输入重新计算一次
+  </script>
+</BaseLayout>

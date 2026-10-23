@@ -1,0 +1,39 @@
+# 推送到 main：校验 → 构建 → SEO 检查 → 计算 IndexNow 差异 → 部署 Cloudflare Pages → 通知 IndexNow
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check:data
+      - run: npm run build
+      - run: npm run check:seo
+      - run: npm run test:search
+      - run: npm run links
+      - name: IndexNow 差异（部署前读取线上旧清单）
+        run: npm run indexnow:diff
+      - name: 部署到 Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=vpntizi-blog --branch=main
+      - name: 等待 CDN 生效
+        run: sleep 30
+      - name: 通知 IndexNow（新增 / 更新 / 删除）
+        run: npm run indexnow:submit
+        continue-on-error: true

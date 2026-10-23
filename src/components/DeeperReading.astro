@@ -1,0 +1,35 @@
+---
+/**
+ * 首页各章末尾的“深入阅读”：点标题在本页展开文章要点，不离开首页；
+ * 展开后再给“阅读全文”链接。要点直接取自文章 frontmatter 的 summary，与文章保持一致。
+ * items: [路径, 显示标题]，路径为文章 slug 或 tools/xxx。
+ */
+import { getArticles, articleUrl } from '../lib/content';
+import { TOOLS } from '../data/tools';
+
+interface Props { items: [string, string][]; label?: string; group: string }
+const { items, label = '深入阅读', group } = Astro.props;
+const articles = await getArticles();
+
+const rows = items.map(([key, title]) => {
+  const tool = TOOLS.find((t) => `tools/${t.slug}` === key);
+  if (tool) return { title, href: tool.href, points: [tool.desc], go: '打开工具', isTool: true };
+  const a = articles.find((x) => x.id === key);
+  if (!a) throw new Error(`DeeperReading: 找不到文章 ${key}`);
+  return { title, href: articleUrl(a), points: a.data.summary.length ? a.data.summary : [a.data.description], go: '阅读全文', isTool: false };
+});
+---
+<div class="deeper">
+  <p class="deeper-label">{label}<span>点标题在本页展开要点</span></p>
+  <div class="deeper-list">
+    {rows.map((r) => (
+      <details class="deeper-item" name={group}>
+        <summary>{r.isTool ? <span class="deeper-tag">工具</span> : null}{r.isTool ? r.title : `《${r.title}》`}</summary>
+        <div class="deeper-body">
+          <ul>{r.points.map((p) => <li>{p}</li>)}</ul>
+          <a class="deeper-go" href={r.href}>{r.go} →</a>
+        </div>
+      </details>
+    ))}
+  </div>
+</div>

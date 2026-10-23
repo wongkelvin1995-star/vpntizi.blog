@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+const path = '/yinsi-shuoming/';
+const UPDATED = '2026-10-23';
+const jsonLd = [{
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: '隐私说明',
+  url: SITE.url + path,
+  inLanguage: 'zh-CN',
+  dateModified: UPDATED,
+  isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+}];
+---
+<BaseLayout title="隐私说明：本站收集什么、不收集什么" description="VPN梯子指南隐私说明：本站不设 Cookie、不加统计和广告脚本、搜索与计算工具只在浏览器本地运行；托管商访问日志、推广链接与来信如何处理，以及联系方式。" path={path} jsonLd={jsonLd} breadcrumbs={[{ name: '首页', href: '/' }, { name: '隐私说明', href: path }]}>
+  <div class="prose" style="max-width:780px">
+    <h1>隐私说明</h1>
+    <p class="meta">更新日期：{UPDATED}</p>
+    <p>这页说明你访问 {SITE.name}（{SITE.domain}）时，哪些信息会被记录、哪些不会。简单说：本站没有账号、没有表单、不设 Cookie，也不放统计和广告脚本。</p>
+
+    <h2>本站不收集的信息</h2>
+    <ul>
+      <li><strong>不设 Cookie，也不用浏览器本地存储</strong>记录你的浏览行为。</li>
+      <li><strong>不加统计、广告或追踪脚本</strong>，页面上的脚本都是本站自己的，字体也由本站自己提供，不会从第三方加载。</li>
+      <li><strong>搜索和工具只在你的浏览器里运行。</strong>站内搜索、流量估算、每GB价格计算、客户端选择和故障排查，输入的内容不会发送到任何服务器。</li>
+      <li><strong>没有注册、登录和留言功能</strong>，本站不保存你的账号、密码或订阅链接。请不要把订阅链接发给任何人，包括本站。</li>
+    </ul>
+
+    <h2>托管商会记录的信息</h2>
+    <p>本站是静态网站，托管在 Cloudflare。和所有网站一样，你打开页面时，托管商的服务器会处理这次请求，并按其隐私政策记录访问时间、IP 地址、浏览器类型和访问的网址等信息，用于安全防护和网站运行。本站在托管商后台查看的只有汇总的访问数据（例如请求数量），不会用这些信息识别个人。</p>
+
+    <h2>点击外部链接之后</h2>
+    <ul>
+      <li><strong>推广链接：</strong>机场的“官网注册”按钮是推广链接，网址里带有本站的推广码。点进去后，对方网站能知道你是从本站来的；你在对方网站上填写的信息，由对方按其隐私政策处理，与本站无关。详见 <a href="/tuiguang-pilu/">推广披露与推荐方法</a>。</li>
+      <li><strong>Telegram 与 GitHub：</strong>点进去后适用 Telegram、GitHub 各自的隐私政策。</li>
+    </ul>
+
+    <h2>你写信给我们时</h2>
+    <p>如果你通过邮箱或 Telegram 联系本站，我们会收到你的邮箱地址或 Telegram 账号，以及你写的内容。这些信息只用于回复和处理资料纠错，不会公开，也不会提供给第三方。你可以随时来信要求删除往来记录。</p>
+
+    <h2>这份说明的更新</h2>
+    <p>如果以后加入统计工具或其他会处理个人信息的功能，会先更新这页并修改上方日期。</p>
+
+    <h2>联系方式</h2>
+    <ul>
+      <li>邮箱：<a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+      <li>Telegram：<a href={SITE.telegram} target="_blank" rel="noopener">{SITE.telegram}</a></li>
+    </ul>
+    <p>其他说明见 <a href="/mianze-shengming/">免责声明</a> 和 <a href="/yinsi-anquan-falv/">使用 VPN 和机场的隐私、安全与法律注意事项</a>。</p>
+  </div>
+</BaseLayout>

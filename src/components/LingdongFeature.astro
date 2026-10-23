@@ -1,0 +1,60 @@
+---
+/**
+ * 首页“01 本站重点推荐展示”中的灵动云导读短文。
+ * 所有数字都从 airports.json 计算，资料更新后文章自动同步，不会与资料页矛盾。
+ */
+import { airports, airportUrl, fmtCNY, monthlyEquivalent, pricePerGB, summarize } from '../lib/airports';
+import AffButton from './AffButton.astro';
+import { shiceFor } from '../data/shice';
+const test = shiceFor('lingdongyun')[0];
+
+const a = airports.find((x) => x.id === 'lingdongyun')!;
+const S = summarize(a);
+const month = a.plans.filter((p) => p.billing === 'month' && !/定制/.test(p.name)).sort((x, y) => x.priceCNY - y.priceCNY);
+const entry = month[0];
+const top = month[month.length - 1];
+const iplc = a.plans.find((p) => /穿云/.test(p.name));
+const payg = a.plans.filter((p) => p.billing === 'payg').sort((x, y) => x.priceCNY - y.priceCNY)[0];
+const regionRank = [...airports].sort((x, y) => y.regions.length - x.regions.length).findIndex((x) => x.id === a.id) + 1;
+const gb = (n: number | null) => (n == null ? '不限量' : n >= 1000 ? `${+(n / 1000).toFixed(2)}TB` : `${n}GB`);
+const yearOfEntry = a.plans.find((p) => p.name === entry.name && p.billing === 'year');
+---
+<article class="lead-story" aria-labelledby="ld-h">
+  <div class="lead-story-head">
+    <p class="kicker">编辑导读 · 推荐位 01</p>
+    <h3 id="ld-h">为什么用户优选灵动云？</h3>
+    <p class="lead-story-dek">月付 {fmtCNY(entry.priceCNY, 0)} 起、{a.regions.length} 个节点地区、不限速不限设备。下面是把它放在第一位的五个理由，以及购买前要留意的地方。</p>
+    <div class="lead-story-cta">
+      <AffButton airport={a} label="前往灵动云官网注册" />
+      <a class="btn btn-ghost" href={airportUrl(a)}>查看灵动云完整资料</a>
+    </div>
+  </div>
+
+  <div class="lead-story-body">
+    <ol class="reasons">
+      <li>
+        <strong>入门门槛低。</strong>
+        “{entry.name}”月付 {fmtCNY(entry.priceCNY, 0)}，每月 {gb(entry.trafficGB)}，适合第一次买机场的人先用一个月试试{yearOfEntry && `；确认好用后改年付 ${fmtCNY(yearOfEntry.priceCNY, 0)}，折合每月 ${fmtCNY(monthlyEquivalent(yearOfEntry), 0)}`}。
+      </li>
+      <li>
+        <strong>流量档位跨度大。</strong>
+        月付从 {gb(entry.trafficGB)} 到 {gb(top.trafficGB)} 共 {month.length} 档，支持{S.billings.filter((b) => b !== '按量计费').join('、')}，用量变多时直接升档，不用换机场重新配置。
+      </li>
+      <li>
+        <strong>节点地区多。</strong>
+        资料列出 {a.regions.length} 个国家和地区，在本站收录的 {airports.length} 家中排第 {regionRank}，除港台日新美外还有欧洲和东南亚节点。
+      </li>
+      <li>
+        <strong>使用规则宽松。</strong>
+        全部套餐标注不限速、不限设备、1 倍率计费，手机、电脑、平板可以同时用。
+      </li>
+      <li>
+        <strong>专线与不限时都能选。</strong>
+        {iplc && <>“{iplc.name.replace(/（.*?）/, '')}”年付 {fmtCNY(iplc.priceCNY, 0)} 标注 IPLC 专线，每月 {gb(iplc.trafficGB)}；</>}
+        {payg && <>偶尔才用的话，“{payg.name.replace(/ 不限时包/, '')}”{gb(payg.trafficGB)} 流量包 {fmtCNY(payg.priceCNY, 0)}，用完为止，不按月清零。</>}
+      </li>
+    </ol>
+    {test && <p class="shice-note"><strong>本站实测：</strong>{test.date} 傍晚对灵动云{test.regions.map((g) => g.region).join('、')}节点做了延迟与流媒体、AI 解锁测试，香港平均 {test.regions[0].avgTls}ms、台湾 {test.regions[1].avgTls}ms，亚洲节点 YouTube 与 Netflix 测试项几乎全部通过。<a href={`${airportUrl(a)}#shice`}>查看测试截图与逐项结论</a></p>}
+    <p class="caveat"><strong>购买前留意：</strong>通用订阅需要联系客服获取；历史检测中部分节点的 TikTok、Abema 未通过，用流媒体时请换节点测试。以上资料根据公开信息整理，价格以官网结算页为准，每GB 最低约 {fmtCNY(pricePerGB(S.bestPerGB!), 3)}。</p>
+  </div>
+</article>

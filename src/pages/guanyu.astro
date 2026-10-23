@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+import { airports, LAST_REVIEWED } from '../lib/airports';
+import { getArticles } from '../lib/content';
+import { TOOLS } from '../data/tools';
+const path = '/guanyu/';
+const articleCount = (await getArticles()).length;
+const verified = airports.filter((a) => a.status === 'verified').length;
+const jsonLd = [{
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: `关于${SITE.name}`,
+  url: SITE.url + path,
+  inLanguage: 'zh-CN',
+  dateModified: LAST_REVIEWED,
+  mainEntity: { '@type': 'Organization', name: SITE.name, url: SITE.url, email: SITE.email, sameAs: [SITE.telegram, SITE.github] },
+}];
+---
+<BaseLayout title="关于VPN梯子指南：网站定位与资料维护方式" description="关于VPN梯子指南：网站定位、内容原则、机场资料如何整理与更新、推荐顺序与推广合作说明、本站不做什么，以及资料纠错的邮箱与 Telegram 联系方式。" path={path} jsonLd={jsonLd} breadcrumbs={[{ name: '首页', href: '/' }, { name: '关于本站', href: path }]}>
+  <div class="prose" style="max-width:780px">
+    <h1>关于{SITE.name}</h1>
+    <p>{SITE.name}（{SITE.domain}）是一个面向中文新手的网络工具知识站。目前有 {articleCount} 篇文章、{TOOLS.length} 个在线工具和 {airports.length} 家机场资料页，内容覆盖机场与 VPN 的基础知识、客户端安装与订阅导入教程、套餐价格比较和常见故障排查。</p>
+    <p>本站的目标很简单：让第一次接触的人，不用到处翻帖子，也能按顺序弄懂“选什么、怎么买、怎么装、出问题怎么办”。</p>
+
+    <h2>内容原则</h2>
+    <ul>
+      <li><strong>不虚构数据。</strong>价格、节点、线路和解锁情况都注明整理或核实日期；官网核对过的单独标注“官网已核实”，不同资料说法不一致时写明，不自行估算。</li>
+      <li><strong>区分实付与折合价。</strong>所有价格同时展示“实际付款”和“折合月价”，避免把年付折算价当成月付价。</li>
+      <li><strong>公开推荐方式。</strong>推荐顺序是编辑推荐展示顺序，含推广合作，不是测速排名，详见 <a href="/tuiguang-pilu/">推广披露与推荐方法</a>。</li>
+      <li><strong>一个问题一篇文章。</strong>每篇文章对应一个明确问题，不制造内容雷同的页面。</li>
+      <li><strong>提示法律与安全风险。</strong>见 <a href="/yinsi-anquan-falv/">隐私、安全与法律注意事项</a>。</li>
+    </ul>
+
+    <h2>机场资料怎么整理、多久更新</h2>
+    <ol>
+      <li><strong>来源：</strong>{verified} 家机场的套餐价格已在官网核对，标注“官网已核实”和核对日期；其余按服务商公开的套餐信息整理，标注整理日期，尚未逐项在官网复核。</li>
+      <li><strong>记录方式：</strong>价格记录购买页标价，不叠加优惠码；折合月价、每 GB 价格由系统按套餐数据计算，不手工填写。</li>
+      <li><strong>更新频率：</strong>资料总表最近一次检查是 {LAST_REVIEWED}；超过 90 天未复核的资料会重新核对，每次修改都记在 <a href="/tools/ziliao-hezhe/">资料核验与更新记录</a>。</li>
+      <li><strong>解锁与线路：</strong>AI 工具、流媒体和线路类型都是服务商宣称或公开测评的说法，本站未逐一检测，购买前建议先买月付实测。</li>
+    </ol>
+
+    <h2>本站不做什么</h2>
+    <ul>
+      <li>不运营任何代理服务，不出售账号或订阅。</li>
+      <li>不发布无法复现的“测速分数”，不把推荐顺序说成性能排名。</li>
+      <li>不收集读者输入：所有计算工具都在浏览器本地运行。</li>
+      <li>不提供绕过法律监管的承诺，也不对第三方服务的可用性负责，详见 <a href="/mianze-shengming/">免责声明</a>。</li>
+    </ul>
+
+    <h2>联系我们</h2>
+    <p>资料纠错、品牌信息更新或合作，可以通过以下方式联系：</p>
+    <ul>
+      <li>邮箱：<a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+      <li>Telegram：<a href={SITE.telegram} target="_blank" rel="noopener">{SITE.telegram}</a></li>
+    </ul>
+    <p>纠错被采纳后会记录在 <a href="/tools/ziliao-hezhe/">资料核验与更新记录</a>。来信如何处理，见 <a href="/yinsi-shuoming/">隐私说明</a>。</p>
+  </div>
+</BaseLayout>

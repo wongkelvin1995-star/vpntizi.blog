@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { TOOLS } from '../../data/tools';
+const path = '/tools/';
+---
+<BaseLayout title="机场选购实用工具：流量估算、每GB价格计算" description="五个免费在线工具：流量使用量估算器、每GB套餐价格计算器、客户端选择助手、订阅导入与连接故障排查助手、机场资料核验与更新记录。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: path }]}>
+  <h1>实用工具</h1>
+  <p>这些工具都在你的浏览器本地运行，不收集输入数据。建议的使用顺序：先估算流量，再选客户端，然后用价格计算器比较套餐，遇到连接问题时使用故障排查助手。</p>
+  <h2 class="section">{TOOLS.length} 个免费工具</h2>
+  <div class="grid grid-3">{TOOLS.map((t, i) => <ArticleCard href={t.href} title={`${i + 1}. ${t.name}`} description={t.desc} tag="TOOL" />)}</div>
+</BaseLayout>

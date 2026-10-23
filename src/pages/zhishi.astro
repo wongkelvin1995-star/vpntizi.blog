@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getArticles, articleUrl, CATEGORY } from '../lib/content';
+const list = (await getArticles()).filter((a) => a.data.category === 'knowledge' || a.data.category === 'safety');
+const path = '/zhishi/';
+---
+<BaseLayout title="翻墙新手知识：原理、线路、流量与安全" description="科学上网新手知识合集：VPN 与机场的区别、IEPL 与 IPLC 专线、延迟和稳定性怎么判断、每月流量怎么估算、订阅导入问题，以及隐私安全与法律注意事项。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '新手知识', href: path }]}>
+  <h1>新手知识：买之前先弄懂这些</h1>
+  <p>很多新手踩坑不是因为选错了机场，而是没弄清楚原理、线路和流量规则。建议按顺序阅读：先看 <a href="/vpn-jichang-qubie/">VPN 和机场的区别</a>，再看 <a href="/yinsi-anquan-falv/">隐私、安全与法律注意事项</a>，最后根据需要阅读线路和流量相关文章。</p>
+  <h2 class="section">全部新手知识文章（{list.length} 篇）</h2>
+  <div class="grid grid-3">{list.map((a) => <ArticleCard href={articleUrl(a)} title={a.data.h1} description={a.data.description} tag={CATEGORY[a.data.category].label} date={a.data.updated} />)}</div>
+</BaseLayout>
