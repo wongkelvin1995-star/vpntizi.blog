@@ -11,6 +11,8 @@ export const SITE = {
   email: 'wongkelvin1995@gmail.com',
   /** 顶部 GitHub 图标的链接。留空时图标显示为“即将开放”，不可点击 */
   github: 'https://github.com/wongkelvin1995-star/vpntizi.blog',
+  /** 顶部 GitHub 图标点击后打开的页面（GitHub 上的新手专题文章）；结构化数据 sameAs 仍用上面的仓库地址 */
+  githubIcon: 'https://github.com/wongkelvin1995-star/vpntizi.blog/issues/1',
   /** 推荐展示的诚实说明，所有推荐位共用 */
   disclosure:
     '本站推荐顺序为编辑重点推荐展示顺序，含推广合作（AFF）链接，不是经过独立测速验证的性能排行榜。价格、节点和解锁情况以官网实时信息为准；每家资料都注明整理或核实日期，说法不一致处会写明。',

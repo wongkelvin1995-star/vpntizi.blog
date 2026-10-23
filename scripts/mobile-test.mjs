@@ -184,7 +184,7 @@ for (const vp of VIEWPORTS.filter((v) => [360, 390, 768].includes(v.width))) {
   const tg = page.locator('.site-header a.social-btn.tg');
   const gh = page.locator('.site-header a.social-btn.gh');
   ok((await tg.getAttribute('href'))?.startsWith('https://t.me/'), 'Telegram 图标链接不对');
-  ok((await gh.getAttribute('href')) === 'https://github.com/wongkelvin1995-star/vpntizi.blog', 'GitHub 图标链接不对');
+  ok((await gh.getAttribute('href')) === 'https://github.com/wongkelvin1995-star/vpntizi.blog/issues/1', 'GitHub 图标链接不对');
   for (const [loc, name] of [[tg, 'Telegram'], [gh, 'GitHub']]) {
     ok((await loc.getAttribute('target')) === '_blank', `${name} 图标没有在新窗口打开`);
     const [popup] = await Promise.all([page.waitForEvent('popup', { timeout: 3000 }).catch(() => null), loc.tap()]);
