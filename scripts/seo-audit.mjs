@@ -102,21 +102,47 @@ ok(`检查 HTML 页面 ${pages.length} 个，可索引 ${indexable.length} 个`)
 const robots = existsSync(join(DIST, 'robots.txt')) ? readFileSync(join(DIST, 'robots.txt'), 'utf8') : '';
 if (!robots) fail('缺少 robots.txt');
 else {
-  if (!/Sitemap:\s*https:\/\/vpntizi\.blog\/sitemap-index\.xml/.test(robots)) fail('robots.txt 未声明 sitemap');
+  if (!/^Sitemap:\s*https:\/\/vpntizi\.blog\/sitemap\.xml\s*$/m.test(robots)) fail('robots.txt 未声明 Sitemap: https://vpntizi.blog/sitemap.xml');
   if (/^Disallow:\s*\/\s*$/m.test(robots)) fail('robots.txt 禁止了整站抓取');
   ok('robots.txt 正常');
 }
-const smIndex = existsSync(join(DIST, 'sitemap-index.xml')) ? readFileSync(join(DIST, 'sitemap-index.xml'), 'utf8') : '';
-if (!smIndex) fail('缺少 sitemap-index.xml');
-const smUrls = new Set();
-for (const f of files.filter((f) => /sitemap-\d+\.xml$/.test(f))) for (const m of readFileSync(f, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)) smUrls.add(m[1]);
+// 提交给 Bing 的是 /sitemap.xml：必须是直接列出页面的 urlset，不能是索引，也不能被 _redirects 跳转
+const smErrBefore = errors.length;
+const locsOf = (xml) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+if (redirects['/sitemap.xml']) fail(`/sitemap.xml 不能被 _redirects 跳转（现在跳到 ${redirects['/sitemap.xml']}），应直接返回 200`);
+const smXml = existsSync(join(DIST, 'sitemap.xml')) ? readFileSync(join(DIST, 'sitemap.xml'), 'utf8') : '';
+if (!smXml) fail('缺少 sitemap.xml（postbuild 未运行）');
+else if (!/<urlset[\s>]/.test(smXml)) fail('sitemap.xml 不是 urlset：不能是索引文件');
+const smList = locsOf(smXml);
+const smUrls = new Set(smList);
+if (smList.length !== smUrls.size) fail(`sitemap.xml 含 ${smList.length - smUrls.size} 个重复 URL`);
+if (smList.length > 50000) fail('sitemap.xml 超过 50,000 个 URL 的上限');
 for (const r of indexable) if (!r.startsWith('/404') && !smUrls.has(SITE + r)) fail(`sitemap 缺少可索引页面 ${r}`);
 for (const u of smUrls) {
   const r = u.replace(SITE, '');
+  if (!u.startsWith(SITE + '/')) fail(`sitemap 含其他域名的网址 ${u}`);
   if (NOINDEX_ALLOWED.includes(r)) fail(`sitemap 包含 noindex 页面 ${r}`);
   if (!pages.some((p) => p.route === r)) fail(`sitemap 包含不存在的页面 ${r}`);
 }
-ok(`sitemap 收录 ${smUrls.size} 个 URL`);
+// lastmod：每条都要有，格式合法（W3C Datetime），且不能晚于今天（Bing 用它决定是否重新抓取）
+for (const m of smXml.matchAll(/<url>[\s\S]*?<\/url>/g)) {
+  const loc = (m[0].match(/<loc>([^<]+)<\/loc>/) || [])[1];
+  const lm = (m[0].match(/<lastmod>([^<]+)<\/lastmod>/) || [])[1];
+  if (!lm) fail(`sitemap 缺少 lastmod：${loc}`);
+  else if (!/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d+)?)?(Z|[+-]\d{2}:\d{2}))?$/.test(lm) || Number.isNaN(Date.parse(lm))) fail(`sitemap lastmod 格式不合法：${loc} ${lm}`);
+  else if (Date.parse(lm) > Date.now() + 24 * 3600e3) fail(`sitemap lastmod 晚于今天：${loc} ${lm}`);
+}
+// 旧地址 sitemap-index.xml → sitemap-N.xml 继续保留（可能已被提交过），收录范围必须与 sitemap.xml 完全一致
+const smIndex = existsSync(join(DIST, 'sitemap-index.xml')) ? readFileSync(join(DIST, 'sitemap-index.xml'), 'utf8') : '';
+if (!smIndex) fail('缺少 sitemap-index.xml');
+const childUrls = new Set();
+for (const c of locsOf(smIndex)) {
+  const f = join(DIST, c.replace(SITE + '/', ''));
+  if (existsSync(f)) locsOf(readFileSync(f, 'utf8')).forEach((u) => childUrls.add(u));
+  else fail(`sitemap-index.xml 引用的子文件不存在：${c}`);
+}
+if (childUrls.size !== smUrls.size || [...smUrls].some((u) => !childUrls.has(u))) fail('sitemap.xml 与 sitemap-index.xml 收录的页面不一致');
+if (errors.length === smErrBefore) ok(`sitemap.xml 直接列出 ${smUrls.size} 个页面（覆盖全部可索引页面，与 sitemap-index.xml 一致）`);
 const key = existsSync('.indexnow-key') ? readFileSync('.indexnow-key', 'utf8').trim() : '';
 if (!key || !existsSync(join(DIST, `${key}.txt`)) || readFileSync(join(DIST, `${key}.txt`), 'utf8').trim() !== key) fail('IndexNow 密钥文件缺失或内容不一致');
 else ok('IndexNow 密钥文件正常');

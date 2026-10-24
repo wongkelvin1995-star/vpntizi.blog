@@ -22,10 +22,13 @@
 
 ## 2. 提交 Sitemap
 
-Bing Webmaster → Sitemaps → 提交 `https://vpntizi.blog/sitemap-index.xml`。
-（robots.txt 已声明 sitemap，提交后可以更快被发现。）
+Bing Webmaster → Sitemaps → 提交 `https://vpntizi.blog/sitemap.xml`。
 
-状态显示“成功”后，记录“已发现 URL 数”，应接近 `npm run check:seo` 输出的 sitemap 数量。
+这个文件**直接列出全部页面**（不是索引，也不会跳转），每次 `npm run build` 自动重新生成；`robots.txt` 也声明了它。
+旧地址 `sitemap-index.xml`（指向 `sitemap-0.xml`）继续保留，内容与 `sitemap.xml` 完全一致，之前提交过也不会失效，不需要重复提交。
+
+状态显示“成功”后，记录“已发现 URL 数”，应与 `npm run check:seo` 输出的 sitemap 数量一致。
+`lastmod` 取自页面真实更新日期；Bing 忽略 `changefreq` 和 `priority`，只看 `lastmod`，所以不要为了“刷新”而随意改日期。
 
 ## 3. 确认 IndexNow
 

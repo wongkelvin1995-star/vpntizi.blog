@@ -8,7 +8,7 @@
 - ✅ 每页唯一 title、meta description、H1
 - ✅ 每页 canonical 指向 `https://vpntizi.blog/...`，统一结尾斜杠
 - ✅ 除 `/search/`、`/404/` 外无 noindex
-- ✅ sitemap-index.xml 覆盖全部可索引页面，不含 noindex 页面
+- ✅ sitemap.xml 直接列出全部可索引页面（不含 noindex 页面、不被跳转）；旧地址 sitemap-index.xml 保留且内容一致
 - ✅ robots.txt 允许抓取并声明 sitemap
 - ✅ IndexNow 密钥文件存在且内容一致
 - ✅ 站内链接无死链，不链接到重定向地址
