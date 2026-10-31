@@ -24,12 +24,12 @@ const CAT_LINKS = [
   { href: '/tools/', label: '实用工具', n: TOOLS.length },
 ];
 
-const HOME_UPDATED = '2026-10-23';
+const HOME_UPDATED = '2026-10-31';
 
 // —— 章节里用到的数据，全部由机场资料计算 ——
 const ld = airports.find((a) => a.id === 'lingdongyun')!;
-const ldMonth = ld.plans.find((p) => p.name === '拂风' && p.billing === 'month')!;
-const ldYear = ld.plans.find((p) => p.name === '拂风' && p.billing === 'year')!;
+const ldMonth = ld.plans.find((p) => p.name === '灵动·拂风' && p.billing === 'month')!;
+const ldYear = ld.plans.find((p) => p.name === '灵动·拂风' && p.billing === 'year')!;
 const lineCount = airports.filter((a) => a.lineTypes.some((l) => /IEPL|IPLC/.test(l) && !/未注明/.test(l))).length;
 const devFree = airports.filter((a) => [...a.limits, ...a.plans.map((p) => `${p.deviceLimit ?? ''} ${p.note ?? ''}`)].some((t) => /不限设备|不限制设备|设备数量不限|设备数不限|不限在线|不限设备登录|不限同时|不限制同时|不限制在线|无限设备|设备连接数不限|^不限\s/.test(t))).length;
 const listed = airports.filter((a) => a.regions.length && !a.regions.some((r) => /未列出/.test(r)));
@@ -44,7 +44,7 @@ const REGIONS = [
 const faq = [
   { q: '梯子哪个好？', a: '没有对所有人都最好的梯子。先按用途定类型：长期在国内每天用，多数人选机场；短期来华、不想折腾，选商业 VPN。再按第二章的五点比较：线路类型、晚高峰表现、流量规则、设备数和售后。本站前五推荐含推广合作，不是测速排名，第一次买建议先买月付，在晚上 8 点到 11 点实测几天再续费。' },
   { q: '本站的推荐顺序是测速排名吗？', a: '不是。推荐顺序是本站编辑重点推荐展示顺序，含推广合作链接。我们不把它包装成独立测速排行榜，每家资料都注明整理或核实日期，官网核对过的会单独标注。' },
-  { q: '一份订阅能在几台设备上用？', a: '看套餐写明的“同时在线设备数”。不少机场标注不限设备，也有按档位限制的，例如飞V Basic 版同时 3 台、环球云学生套餐同时 3 台。各家规则见对应的机场资料页。' },
+  { q: '一份订阅能在几台设备上用？', a: '看套餐写明的“同时在线设备数”。不少机场标注不限设备，也有按套餐限制的，例如环球云学生套餐同时 3 台；个别机场的资料说法不一，购买前请向客服确认。各家规则见对应的机场资料页。' },
   { q: '第一次买，选月付还是年付？', a: '先买月付或最短周期，在晚上 8 点到 11 点实测几天，常用网站、视频和 AI 工具都正常，再改年付。年付折合月价更低，但要一次付清，机场停运时剩余费用很难追回。' },
   { q: '机场跑路了怎么办？怎么降低损失？', a: '机场多为小团队运营，停运时有发生。降低损失的办法：首次只买短周期、不预充大额余额、备一份不限时流量包作为备用、关注机场的公告频道，出现异常时及时切换。' },
   { q: '使用这些工具有法律风险吗？', a: '不同国家和地区的法规不同。中国大陆对国际联网有明确管理规定，擅自建立或使用非法定信道进行国际联网可能被处罚。请先阅读《隐私、安全与法律注意事项》，并遵守你所在地的法律法规。' },
@@ -94,7 +94,7 @@ const jsonLd = [
     <p class="kicker">新手学堂 · 机场资料更新于 {LAST_REVIEWED}</p>
     <h1 id="hero-h">VPN梯子推荐指南2026：从选机场到<em>连上网</em>，一站讲清楚</h1>
     <dl class="byline">
-      <div><dt>更新日期</dt><dd><time datetime={HOME_UPDATED}>2026年10月22日</time></dd></div>
+      <div><dt>更新日期</dt><dd><time datetime={HOME_UPDATED}>2026年10月31日</time></dd></div>
       <div><dt>作者</dt><dd><a href="/guanyu/">VPN梯子指南编辑部</a></dd></div>
       <div><dt>适合人群</dt><dd>VPN新手、机场订阅用户、Clash初学者、需要比较套餐的用户</dd></div>
     </dl>
@@ -191,7 +191,7 @@ const jsonLd = [
           <div class="mini"><h3>每GB价格</h3><p>实际付款 ÷ 总流量。比较不同流量档位时最公平。</p></div>
         </div>
         <div class="example">
-          <p class="example-title">算一个例子：{ld.name}“{ldMonth.name}”套餐（每月 {ldMonth.trafficGB}GB）</p>
+          <p class="example-title">算一个例子：{ldMonth.name}套餐（每月 {ldMonth.trafficGB}GB）</p>
           <div class="table-wrap">
             <table class="cmp">
               <thead><tr><th>付费方式</th><th>实际付款</th><th>折合月价</th><th>每GB</th></tr></thead>

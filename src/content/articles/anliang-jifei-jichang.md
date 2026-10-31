@@ -11,7 +11,7 @@ showTopFour: true
 keywords: ["按量计费机场"]
 aliases: ["按量", "不限时", "流量包", "一次性", "不过期", "备用", "低频"]
 published: 2026-10-20
-updated: 2026-10-23
+updated: 2026-10-31
 related: ["jichang-liuliang-guji", "pianyi-jichang-tuijian", "wending-jichang-tuijian"]
 faq:
   - q: "按量计费的流量真的永不过期吗？"

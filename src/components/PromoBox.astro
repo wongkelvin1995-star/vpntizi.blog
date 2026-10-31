@@ -1,0 +1,25 @@
+---
+/**
+ * 全站“本站主推”小框：放在页头之后、<main> 之外，所有页面都有。
+ * 宽屏（≥1700px）贴在正文右侧空白处；其余屏幕变成页面顶部的一条，不浮动、不遮字。
+ * 手机（≤640px）默认收成一行，点“查看优惠”再展开套餐、优惠码和注册按钮：
+ * 用的是 CSS 复选框开关（label + checkbox），没有脚本；更宽的屏幕上开关本身不显示，内容直接可见。
+ * 套餐价格与流量从灵动云资料计算，资料更新后自动同步。
+ */
+import { airports, airportUrl, fmtCNY } from '../lib/airports';
+import AffButton from './AffButton.astro';
+const ld = airports.find((a) => a.id === 'lingdongyun')!;
+const plan = ld.plans.find((p) => /穿云/.test(p.name));
+---
+<aside class="promo" aria-label="本站主推">
+  <input type="checkbox" id="promo-toggle" class="promo-cb" />
+  <div class="promo-in" data-nosnippet>
+    <span class="promo-badge">本站主推</span>
+    <a class="promo-brand" href={airportUrl(ld)}>{ld.name}</a>
+    <label class="promo-tg" for="promo-toggle"><span class="tg-on">查看优惠</span><span class="tg-off">收起</span></label>
+    {plan && <p class="promo-plan">推荐「穿云」套餐：{fmtCNY(plan.priceCNY, 0)}/年，每月 {plan.trafficGB}GB，IEPL / IPLC 专线</p>}
+    {ld.promoCode && <p class="promo-code">优惠码 <code>{ld.promoCode}</code></p>}
+    <AffButton airport={ld} label="立即注册" />
+    <a class="promo-why" href="/tuiguang-pilu/">推广合作 · 以官网结算页为准</a>
+  </div>
+</aside>

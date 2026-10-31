@@ -11,7 +11,7 @@ showTopFour: true
 keywords: ["Shadowrocket 机场推荐"]
 aliases: ["shadowrocket", "小火箭", "火箭", "ios", "iphone", "ipad", "苹果", "外区"]
 published: 2026-10-20
-updated: 2026-10-23
+updated: 2026-10-31
 related: ["shadowrocket-jiaocheng", "sing-box-jiaocheng", "dingyue-daoru-wenti"]
 faq:
   - q: "Shadowrocket 可以用 Clash 订阅吗？"
@@ -63,8 +63,8 @@ Shadowrocket（俗称“小火箭”）是 iPhone 和 iPad 上最常用的代理
 上方四家是本站重点推荐展示的机场。和 iPhone 相关的资料：
 
 - **飞猫云**：通用订阅可直接导入 Shadowrocket 和 Stash，也有自研客户端；
-- **灵动云**：有自家客户端（以下载页列出的系统为准），用小火箭需要联系客服获取通用订阅；
-- **暮光加速**：通用订阅，VLESS 与 Shadowsocks 协议，小火箭都支持；
+- **灵动云**：官方专属客户端（以下载页列出的系统为准）；用小火箭需要联系客服获取通用订阅；
+- **暮光加速**：官方专属客户端，通用订阅需联系客服获取；本站资料目前只列出 Clash Verge Rev、ClashParty，没有列出小火箭，iPhone 用户请先向客服确认；
 - **微风网络**：据公开资料，2026 年 10 月起新订单只能用官方专属客户端，不再提供订阅链接，**新订单不能导入小火箭**，要用官方 App；iPhone 能否安装以官网为准。已有订阅链接的老用户不受影响。
 
 下方表格列出了 34 家中在资料里列出 Shadowrocket 的机场；也有不少机场（如浪网、跨界云、极连云）提供 iOS 官方客户端。

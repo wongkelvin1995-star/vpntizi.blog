@@ -5,13 +5,13 @@ description: "专线机场推荐与选购要点：IEPL 和 IPLC 专线机场适�
 summary:
   - "远程办公、视频会议、跨境电商等怕断线的场景，才值得为专线多付钱。"
   - "选专线看入口和落地地区、带宽超售、是否支持 UDP、每GB价格是否合理。"
-  - "前四家中飞猫云全线标注 IEPL，微风网络标注 IPLC 专线，灵动云的“穿云”年付标注 IPLC。"
+  - "前四家中飞猫云全线标注 IEPL，微风网络标注 IPLC 专线，灵动云在套餐页标注全部套餐使用 IEPL / IPLC 优化线路。"
 category: recommend
 showTopFour: true
 keywords: ["专线机场推荐", "IEPL 机场推荐", "IPLC 机场推荐"]
 aliases: ["专线", "iepl", "iplc", "内网专线", "中转", "企业", "远程办公"]
 published: 2026-10-20
-updated: 2026-10-23
+updated: 2026-10-31
 related: ["iepl-iplc-qubie", "wending-jichang-tuijian", "gaosu-jichang-tuijian"]
 faq:
   - q: "专线机场为什么流量少、价格高？"
@@ -61,7 +61,7 @@ faq:
 | 机场 | 线路标注 | 说明 |
 |---|---|---|
 | 飞猫云 | IEPL 专线 | 全部常规套餐，标称最高 2.5Gbps |
-| 灵动云 | BGP；“穿云”为 IPLC | 只有穿云年付（¥99，70GB/月）标注 IPLC |
+| 灵动云 | IEPL / IPLC 优化线路 | 套餐页标注全部 9 款套餐，包括穿云年付（¥99，70GB/月） |
 | 暮光加速 | BGP + 专线出口 | 未注明是 IEPL 还是 IPLC |
 | 微风网络 | IPLC 专线（另有资料标注 IEPL） | 线路说法不一致，以官网为准 |
 

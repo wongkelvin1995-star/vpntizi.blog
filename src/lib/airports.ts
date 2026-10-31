@@ -14,6 +14,8 @@ export interface Plan {
   trafficPeriod: 'month' | 'cycle' | 'total';
   deviceLimit?: string;
   note?: string;
+  /** 订阅详情：4–5 条要点，只写在每个套餐系列的第一行（月付行 / 年付行 / 流量包行） */
+  details?: string[];
 }
 
 export interface Source {
@@ -47,6 +49,10 @@ export interface Airport {
   limits: string[];
   sources: Source[];
   verifiedAt: string | null;
+  /** 合作优惠码（站长提供）；null 或缺省 = 不显示 */
+  promoCode?: string | null;
+  /** 资料说明里的补充一句（例如套餐数据来自截图） */
+  sourceNote?: string;
 }
 
 const data = raw as unknown as { lastReviewed: string; airports: Airport[] };
@@ -62,7 +68,7 @@ export const airports: Airport[] = [...data.airports].sort((a, b) => a.rank - b.
 export const topFour = airports.slice(0, 4);
 export const topFive = airports.slice(0, 5);
 /** 站长指定的精选机场（第五推荐之后展示，按此顺序） */
-export const PICK_IDS = ['tiziyun', 'feiv', 'yinxingren', 'wuyou', 'feiwei', 'weituyun', 'lingmao'] as const;
+export const PICK_IDS = ['yinxingren', 'feiv', 'tiziyun', 'wuyou', 'feiwei', 'weituyun', 'lingmao'] as const;
 export const featuredPicks = PICK_IDS.map((id) => {
   const a = airports.find((x) => x.id === id);
   if (!a) throw new Error(`精选机场不存在：${id}`);

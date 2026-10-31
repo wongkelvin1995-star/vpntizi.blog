@@ -11,7 +11,7 @@ showTopFour: true
 keywords: ["v2rayN 机场推荐"]
 aliases: ["v2rayn", "v2ray", "xray", "vmess", "vless", "通用订阅", "windows", "base64"]
 published: 2026-10-20
-updated: 2026-10-23
+updated: 2026-10-31
 related: ["v2rayn-v2rayng-jiaocheng", "clash-jichang-tuijian", "dingyue-daoru-wenti"]
 faq:
   - q: "v2rayN 和 Clash Verge 哪个好？"
@@ -73,8 +73,8 @@ v2rayN 的节点列表没有分组，名称就是最重要的信息。常见写�
 上方四家是本站重点推荐展示的机场。和 v2rayN 相关的资料：
 
 - **飞猫云**：通用订阅明确列出 v2rayN，协议包括 Shadowsocks、Trojan、VLESS；
-- **暮光加速**：提供通用订阅，VLESS 与 Shadowsocks 都能在 v2rayN 中使用；
-- **灵动云**：通用订阅需要联系客服获取，协议为 Shadowsocks；
+- **暮光加速**：官方专属客户端，通用订阅需联系客服获取；本站资料目前只列出 Clash Verge Rev、ClashParty，没有列出 v2rayN，想用 v2rayN 请先向客服确认；
+- **灵动云**：官方专属客户端，通用订阅需要联系客服获取，协议为 Shadowsocks；本站资料目前列出 Clash Verge Rev、ClashParty、Shadowrocket，没有列出 v2rayN；
 - **微风网络**：据公开资料，2026 年 10 月起新订单只能用官方专属客户端，不再提供订阅链接，**新订单不能导入 v2rayN**；已有订阅链接的老用户不受影响。
 
 下方表格列出了 34 家中在资料里列出 v2rayN 或 v2rayNG 的机场。

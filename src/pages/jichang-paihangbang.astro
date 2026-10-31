@@ -20,7 +20,7 @@ const jsonLd = [
 ];
 const faq = [
   { q: '这个排行榜是按速度排的吗？', a: '不是。这是本站的推荐展示顺序，前五固定，含推广合作。我们没有在多地区、多时段做可复现的独立测速，因此不会把顺序称为速度排名。' },
-  { q: '为什么第 6 名以后顺序会变化？', a: '前五名固定不变；第 6 至 34 名会随资料核实进度、套餐变化等情况调整展示顺序，但不会删除或重复任何一家。' },
+  { q: '为什么第 6 名以后顺序会变化？', a: '前五名固定不变；第 6 名起的顺序同样由编辑设定，会随资料整理进度、套餐变化和合作情况调整，但不会删除或重复任何一家。' },
   { q: '如何判断哪家适合我？', a: '先用流量估算器确定用量，再在资料页对比“实际付款”“折合月价”和“每GB价格”，并留意设备数、退款与流量重置规则。' },
 ];
 ---
@@ -38,7 +38,7 @@ const faq = [
 
   <div class="table-wrap section">
     <table>
-      <thead><tr><th>#</th><th>机场</th><th>资料状态</th><th>起步折合月价</th><th>线路类型</th><th>资料日期</th><th>注册</th></tr></thead>
+      <thead><tr><th>#</th><th>机场</th><th>资料状态</th><th>起步折合月价</th><th>线路类型</th><th>资料日期</th><th>注册与优惠码</th></tr></thead>
       <tbody>
         {airports.map((a) => {
           const c = [...a.plans].filter((p) => monthlyEquivalent(p) != null).sort((x, y) => (monthlyEquivalent(x)! - monthlyEquivalent(y)!))[0];
@@ -50,13 +50,15 @@ const faq = [
               <td class="num">{c ? fmtCNY(monthlyEquivalent(c)) : <span class="pending">{PENDING}</span>}</td>
               <td>{a.lineTypes.join('、') || <span class="pending">{PENDING}</span>}</td>
               <td class="num">{a.verifiedAt ?? a.collectedAt ?? '—'}</td>
-              <td><AffButton airport={a} label="官网注册" /></td>
+              <td><AffButton airport={a} label="官网注册" />{a.promoCode && <div class="small muted" style="margin-top:.25rem">优惠码 <code>{a.promoCode}</code></div>}</td>
             </tr>
           );
         })}
       </tbody>
     </table>
   </div>
+
+  <p class="small muted">优惠码由站长提供，是否生效、优惠幅度以官网结算页为准；表中价格为购买页标价，未计入优惠码。</p>
 
   <section class="section prose">
     <h2>看榜单时要注意什么</h2>

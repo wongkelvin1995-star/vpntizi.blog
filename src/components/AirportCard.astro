@@ -2,6 +2,7 @@
 import type { Airport } from '../lib/airports';
 import { airportUrl, monthlyEquivalent, pricePerGB, fmtCNY, PENDING, BILLING_LABEL, statusLabel, shortName } from '../lib/airports';
 import AffButton from './AffButton.astro';
+import SakuraPetals from './SakuraPetals.astro';
 
 interface Props { airport: Airport; featured?: boolean; headingLevel?: 'h2' | 'h3'; showRank?: boolean }
 const { airport: a, featured = false, headingLevel = 'h3', showRank = true } = Astro.props;
@@ -15,7 +16,9 @@ const intro = a.intro || (placeholder
   : `${a.name}已收录，注册入口可用。本站暂未取得可靠的套餐价格、节点与线路资料，相关字段显示“待核实”，请以官网实时信息为准。`);
 const list = (arr: string[]) => (arr.length ? arr.join('、') : PENDING);
 ---
-<article class:list={['ap-card', { featured }]} id={`ap-${a.id}`}>
+<article class:list={['ap-card', { featured, star: a.id === 'lingdongyun' }]} id={`ap-${a.id}`}>
+  {a.id === 'lingdongyun' && <span class="ap-star">本站主推</span>}
+  {a.id === 'lingdongyun' && <SakuraPetals place="card" />}
   {showRank && <span class="ap-rank" aria-label={`推荐位 ${a.rank}`}>{String(a.rank).padStart(2, '0')}</span>}
   <H>{placeholder ? a.name : <a href={airportUrl(a)}>{a.name}</a>}</H>
   <div>

@@ -11,7 +11,7 @@ showTopFour: true
 keywords: ["Clash 机场推荐", "Clash Verge 机场推荐", "机场推荐 Clash"]
 aliases: ["clash", "clash verge", "verge", "mihomo", "clash meta", "规则", "分流", "yaml", "小猫咪"]
 published: 2026-10-20
-updated: 2026-10-23
+updated: 2026-10-31
 related: ["clash-verge-jiaocheng", "clashparty-jiaocheng", "dingyue-daoru-wenti"]
 faq:
   - q: "原版 Clash 停更了，还能用吗？"
@@ -80,8 +80,8 @@ proxy-groups:
 上方四家是本站重点推荐展示的机场。和 Clash 相关的资料：
 
 - **飞猫云**：通用订阅可导入 Clash 系客户端、Shadowrocket、v2rayN、Stash，拿到就能用；
-- **灵动云**：主推自家客户端，通用订阅需要联系客服获取；官网有 Clash Verge、Clash Party、Mihomo 的配置说明；
-- **暮光加速**：提供通用订阅，协议为 VLESS 与 Shadowsocks，需使用 mihomo 内核的客户端；
+- **灵动云**：官方专属客户端；通用订阅（可用于 Clash Verge Rev、ClashParty）需要联系客服获取，官网有 Clash Verge、Clash Party、Mihomo 的配置说明；
+- **暮光加速**：官方专属客户端；通用订阅需联系客服获取，可用于 Clash Verge Rev、ClashParty，协议为 VLESS 与 Shadowsocks，需使用 mihomo 内核的客户端；
 - **微风网络**：据公开资料，2026 年 10 月起新订单只能用官方专属客户端，不再提供订阅链接，**新订单不能导入 Clash**；已有订阅链接的老用户不受影响。只用 Clash 的新用户，优先看上面三家。
 
 下方表格列出了 34 家中在资料里列出 Clash 系客户端的机场。

@@ -5,6 +5,7 @@
  */
 import { airports, airportUrl, fmtCNY, monthlyEquivalent, pricePerGB, summarize } from '../lib/airports';
 import AffButton from './AffButton.astro';
+import SakuraPetals from './SakuraPetals.astro';
 import { shiceFor } from '../data/shice';
 const test = shiceFor('lingdongyun')[0];
 
@@ -17,9 +18,11 @@ const iplc = a.plans.find((p) => /穿云/.test(p.name));
 const payg = a.plans.filter((p) => p.billing === 'payg').sort((x, y) => x.priceCNY - y.priceCNY)[0];
 const regionRank = [...airports].sort((x, y) => y.regions.length - x.regions.length).findIndex((x) => x.id === a.id) + 1;
 const gb = (n: number | null) => (n == null ? '不限量' : n >= 1000 ? `${+(n / 1000).toFixed(2)}TB` : `${n}GB`);
+const short = (n: string) => n.replace(/（.*?）/, '').replace(/ 不限时包/, '').replace(/^灵动云?·/, '');
 const yearOfEntry = a.plans.find((p) => p.name === entry.name && p.billing === 'year');
 ---
 <article class="lead-story" aria-labelledby="ld-h">
+  <SakuraPetals place="feature" />
   <div class="lead-story-head">
     <p class="kicker">编辑导读 · 推荐位 01</p>
     <h3 id="ld-h">为什么用户优选灵动云？</h3>
@@ -34,7 +37,7 @@ const yearOfEntry = a.plans.find((p) => p.name === entry.name && p.billing === '
     <ol class="reasons">
       <li>
         <strong>入门门槛低。</strong>
-        “{entry.name}”月付 {fmtCNY(entry.priceCNY, 0)}，每月 {gb(entry.trafficGB)}，适合第一次买机场的人先用一个月试试{yearOfEntry && `；确认好用后改年付 ${fmtCNY(yearOfEntry.priceCNY, 0)}，折合每月 ${fmtCNY(monthlyEquivalent(yearOfEntry), 0)}`}。
+        “{short(entry.name)}”月付 {fmtCNY(entry.priceCNY, 0)}，每月 {gb(entry.trafficGB)}，适合第一次买机场的人先用一个月试试{yearOfEntry && `；确认好用后改年付 ${fmtCNY(yearOfEntry.priceCNY, 0)}，折合每月 ${fmtCNY(monthlyEquivalent(yearOfEntry), 0)}`}。
       </li>
       <li>
         <strong>流量档位跨度大。</strong>
@@ -50,8 +53,8 @@ const yearOfEntry = a.plans.find((p) => p.name === entry.name && p.billing === '
       </li>
       <li>
         <strong>专线与不限时都能选。</strong>
-        {iplc && <>“{iplc.name.replace(/（.*?）/, '')}”年付 {fmtCNY(iplc.priceCNY, 0)} 标注 IPLC 专线，每月 {gb(iplc.trafficGB)}；</>}
-        {payg && <>偶尔才用的话，“{payg.name.replace(/ 不限时包/, '')}”{gb(payg.trafficGB)} 流量包 {fmtCNY(payg.priceCNY, 0)}，用完为止，不按月清零。</>}
+        套餐页标注全部套餐使用 IEPL / IPLC 优化线路，其中{iplc && <>“{short(iplc.name)}”年付 {fmtCNY(iplc.priceCNY, 0)}，每月 {gb(iplc.trafficGB)}；</>}
+        {payg && <>偶尔才用的话，“{short(payg.name)}”{gb(payg.trafficGB)} 流量包 {fmtCNY(payg.priceCNY, 0)}，用完为止，不按月清零。</>}
       </li>
     </ol>
     {test && <p class="shice-note"><strong>本站实测：</strong>{test.date} 傍晚对灵动云{test.regions.map((g) => g.region).join('、')}节点做了延迟与流媒体、AI 解锁测试，香港平均 {test.regions[0].avgTls}ms、台湾 {test.regions[1].avgTls}ms，亚洲节点 YouTube 与 Netflix 测试项几乎全部通过。<a href={`${airportUrl(a)}#shice`}>查看测试截图与逐项结论</a></p>}

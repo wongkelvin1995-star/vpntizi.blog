@@ -11,7 +11,7 @@ showTopFour: true
 keywords: ["ChatGPT 机场推荐"]
 aliases: ["chatgpt", "openai", "gpt", "claude", "gemini", "ai", "人工智能", "不支持地区", "unsupported"]
 published: 2026-10-20
-updated: 2026-10-23
+updated: 2026-10-31
 related: ["liumeiti-jiesuo-jichang", "iepl-iplc-qubie", "dingyue-daoru-wenti"]
 faq:
   - q: "为什么提示“地区不支持”？"

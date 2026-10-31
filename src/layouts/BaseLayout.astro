@@ -6,6 +6,7 @@ import '../styles/global.css';
 import { SITE, NAV, FOOTER_LINKS } from '../data/site';
 import { airports } from '../lib/airports';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import PromoBox from '../components/PromoBox.astro';
 
 export interface Crumb { name: string; href: string }
 interface Props {
@@ -54,7 +55,9 @@ const allLd = [...(crumbLd ? [crumbLd] : []), ...jsonLd];
   <meta name="color-scheme" content="light" />
   {SITE.bingVerification && <meta name="msvalidate.01" content={SITE.bingVerification} />}
   {SITE.googleVerification && <meta name="google-site-verification" content={SITE.googleVerification} />}
+  <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
   <link rel="sitemap" type="application/xml" title="站点地图" href="/sitemap.xml" />
   <meta property="og:site_name" content={SITE.name} />
@@ -103,6 +106,8 @@ const allLd = [...(crumbLd ? [crumbLd] : []), ...jsonLd];
     </div>
   </header>
 
+  <PromoBox />
+
   <!-- 右侧固定入口：中文搜索 + Telegram（只在 1380px 以上的宽屏显示，窄屏用顶部按钮，避免压住正文） -->
   <aside class="rail" aria-label="快捷入口">
     <button class="rail-btn" type="button" data-open-search title="站内中文搜索" aria-label="打开站内搜索">
@@ -140,7 +145,7 @@ const allLd = [...(crumbLd ? [crumbLd] : []), ...jsonLd];
           <ul>
             {FOOTER_LINKS.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
             <li><a href={SITE.telegram} target="_blank" rel="noopener">Telegram 联系</a></li>
-            <li><a href={`mailto:${SITE.email}`}>邮箱：{SITE.email}</a></li>
+            <li><!--email_off--><a href={`mailto:${SITE.email}`}>邮箱：{SITE.email}</a><!--/email_off--></li>
           </ul>
         </div>
       </div>

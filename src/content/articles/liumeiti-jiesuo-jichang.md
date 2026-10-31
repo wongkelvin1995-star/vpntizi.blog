@@ -11,7 +11,7 @@ showTopFour: true
 keywords: ["流媒体解锁机场", "Netflix 机场推荐"]
 aliases: ["netflix", "奈飞", "网飞", "流媒体", "解锁", "disney", "youtube", "油管", "hbo", "自制剧"]
 published: 2026-10-20
-updated: 2026-10-23
+updated: 2026-10-31
 related: ["chatgpt-jichang-tuijian", "gaosu-jichang-tuijian", "jichang-liuliang-guji"]
 faq:
   - q: "“仅解锁自制剧”是什么意思？"

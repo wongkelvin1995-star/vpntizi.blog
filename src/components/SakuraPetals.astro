@@ -1,0 +1,15 @@
+---
+/**
+ * 樱花飘落装饰：只用于灵动云的卡片（place="card"）和首页导读（place="feature"）。
+ * 纯 CSS 动画（见 global.css 的 .petals），没有脚本、没有文字，读屏软件会跳过；
+ * 系统开启“减少动态效果”或打印时自动隐藏。
+ *
+ * 想调强弱，只改下面 LEVEL 这一行（改完重新部署即可）：
+ *   'soft' 含蓄：花瓣少而小、颜色浅　'normal' 标准（默认）　'bold' 明显：花瓣多而大、颜色更深
+ */
+const LEVEL: 'soft' | 'normal' | 'bold' = 'normal';
+const COUNTS = { soft: { card: 5, feature: 7 }, normal: { card: 8, feature: 12 }, bold: { card: 12, feature: 16 } };
+interface Props { place?: 'card' | 'feature' }
+const { place = 'card' } = Astro.props;
+---
+<span class={`petals petals-${LEVEL}`} aria-hidden="true">{Array.from({ length: COUNTS[LEVEL][place] }, () => <i />)}</span>

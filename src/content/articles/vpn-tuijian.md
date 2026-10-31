@@ -11,7 +11,7 @@ summary:
 keywords: ["VPN 推荐", "翻墙 VPN"]
 aliases: ["vpn推荐", "翻墙vpn", "astrill", "expressvpn", "surfshark", "快连", "letsvpn", "商业vpn", "中国能用的vpn"]
 published: 2026-10-20
-updated: 2026-10-23
+updated: 2026-10-31
 related: ["vpn-jichang-qubie", "mianfei-vpn", "tizi-tuijian", "yinsi-anquan-falv"]
 faq:
   - q: "在国外好用的 VPN，回国为什么连不上？"

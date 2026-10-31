@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../data/site';
 const path = '/yinsi-shuoming/';
-const UPDATED = '2026-10-23';
+const UPDATED = '2026-10-31';
 const jsonLd = [{
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -13,22 +13,26 @@ const jsonLd = [{
   isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
 }];
 ---
-<BaseLayout title="隐私说明：本站收集什么、不收集什么" description="VPN梯子指南隐私说明：本站不设 Cookie、不加统计和广告脚本、搜索与计算工具只在浏览器本地运行；托管商访问日志、推广链接与来信如何处理，以及联系方式。" path={path} jsonLd={jsonLd} breadcrumbs={[{ name: '首页', href: '/' }, { name: '隐私说明', href: path }]}>
+<BaseLayout title="隐私说明：本站收集什么、不收集什么" description="VPN梯子指南隐私说明：本站自己不设 Cookie、不放广告脚本，使用 Cloudflare 网站访问统计（汇总数据）；搜索与计算工具只在浏览器本地运行；托管日志、推广链接与来信如何处理，以及联系方式。" path={path} jsonLd={jsonLd} breadcrumbs={[{ name: '首页', href: '/' }, { name: '隐私说明', href: path }]}>
   <div class="prose" style="max-width:780px">
     <h1>隐私说明</h1>
     <p class="meta">更新日期：{UPDATED}</p>
-    <p>这页说明你访问 {SITE.name}（{SITE.domain}）时，哪些信息会被记录、哪些不会。简单说：本站没有账号、没有表单、不设 Cookie，也不放统计和广告脚本。</p>
+    <p>这页说明你访问 {SITE.name}（{SITE.domain}）时，哪些信息会被记录、哪些不会。简单说：本站没有账号、没有表单，自己不设 Cookie，也不放广告脚本；页面由 Cloudflare 托管，并使用 Cloudflare 的网站访问统计（只看汇总数据，见下文）。</p>
 
     <h2>本站不收集的信息</h2>
     <ul>
-      <li><strong>不设 Cookie，也不用浏览器本地存储</strong>记录你的浏览行为。</li>
-      <li><strong>不加统计、广告或追踪脚本</strong>，页面上的脚本都是本站自己的，字体也由本站自己提供，不会从第三方加载。</li>
+      <li><strong>本站自己不设 Cookie，也不用浏览器本地存储</strong>记录你的浏览行为。</li>
+      <li><strong>不加广告脚本，也不使用 Google Analytics 等第三方统计工具</strong>。字体由本站自己提供，不从第三方加载；页面上唯一的第三方脚本是托管商 Cloudflare 的访问统计，见下一节。</li>
       <li><strong>搜索和工具只在你的浏览器里运行。</strong>站内搜索、流量估算、每GB价格计算、客户端选择和故障排查，输入的内容不会发送到任何服务器。</li>
       <li><strong>没有注册、登录和留言功能</strong>，本站不保存你的账号、密码或订阅链接。请不要把订阅链接发给任何人，包括本站。</li>
     </ul>
 
     <h2>托管商会记录的信息</h2>
     <p>本站是静态网站，托管在 Cloudflare。和所有网站一样，你打开页面时，托管商的服务器会处理这次请求，并按其隐私政策记录访问时间、IP 地址、浏览器类型和访问的网址等信息，用于安全防护和网站运行。本站在托管商后台查看的只有汇总的访问数据（例如请求数量），不会用这些信息识别个人。</p>
+
+    <h2>访问统计：Cloudflare Web Analytics</h2>
+    <p>本站启用了托管商 Cloudflare 的网站访问统计（Web Analytics），页面里会加载一小段由 Cloudflare 提供的统计脚本，用来了解哪些页面有人看、读者大致来自哪些国家和地区、使用什么设备和浏览器，以及页面加载快不快。据 Cloudflare 的公开说明，这项统计不使用 Cookie 或浏览器本地存储来追踪用户，也不通过 IP 地址等信息识别个人。本站在后台看到的只是汇总数据，不会用它识别或追踪某一位读者。</p>
+    <p>如果你不希望被统计，可以用浏览器自带的跟踪防护或广告拦截插件屏蔽这段脚本，页面的阅读和使用不受影响。</p>
 
     <h2>点击外部链接之后</h2>
     <ul>
@@ -40,11 +44,11 @@ const jsonLd = [{
     <p>如果你通过邮箱或 Telegram 联系本站，我们会收到你的邮箱地址或 Telegram 账号，以及你写的内容。这些信息只用于回复和处理资料纠错，不会公开，也不会提供给第三方。你可以随时来信要求删除往来记录。</p>
 
     <h2>这份说明的更新</h2>
-    <p>如果以后加入统计工具或其他会处理个人信息的功能，会先更新这页并修改上方日期。</p>
+    <p>如果以后加入其他统计工具或其他会处理个人信息的功能，会先更新这页并修改上方日期。</p>
 
     <h2>联系方式</h2>
     <ul>
-      <li>邮箱：<a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+      <li>邮箱：<!--email_off--><a href={`mailto:${SITE.email}`}>{SITE.email}</a><!--/email_off--></li>
       <li>Telegram：<a href={SITE.telegram} target="_blank" rel="noopener">{SITE.telegram}</a></li>
     </ul>
     <p>其他说明见 <a href="/mianze-shengming/">免责声明</a> 和 <a href="/yinsi-anquan-falv/">使用 VPN 和机场的隐私、安全与法律注意事项</a>。</p>

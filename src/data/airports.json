@@ -1,6 +1,6 @@
 {
   "_readme": "34 家机场资料。rank 1-5 固定顺序不可改；6-34 可调整顺序但不可删除或重复。affUrl 为站长提供的品牌专属 AFF 链接。sourceType=official 且 status=verified 表示价格已在官网核对（sources 只登记机场官网）；sourceType=third-party 表示按公开资料整理（collectedAt 为整理日期），尚未在官网逐项复核。填写说明见 docs/DATA-ENTRY.md。",
-  "lastReviewed": "2026-10-22",
+  "lastReviewed": "2026-10-31",
   "airports": [
     {
       "id": "lingdongyun",
@@ -14,21 +14,28 @@
       ],
       "status": "pending",
       "sourceType": "third-party",
-      "collectedAt": "2026-10-20",
+      "collectedAt": "2026-10-31",
       "affUrl": "https://varnexa.lingdongaff.com/#/?code=HHoxxHGa",
       "officialSite": "",
-      "intro": "灵动云提供专用客户端，也可联系客服获取通用订阅。常规套餐（拂风、驭浪、破晓、凌霄）标注 BGP 线路、不限速、不限设备；“穿云”年付套餐标注为 IPLC 专线；另有不限时流量包和独立 IP 定制方案。",
+      "intro": "灵动云提供官方专属客户端，通用订阅需联系客服获取。套餐页标注全部 9 款套餐使用 IEPL / IPLC 优化线路、不限速、不限设备；含月付、“穿云”年付、不限时流量包和独立 IP 定制方案。",
       "plans": [
         {
-          "name": "拂风",
+          "name": "灵动·拂风",
           "billing": "month",
           "priceCNY": 20,
           "trafficGB": 100,
           "trafficPeriod": "month",
-          "note": "不限速，1 倍率"
+          "note": "不限速，1 倍率",
+          "details": [
+            "💎 轻量优选：每月 100GB 流量，适合日常浏览和轻度娱乐。",
+            "🌍 全球节点：香港、台湾、日本、新加坡、美国等热门地区。",
+            "🚀 专线优化：提供 IEPL / IPLC 优化线路选择。",
+            "⚡ 流量计费：不限速，1.0 倍率，支持多设备使用。",
+            "🎬 影音与 AI：支持主流流媒体及 ChatGPT、Claude 等工具，实际可用性因节点而异。"
+          ]
         },
         {
-          "name": "拂风",
+          "name": "灵动·拂风",
           "billing": "quarter",
           "priceCNY": 57,
           "trafficGB": 100,
@@ -36,7 +43,7 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "拂风",
+          "name": "灵动·拂风",
           "billing": "halfyear",
           "priceCNY": 108,
           "trafficGB": 100,
@@ -44,7 +51,7 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "拂风",
+          "name": "灵动·拂风",
           "billing": "year",
           "priceCNY": 204,
           "trafficGB": 100,
@@ -52,15 +59,22 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "驭浪",
+          "name": "灵动·驭浪",
           "billing": "month",
           "priceCNY": 50,
           "trafficGB": 300,
           "trafficPeriod": "month",
-          "note": "不限速，1 倍率"
+          "note": "不限速，1 倍率",
+          "details": [
+            "💎 进阶优选：每月 300GB 流量，适合办公与影音娱乐。",
+            "🌍 多地区节点：覆盖香港、台湾、日本、新加坡、美国等地区。",
+            "🚀 高速专线：IEPL / IPLC 优化线路，改善跨境连接体验。",
+            "⚡ 不限速使用：1.0 倍率计费，兼顾多设备需求。",
+            "🤖 影音与 AI：适合高清视频、远程办公及常用 AI 工具访问。"
+          ]
         },
         {
-          "name": "驭浪",
+          "name": "灵动·驭浪",
           "billing": "quarter",
           "priceCNY": 142.5,
           "trafficGB": 300,
@@ -68,7 +82,7 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "驭浪",
+          "name": "灵动·驭浪",
           "billing": "halfyear",
           "priceCNY": 270,
           "trafficGB": 300,
@@ -76,7 +90,7 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "驭浪",
+          "name": "灵动·驭浪",
           "billing": "year",
           "priceCNY": 510,
           "trafficGB": 300,
@@ -84,15 +98,22 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "破晓",
+          "name": "灵动·破晓",
           "billing": "month",
           "priceCNY": 100,
           "trafficGB": 700,
           "trafficPeriod": "month",
-          "note": "不限速，1 倍率"
+          "note": "不限速，1 倍率",
+          "details": [
+            "👑 旗舰大流量：每月 700GB 流量，满足高频网络需求。",
+            "🌐 全球节点：覆盖多个热门国家及地区。",
+            "🚀 IEPL / IPLC 专线：优化网络传输路径与连接体验。",
+            "⚡ 高速不限速：1.0 倍率计费，适合大文件下载。",
+            "🎬 多场景支持：适合高清影音、AI 办公与多设备使用。"
+          ]
         },
         {
-          "name": "破晓",
+          "name": "灵动·破晓",
           "billing": "quarter",
           "priceCNY": 285,
           "trafficGB": 700,
@@ -100,7 +121,7 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "破晓",
+          "name": "灵动·破晓",
           "billing": "halfyear",
           "priceCNY": 540,
           "trafficGB": 700,
@@ -108,7 +129,7 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "破晓",
+          "name": "灵动·破晓",
           "billing": "year",
           "priceCNY": 1020,
           "trafficGB": 700,
@@ -116,15 +137,22 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "凌霄",
+          "name": "灵动·凌霄",
           "billing": "month",
           "priceCNY": 180,
           "trafficGB": 1500,
           "trafficPeriod": "month",
-          "note": "不限速，1 倍率"
+          "note": "不限速，1 倍率",
+          "details": [
+            "👑 旗舰超大流量：每月 1.5TB 流量，适合重度使用。",
+            "🌍 全球多地区节点：支持香港、台湾、日本、新加坡、美国等地区。",
+            "🚀 优质专线：IEPL / IPLC 优化线路，兼顾高速与稳定性。",
+            "⚡ 大流量畅享：不限速，1.0 倍率计费。",
+            "💻 多端使用：适合高频办公、视频观看及多设备场景。"
+          ]
         },
         {
-          "name": "凌霄",
+          "name": "灵动·凌霄",
           "billing": "quarter",
           "priceCNY": 513,
           "trafficGB": 1500,
@@ -132,7 +160,7 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "凌霄",
+          "name": "灵动·凌霄",
           "billing": "halfyear",
           "priceCNY": 972,
           "trafficGB": 1500,
@@ -140,7 +168,7 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "凌霄",
+          "name": "灵动·凌霄",
           "billing": "year",
           "priceCNY": 1836,
           "trafficGB": 1500,
@@ -148,44 +176,79 @@
           "note": "不限速，1 倍率"
         },
         {
-          "name": "穿云（IPLC）",
+          "name": "灵动·穿云",
           "billing": "year",
           "priceCNY": 99,
           "trafficGB": 70,
           "trafficPeriod": "month",
-          "note": "购买日起每 30 天刷新 70GB；标注 IPLC 专线"
+          "note": "购买日起每 30 天刷新 70GB；标注 IPLC 专线",
+          "details": [
+            "💎 年度轻量方案：每年 ¥99，每月提供 70GB 流量。",
+            "🔄 每月自动重置：按套餐规则每 30 天刷新流量。",
+            "🌍 全球节点：覆盖香港、台湾、日本、新加坡、美国等地区。",
+            "🚀 专线连接：提供 IEPL / IPLC 优化节点。",
+            "⚡ 轻量使用：不限速、1.0 倍率，适合日常浏览与轻度办公。"
+          ]
         },
         {
-          "name": "闲云 不限时包",
+          "name": "灵动·闲云",
           "billing": "payg",
           "priceCNY": 199,
           "trafficGB": 150,
           "trafficPeriod": "total",
-          "note": "一次性，用完为止"
+          "note": "一次性小流量包，用完为止",
+          "details": [
+            "🌟 轻量永久流量包：一次购买获得 150GB 流量。",
+            "💎 灵活使用：不按月清零，流量用完为止。",
+            "🌍 多地区节点：支持香港、台湾、日本、新加坡、美国等地区。",
+            "🚀 专线优化：IEPL / IPLC 线路选择，满足轻量网络需求。",
+            "⚡ 无月租压力：不限速、1.0 倍率，适合偶尔使用与备用连接。"
+          ]
         },
         {
-          "name": "惊云 不限时包",
+          "name": "灵动·惊云",
           "billing": "payg",
           "priceCNY": 499,
           "trafficGB": 400,
           "trafficPeriod": "total",
-          "note": "一次性，用完为止"
+          "note": "一次性标准流量包，用完为止",
+          "details": [
+            "💎 标准流量包：一次购买获得 400GB 流量。",
+            "🔄 长期有效：不按月重置，按实际使用量扣除。",
+            "🌐 全球节点：提供多个热门地区节点。",
+            "🚀 优质专线：IEPL / IPLC 优化线路。",
+            "⚡ 灵活畅享：不限速、1.0 倍率，适合中长期使用。"
+          ]
         },
         {
-          "name": "飞云 不限时包",
+          "name": "灵动·飞云",
           "billing": "payg",
           "priceCNY": 899,
           "trafficGB": 800,
           "trafficPeriod": "total",
-          "note": "一次性，用完为止"
+          "note": "一次性精英流量包，用完为止",
+          "details": [
+            "👑 精英流量包：一次购买获得 800GB 大容量流量。",
+            "💎 按量使用：不按月清零，流量用完为止。",
+            "🌍 全球高速节点：支持多个国家与地区的节点选择。",
+            "🚀 高端专线：IEPL / IPLC 优化线路，满足高流量需求。",
+            "💻 多端兼容：不限速、1.0 倍率，适合长期高频使用。"
+          ]
         },
         {
-          "name": "至尊私人定制",
+          "name": "灵动云·至尊私人定制",
           "billing": "month",
           "priceCNY": 680,
           "trafficGB": 500,
           "trafficPeriod": "month",
-          "note": "独立带宽与独立公网 IP，约 2–3 个工作日交付"
+          "note": "独立带宽与独立公网 IP，约 2–3 个工作日交付",
+          "details": [
+            "👑 私人专属方案：每月 500GB 专属流量。",
+            "🔐 独享网络资源：独立带宽、专属公网 IP。",
+            "🚀 专线定制：根据业务需求提供专属网络配置。",
+            "🌐 商业应用：适用于跨境电商、独立站、TikTok 直播及远程办公。",
+            "🛠️ 专人技术支持：确认需求后，预计 2–3 个工作日交付。"
+          ]
         }
       ],
       "regions": [
@@ -206,15 +269,13 @@
         "英国"
       ],
       "lineTypes": [
-        "BGP（常规套餐）",
-        "IPLC 专线（穿云）"
+        "IEPL / IPLC 优化线路（套餐页标注）"
       ],
       "protocols": [
         "Shadowsocks（套餐标注）"
       ],
       "clients": [
-        "灵动云专用客户端",
-        "通用订阅（需联系客服）：Clash Verge Rev、ClashParty 等"
+        "官方专属客户端，通用订阅：Clash Verge Rev、ClashParty，Shadowrocket（需联系客服）"
       ],
       "aiCompat": "服务商宣称支持 ChatGPT、Claude，官网另介绍 Midjourney（本站未检测；AI 服务对节点 IP 有限制，请以实际使用为准）。",
       "streamingCompat": "服务商宣称支持 Netflix、Disney+、HBO，穿云另列 TikTok；历史检测中部分节点的 TikTok、Abema 未通过，部分新加坡/台湾节点 YouTube 显示送中（本站未检测；解锁情况随节点变化）。",
@@ -228,13 +289,20 @@
       ],
       "limits": [
         "全部套餐标注不限速；设备数不限",
-        "另有两年付、三年付选项（拂风两年 ¥384、三年 ¥540 等），本表未列出",
+        "套餐页标注 4 个周期可选：月付、季付、半年付、年付（穿云仅年付，至尊私人定制仅月付，流量包为一次性）；更长周期以官网结算页为准",
         "可单独购买“重置流量包”（价格与对应套餐月付相同）",
         "条款提及可申请退款与升级补差价，具体条件需按平台指引确认",
         "支付方式：支付宝、微信、USDT"
       ],
-      "sources": [],
-      "verifiedAt": null
+      "sources": [
+        {
+          "label": "站长提供的灵动云套餐页截图（2026-10-31）",
+          "url": ""
+        }
+      ],
+      "verifiedAt": null,
+      "sourceNote": "套餐名称、价格（含月付、季付、半年付、年付金额）、流量、线路、设备数与付款方式据站长提供的套餐页截图整理（2026-10-31），尚未在官网重新核对；价格以官网结算页为准。",
+      "promoCode": "ld888"
     },
     {
       "id": "muguang-jiasu",
@@ -252,7 +320,7 @@
       "collectedAt": "2026-10-20",
       "affUrl": "https://varnexa.twilightaff.com/#/?code=rkRvrsRc",
       "officialSite": "",
-      "intro": "暮光加速（又称暮光网络 / TwiLight）提供通用订阅，支持 VLESS 与 Shadowsocks，套餐标注 BGP 智能路由与专线出口。服务商资料称由新加坡团队运营，成立于 2025 年。",
+      "intro": "暮光加速（又称暮光网络 / TwiLight）提供官方专属客户端，通用订阅需联系客服获取，协议为 VLESS 与 Shadowsocks，套餐标注 BGP 智能路由与专线出口。服务商资料称由新加坡团队运营，成立于 2025 年。",
       "plans": [
         {
           "name": "年付轻量版",
@@ -438,17 +506,18 @@
         "Shadowsocks"
       ],
       "clients": [
-        "通用订阅：Clash 系、Shadowrocket、v2rayN 等兼容客户端"
+        "官方专属客户端，通用订阅：Clash Verge Rev、ClashParty（需联系客服）"
       ],
       "aiCompat": "服务商宣称支持 ChatGPT、Claude（本站未检测；AI 服务对节点 IP 有限制，请以实际使用为准）。",
       "streamingCompat": "服务商宣称支持 Netflix、Hulu、HBO、Disney+、DAZN（本站未检测；解锁情况随节点变化）。",
       "suitableFor": [
-        "需要通用订阅与 VLESS 的用户",
+        "愿意联系客服获取通用订阅、并使用 Clash Verge Rev 或 ClashParty 的用户",
         "希望一次付费、流量不按月清零的用户（不限时包）",
         "需要独立 IP 的跨境或直播业务"
       ],
       "notSuitableFor": [
-        "需要明确退款细则的用户（资料未给出退款条件）"
+        "需要明确退款细则的用户（资料未给出退款条件）",
+        "想用 Shadowrocket、v2rayN 的用户（本站资料目前未列出，需先向客服确认）"
       ],
       "limits": [
         "基础版、标准版、至尊版标注不限速；旗舰版限速情况未写明",
@@ -458,7 +527,9 @@
         "支付：支付宝；微信与 USDT 需联系客服"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "sourceNote": "客户端说明于 2026-10-31 按站长提供的最新信息更新；套餐价格仍为 2026-10-20 整理的数据。",
+      "promoCode": "mm88"
     },
     {
       "id": "breezenet",
@@ -625,7 +696,8 @@
         "线路与协议说法不一：有资料标注 IPLC 专线、Shadowsocks / VMess / Trojan，也有资料标注 IEPL 专线、VLESS 协议，以官网为准。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "weifeng90"
     },
     {
       "id": "feimaoyun",
@@ -819,7 +891,8 @@
         "支付：支付宝、微信、USDT"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "flycat888"
     },
     {
       "id": "dalaoyun",
@@ -961,375 +1034,12 @@
         "节点地区说法不一：有资料列出香港、日本、美国，也有测评称覆盖港、日、美、新、韩、台等 45+ 节点。"
       ],
       "sources": [],
-      "verifiedAt": null
-    },
-    {
-      "id": "feiv",
-      "rank": 6,
-      "name": "飞V",
-      "nameEn": "FeiV",
-      "aliases": [
-        "飞v",
-        "feiv",
-        "flyv"
-      ],
-      "status": "verified",
-      "sourceType": "official",
-      "collectedAt": null,
-      "affUrl": "https://varnexa.flyvaff.com/#/?code=1mq17Z8C",
-      "officialSite": "https://flyv.my/",
-      "intro": "飞V（FlyV）官网称采用 IPLC / IEPL 国际专线与多路 BGP 中转，全球 100+ 节点，兼容 Shadowsocks、V2Ray、Trojan 协议，并为 ChatGPT、Netflix、YouTube、Disney+ 提供专属节点。套餐全部为月付，按档位限制同时在线设备数，并提供 24 小时内小流量无理由退款。",
-      "plans": [
-        {
-          "name": "Lite 体验版",
-          "billing": "month",
-          "priceCNY": 9.9,
-          "trafficGB": 15,
-          "trafficPeriod": "month",
-          "note": "1 台设备；标称 1Gbps"
-        },
-        {
-          "name": "Basic 基础版",
-          "billing": "month",
-          "priceCNY": 19.9,
-          "trafficGB": 100,
-          "trafficPeriod": "month",
-          "note": "3 台设备；标称 5Gbps"
-        },
-        {
-          "name": "Standard 标准版",
-          "billing": "month",
-          "priceCNY": 39.9,
-          "trafficGB": 250,
-          "trafficPeriod": "month",
-          "note": "5 台设备；多线中转"
-        },
-        {
-          "name": "Pro 专业版",
-          "billing": "month",
-          "priceCNY": 69.9,
-          "trafficGB": 500,
-          "trafficPeriod": "month",
-          "note": "8 台设备；IPLC 专线"
-        },
-        {
-          "name": "VIP 尊享版",
-          "billing": "month",
-          "priceCNY": 99.9,
-          "trafficGB": 1000,
-          "trafficPeriod": "month",
-          "note": "不限设备；IEPL 专线"
-        },
-        {
-          "name": "Enterprise 企业版",
-          "billing": "month",
-          "priceCNY": 299.9,
-          "trafficGB": 3000,
-          "trafficPeriod": "month",
-          "note": "定制高并发独立端口"
-        }
-      ],
-      "regions": [
-        "全球 100+ 节点（官网未列出具体地区）"
-      ],
-      "lineTypes": [
-        "IPLC",
-        "IEPL",
-        "BGP 中转"
-      ],
-      "protocols": [
-        "Shadowsocks",
-        "V2Ray",
-        "Trojan"
-      ],
-      "clients": [
-        "Clash",
-        "ClashParty",
-        "Shadowsocks 客户端",
-        "支持 Windows、macOS、iOS、Android、Linux 与路由器"
-      ],
-      "aiCompat": "官网称为 ChatGPT 提供专属节点（本站未检测）。",
-      "streamingCompat": "官网称为 Netflix、YouTube、Disney+ 提供专属节点（本站未检测）。",
-      "suitableFor": [
-        "想用 ¥9.9 先试用的新手（Lite 每月 15GB，仅限 1 台设备）",
-        "外贸、游戏用户（官网列出低延迟游戏节点）",
-        "需要大流量或团队使用（VIP、企业版）"
-      ],
-      "notSuitableFor": [
-        "想用年付拿低价的用户（官网只列月付）",
-        "多设备但预算低的用户（Basic 只允许 3 台同时在线）"
-      ],
-      "limits": [
-        "同时在线设备：Lite 1 台、Basic 3 台、Standard 5 台、Pro 8 台、VIP 不限",
-        "流量按月计算，每月重置；可随时升级或补差价",
-        "退款：订阅后 24 小时内且使用流量不超过 2GB，可无理由全额退款",
-        "官网标称带宽（1Gbps–100Gbps）为线路规格，不代表个人实际速度"
-      ],
-      "sources": [
-        {
-          "label": "飞V 官网首页（2026-10-20 读取）",
-          "url": "https://flyv.my/"
-        }
-      ],
-      "verifiedAt": "2026-10-20"
-    },
-    {
-      "id": "tiziyun",
-      "rank": 7,
-      "name": "梯子云 LadderCloud",
-      "nameEn": "LadderCloud",
-      "aliases": [
-        "梯子云",
-        "laddercloud",
-        "ladder"
-      ],
-      "status": "pending",
-      "sourceType": "third-party",
-      "collectedAt": "2026-10-20",
-      "affUrl": "https://varnexa.ladderaff.com/#/?code=NSTRhs22",
-      "officialSite": "",
-      "intro": "梯子云（LadderCloud）主打 IEPL 专线和 VLESS 协议，提供自研全平台 App，也支持通用订阅接入 Clash、Shadowrocket、sing-box。所有套餐都按月刷新流量，另有附独享公网 IP 的定制专线。",
-      "plans": [
-        {
-          "name": "年度保活方案",
-          "billing": "year",
-          "priceCNY": 89,
-          "trafficGB": 60,
-          "trafficPeriod": "month",
-          "note": "全年实付 ¥89，流量每月刷新"
-        },
-        {
-          "name": "初阶·基础视界",
-          "billing": "month",
-          "priceCNY": 25,
-          "trafficGB": 125,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "初阶·基础视界",
-          "billing": "quarter",
-          "priceCNY": 71.25,
-          "trafficGB": 125,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "初阶·基础视界",
-          "billing": "year",
-          "priceCNY": 255,
-          "trafficGB": 125,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "中阶·极清多线",
-          "billing": "month",
-          "priceCNY": 60,
-          "trafficGB": 350,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "中阶·极清多线",
-          "billing": "quarter",
-          "priceCNY": 171,
-          "trafficGB": 350,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "中阶·极清多线",
-          "billing": "year",
-          "priceCNY": 612,
-          "trafficGB": 350,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "高阶·全球智联",
-          "billing": "month",
-          "priceCNY": 110,
-          "trafficGB": 750,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "高阶·全球智联",
-          "billing": "quarter",
-          "priceCNY": 313.5,
-          "trafficGB": 750,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "高阶·全球智联",
-          "billing": "year",
-          "priceCNY": 1122,
-          "trafficGB": 750,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "顶阶·全球骨干",
-          "billing": "month",
-          "priceCNY": 190,
-          "trafficGB": 1600,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "顶阶·全球骨干",
-          "billing": "quarter",
-          "priceCNY": 541.5,
-          "trafficGB": 1600,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "顶阶·全球骨干",
-          "billing": "year",
-          "priceCNY": 1938,
-          "trafficGB": 1600,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "云端独享定制专线",
-          "billing": "month",
-          "priceCNY": 680,
-          "trafficGB": 500,
-          "trafficPeriod": "month",
-          "note": "独享公网 IP、独立带宽"
-        }
-      ],
-      "regions": [
-        "香港",
-        "台湾",
-        "日本",
-        "新加坡",
-        "美国"
-      ],
-      "lineTypes": [
-        "IEPL 专线"
-      ],
-      "protocols": [
-        "VLESS"
-      ],
-      "clients": [
-        "自研全平台 App",
-        "通用订阅：Clash、Shadowrocket、sing-box"
-      ],
-      "aiCompat": "服务商宣称支持 ChatGPT、Claude（原生 IP）（本站未检测；AI 服务对节点 IP 有限制，请以实际使用为准）。",
-      "streamingCompat": "服务商宣称支持 Netflix、Disney+、YouTube（本站未检测；解锁情况随节点变化）。",
-      "suitableFor": [
-        "轻度或备用使用（年度保活，每月 60GB）",
-        "看视频、用 AI、下载较多的用户（350GB 档以上）",
-        "TikTok 直播、独立站等需要固定出口的业务"
-      ],
-      "notSuitableFor": [
-        "想买不限时流量包的用户（没有不限时套餐）"
-      ],
-      "limits": [
-        "所有套餐为每月额度，没有不限时包",
-        "“60+ 节点、2Gbps+ 带宽”为服务端容量说明，并非单用户速率",
-        "设备数与限速情况资料未写明",
-        "退款规则：资料未说明，购买前请向客服确认。"
-      ],
-      "sources": [],
-      "verifiedAt": null
-    },
-    {
-      "id": "wavenet",
-      "rank": 8,
-      "name": "浪网 WaveNet",
-      "nameEn": "WaveNet",
-      "aliases": [
-        "浪网",
-        "wavenet",
-        "wave"
-      ],
-      "status": "verified",
-      "sourceType": "official",
-      "collectedAt": null,
-      "affUrl": "https://varnexa.wavenetaff.com/#/?code=Thua5OyI",
-      "officialSite": "https://wavenet.my/",
-      "intro": "浪网 WaveNet 官网称采用 BGP 多线智能调度与专线级出口，协议为 Shadowsocks，所有节点统一 1 倍率。套餐只有月付，流量从 150GB 到 2TB，另有带独立公网 IP 的定制线路包，提供 Windows、macOS、iOS、Android 客户端。",
-      "plans": [
-        {
-          "name": "浪网 入门",
-          "billing": "month",
-          "priceCNY": 30,
-          "trafficGB": 150,
-          "trafficPeriod": "month",
-          "note": "标注无速率限制"
-        },
-        {
-          "name": "浪网 进阶",
-          "billing": "month",
-          "priceCNY": 70,
-          "trafficGB": 400,
-          "trafficPeriod": "month",
-          "note": "纯专线出口；标注无速率限制"
-        },
-        {
-          "name": "浪网 高端",
-          "billing": "month",
-          "priceCNY": 120,
-          "trafficGB": 800,
-          "trafficPeriod": "month"
-        },
-        {
-          "name": "浪网 商业",
-          "billing": "month",
-          "priceCNY": 200,
-          "trafficGB": 2000,
-          "trafficPeriod": "month",
-          "note": "团队与高并发；标注无速率限制"
-        },
-        {
-          "name": "浪网 定制线路包",
-          "billing": "month",
-          "priceCNY": 640,
-          "trafficGB": 500,
-          "trafficPeriod": "month",
-          "note": "独享专线、独立公网 IP，约 2–3 个工作日交付"
-        }
-      ],
-      "regions": [
-        "官网未列出具体地区（官网称“全球节点”）"
-      ],
-      "lineTypes": [
-        "BGP 多线智能调度",
-        "专线级出口",
-        "独享专线（定制包）"
-      ],
-      "protocols": [
-        "Shadowsocks"
-      ],
-      "clients": [
-        "Windows 10+",
-        "macOS 10.15+",
-        "iOS 12.0+",
-        "Android 5.0+（订阅链接或二维码导入）"
-      ],
-      "aiCompat": "官网称支持 ChatGPT、Claude 等 AI 应用与开发工具（本站未检测）。",
-      "streamingCompat": "官网称支持 Netflix、Hulu、HBO、Disney+、DAZN（本站未检测）。",
-      "suitableFor": [
-        "远程办公、团队协作（进阶、商业档）",
-        "流量需求大的用户（2TB 商业档每GB 约 ¥0.10）",
-        "直播上传与固定出口业务（定制线路包）"
-      ],
-      "notSuitableFor": [
-        "预算低的轻度用户（入门档 ¥30 起，高于多数同类入门价）",
-        "想年付省钱的用户（官网只列月付）"
-      ],
-      "limits": [
-        "所有节点 1 倍率",
-        "节点地区与设备数官网未列明",
-        "官网公开的新用户首单优惠码：lw888",
-        "24/7 在线协助（官网描述）",
-        "退款规则：资料未说明，购买前请向客服确认。"
-      ],
-      "sources": [
-        {
-          "label": "浪网 WaveNet 官网首页（2026-10-20 读取）",
-          "url": "https://wavenet.my/"
-        }
-      ],
-      "verifiedAt": "2026-10-20"
+      "verifiedAt": null,
+      "promoCode": "dly88"
     },
     {
       "id": "yinxingren",
-      "rank": 9,
+      "rank": 6,
       "name": "隐形人",
       "nameEn": "YinXingRen",
       "aliases": [
@@ -1479,7 +1189,468 @@
         "通用订阅需联系客服获取"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "yxr888"
+    },
+    {
+      "id": "feiv",
+      "rank": 7,
+      "name": "飞V",
+      "nameEn": "FeiV",
+      "aliases": [
+        "飞v",
+        "feiv",
+        "flyv"
+      ],
+      "status": "pending",
+      "sourceType": "third-party",
+      "collectedAt": "2026-10-31",
+      "affUrl": "https://varnexa.flyvaff.com/#/?code=1mq17Z8C",
+      "officialSite": "https://flyv.my/",
+      "intro": "飞V（FlyV）共 9 款套餐：年付标准轻量版 ¥99/年（每月 65GB）；入门、进阶、高端、商业 4 档月付（¥25–¥190，每月 150GB–1.8TB）；单次轻量版 3 档不限时流量包（130GB–600GB）；以及月付 ¥680 的原生 IP 独享黄金专线。官网首页（2026-10-20 读取）称采用 IPLC / IEPL 国际专线与多路 BGP 中转，兼容 Shadowsocks、V2Ray、Trojan 协议。",
+      "plans": [
+        {
+          "name": "年付标准轻量版",
+          "billing": "year",
+          "priceCNY": 99,
+          "trafficGB": 65,
+          "trafficPeriod": "month",
+          "note": "年付一次付清；每月重置",
+          "details": [
+            "💎 年度轻量优选：全年 ¥99，每月享有 65GB 流量。",
+            "🔄 每月流量重置：未用完的流量不结转。",
+            "🌐 全球节点：支持多地区网络连接，满足轻度使用需求。",
+            "⚡ 经济实惠：适合日常浏览、学习及轻量办公。",
+            "📱 多平台使用：适合手机、电脑及常用客户端连接。"
+          ]
+        },
+        {
+          "name": "入门方案",
+          "billing": "month",
+          "priceCNY": 25,
+          "trafficGB": 150,
+          "trafficPeriod": "month",
+          "note": "不限速",
+          "details": [
+            "💎 新手入门：每月 150GB 流量，兼顾价格与实用性。",
+            "🌍 多地区节点：提供不同地区的网络连接选择。",
+            "🚀 优化线路：多线路连接，满足日常上网需求。",
+            "⚡ 高速使用：不限速，节点倍率以套餐规则为准。",
+            "🎬 多场景支持：适合网页浏览、影音娱乐与轻度 AI 办公。"
+          ]
+        },
+        {
+          "name": "进阶方案",
+          "billing": "month",
+          "priceCNY": 50,
+          "trafficGB": 380,
+          "trafficPeriod": "month",
+          "note": "不限速，1.0 倍率",
+          "details": [
+            "👑 进阶大流量：每月 380GB 流量，适合工作娱乐兼顾。",
+            "🌐 全球节点：多个热门地区节点自由选择。",
+            "🚀 高速专线：BGP 智能路由，搭配 IEPL / IPLC 优化线路。",
+            "⚡ 高速不限速：全节点统一 1.0 倍率。",
+            "🤖 AI 与影音：适合远程办公、高清视频及主流 AI 工具。"
+          ]
+        },
+        {
+          "name": "高端方案",
+          "billing": "month",
+          "priceCNY": 110,
+          "trafficGB": 800,
+          "trafficPeriod": "month",
+          "note": "不限速，1.0 倍率",
+          "details": [
+            "💎 高端大流量：每月 800GB 流量，满足高频使用需求。",
+            "🌍 优质节点：多地区节点选择，兼顾高速与连接体验。",
+            "🚀 高速专线：BGP 多线智能路由与优质线路出口。",
+            "⚡ 不限速体验：全节点统一 1.0 倍率。",
+            "🎬 影音与 AI：支持主流流媒体及 AI 创作工具。"
+          ]
+        },
+        {
+          "name": "商业方案",
+          "billing": "month",
+          "priceCNY": 190,
+          "trafficGB": 1800,
+          "trafficPeriod": "month",
+          "note": "不限速，1.0 倍率",
+          "details": [
+            "👑 商业级流量：每月 1.8TB 流量，适合团队与高频业务使用。",
+            "🌐 企业级网络：BGP 多线路路由与冗余出口架构。",
+            "🚀 高速大流量：不限速，全节点统一 1.0 倍率。",
+            "💻 多设备连接：适合企业办公、开发团队及多设备场景。",
+            "🛠️ 专业应用：兼顾远程协作、AI 开发与大流量网络需求。"
+          ]
+        },
+        {
+          "name": "单次轻量版·小流量包",
+          "billing": "payg",
+          "priceCNY": 189,
+          "trafficGB": 130,
+          "trafficPeriod": "total",
+          "note": "一次性，用完为止",
+          "details": [
+            "🌟 一次购买：获得 130GB 总流量，无需按月续费。",
+            "💎 长期有效：不按月清零，流量用完为止。",
+            "🌍 多地区节点：适合日常浏览与轻量跨境访问。",
+            "⚡ 灵活使用：适合低频使用、备用网络与偶尔出行。",
+            "📱 多端支持：兼容常用代理客户端。"
+          ]
+        },
+        {
+          "name": "单次轻量版·标准流量包",
+          "billing": "payg",
+          "priceCNY": 479,
+          "trafficGB": 380,
+          "trafficPeriod": "total",
+          "note": "一次性，用完为止",
+          "details": [
+            "💎 标准永久流量包：一次购买获得 380GB 总流量。",
+            "🔄 按量使用：不按月重置，流量用完为止。",
+            "🌐 全球节点：提供多地区节点选择。",
+            "🚀 进阶线路：多线路优化，兼顾传输效率与连接体验。",
+            "🎬 灵活使用：适合高清影音、日常办公和长期备用。"
+          ]
+        },
+        {
+          "name": "单次轻量版·精英流量包",
+          "billing": "payg",
+          "priceCNY": 799,
+          "trafficGB": 600,
+          "trafficPeriod": "total",
+          "note": "一次性，用完为止",
+          "details": [
+            "👑 精英大流量：一次购买获得 600GB 总流量。",
+            "💎 长期使用：不按月清零，无需每月续费。",
+            "🌍 全球节点：支持多个国家与地区的网络连接。",
+            "🚀 高端线路：多线路优化，适合高频网络使用。",
+            "🤖 多场景支持：适合 AI 开发、高清视频及大文件传输。"
+          ]
+        },
+        {
+          "name": "原生IP独享黄金专线",
+          "billing": "month",
+          "priceCNY": 680,
+          "trafficGB": 500,
+          "trafficPeriod": "month",
+          "note": "独立原生 IP，约 2–3 个工作日交付",
+          "details": [
+            "👑 黄金专线定制：每月 500GB 专属流量。",
+            "🔐 独立原生 IP：提供专属公网 IP 及独享带宽资源。",
+            "🚀 专属网络线路：优化跨境传输，满足高要求业务场景。",
+            "🌍 商业用途：适合 TikTok 直播、跨境电商、独立站及企业办公。",
+            "🛠️ 专属技术支持：提供一对一技术协助，预计 2–3 个工作日交付。"
+          ]
+        }
+      ],
+      "regions": [
+        "全球 100+ 节点（官网未列出具体地区）"
+      ],
+      "lineTypes": [
+        "IPLC",
+        "IEPL",
+        "BGP 中转"
+      ],
+      "protocols": [
+        "Shadowsocks",
+        "V2Ray",
+        "Trojan"
+      ],
+      "clients": [
+        "Clash",
+        "ClashParty",
+        "Shadowsocks 客户端",
+        "支持 Windows、macOS、iOS、Android、Linux 与路由器"
+      ],
+      "aiCompat": "官网称为 ChatGPT 提供专属节点（本站未检测）。",
+      "streamingCompat": "官网称为 Netflix、YouTube、Disney+ 提供专属节点（本站未检测）。",
+      "suitableFor": [
+        "想用年付 ¥99 低价轻量使用的用户（每月 65GB）",
+        "用量不规律、想一次买断流量的用户（单次流量包，不按月清零）",
+        "需要独立原生 IP 的跨境业务（黄金专线）"
+      ],
+      "notSuitableFor": [
+        "需要先确认设备数上限和退款条件再下单的用户（本站尚未重新核实，购买前请问客服）",
+        "预算有限、又需要独享 IP 的用户（黄金专线月付 ¥680）"
+      ],
+      "limits": [
+        "套餐类型：年付 1 款、月付 4 款、单次不限时流量包 3 款、独享专线 1 款；月付套餐的季付、半年付、年付价格截图没有提供，本站不推算",
+        "流量规则：周期套餐每月重置、未用完不结转；单次流量包不按月清零，用完为止",
+        "设备数上限：本站资料未说明（新套餐页截图没有标注；2026-10-20 官网首页曾按档位限制设备数，新套餐是否沿用未核实，购买前请向客服确认）",
+        "退款规则：本站资料未说明（2026-10-20 官网首页曾写明订阅后 24 小时内且使用流量不超过 2GB 可无理由退款，新套餐是否沿用未核实，购买前请向客服确认）",
+        "原生IP独享黄金专线为定制交付，约 2–3 个工作日开通，下单前请以官网结算页的实际金额为准"
+      ],
+      "sources": [
+        {
+          "label": "站长提供的飞V套餐页截图（2026-10-31）",
+          "url": ""
+        },
+        {
+          "label": "飞V 官网首页（2026-10-20 读取，线路、协议、客户端等资料）",
+          "url": "https://flyv.my/"
+        }
+      ],
+      "verifiedAt": null,
+      "sourceNote": "9 款套餐的名称、价格、流量与付款方式据站长提供的套餐页截图整理（2026-10-31），尚未在官网重新核对，因此不再标注“官网已核实”；线路、协议、客户端等其余资料来自 2026-10-20 官网首页。",
+      "promoCode": "fly20"
+    },
+    {
+      "id": "tiziyun",
+      "rank": 8,
+      "name": "梯子云 LadderCloud",
+      "nameEn": "LadderCloud",
+      "aliases": [
+        "梯子云",
+        "laddercloud",
+        "ladder"
+      ],
+      "status": "pending",
+      "sourceType": "third-party",
+      "collectedAt": "2026-10-20",
+      "affUrl": "https://varnexa.ladderaff.com/#/?code=NSTRhs22",
+      "officialSite": "",
+      "intro": "梯子云（LadderCloud）主打 IEPL 专线和 VLESS 协议，提供自研全平台 App，也支持通用订阅接入 Clash、Shadowrocket、sing-box。所有套餐都按月刷新流量，另有附独享公网 IP 的定制专线。",
+      "plans": [
+        {
+          "name": "年度保活方案",
+          "billing": "year",
+          "priceCNY": 89,
+          "trafficGB": 60,
+          "trafficPeriod": "month",
+          "note": "全年实付 ¥89，流量每月刷新"
+        },
+        {
+          "name": "初阶·基础视界",
+          "billing": "month",
+          "priceCNY": 25,
+          "trafficGB": 125,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "初阶·基础视界",
+          "billing": "quarter",
+          "priceCNY": 71.25,
+          "trafficGB": 125,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "初阶·基础视界",
+          "billing": "year",
+          "priceCNY": 255,
+          "trafficGB": 125,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "中阶·极清多线",
+          "billing": "month",
+          "priceCNY": 60,
+          "trafficGB": 350,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "中阶·极清多线",
+          "billing": "quarter",
+          "priceCNY": 171,
+          "trafficGB": 350,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "中阶·极清多线",
+          "billing": "year",
+          "priceCNY": 612,
+          "trafficGB": 350,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "高阶·全球智联",
+          "billing": "month",
+          "priceCNY": 110,
+          "trafficGB": 750,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "高阶·全球智联",
+          "billing": "quarter",
+          "priceCNY": 313.5,
+          "trafficGB": 750,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "高阶·全球智联",
+          "billing": "year",
+          "priceCNY": 1122,
+          "trafficGB": 750,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "顶阶·全球骨干",
+          "billing": "month",
+          "priceCNY": 190,
+          "trafficGB": 1600,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "顶阶·全球骨干",
+          "billing": "quarter",
+          "priceCNY": 541.5,
+          "trafficGB": 1600,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "顶阶·全球骨干",
+          "billing": "year",
+          "priceCNY": 1938,
+          "trafficGB": 1600,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "云端独享定制专线",
+          "billing": "month",
+          "priceCNY": 680,
+          "trafficGB": 500,
+          "trafficPeriod": "month",
+          "note": "独享公网 IP、独立带宽"
+        }
+      ],
+      "regions": [
+        "香港",
+        "台湾",
+        "日本",
+        "新加坡",
+        "美国"
+      ],
+      "lineTypes": [
+        "IEPL 专线"
+      ],
+      "protocols": [
+        "VLESS"
+      ],
+      "clients": [
+        "自研全平台 App",
+        "通用订阅：Clash、Shadowrocket、sing-box"
+      ],
+      "aiCompat": "服务商宣称支持 ChatGPT、Claude（原生 IP）（本站未检测；AI 服务对节点 IP 有限制，请以实际使用为准）。",
+      "streamingCompat": "服务商宣称支持 Netflix、Disney+、YouTube（本站未检测；解锁情况随节点变化）。",
+      "suitableFor": [
+        "轻度或备用使用（年度保活，每月 60GB）",
+        "看视频、用 AI、下载较多的用户（350GB 档以上）",
+        "TikTok 直播、独立站等需要固定出口的业务"
+      ],
+      "notSuitableFor": [
+        "想买不限时流量包的用户（没有不限时套餐）"
+      ],
+      "limits": [
+        "所有套餐为每月额度，没有不限时包",
+        "“60+ 节点、2Gbps+ 带宽”为服务端容量说明，并非单用户速率",
+        "设备数与限速情况资料未写明",
+        "退款规则：资料未说明，购买前请向客服确认。"
+      ],
+      "sources": [],
+      "verifiedAt": null,
+      "promoCode": "tzy888"
+    },
+    {
+      "id": "wavenet",
+      "rank": 9,
+      "name": "浪网 WaveNet",
+      "nameEn": "WaveNet",
+      "aliases": [
+        "浪网",
+        "wavenet",
+        "wave"
+      ],
+      "status": "verified",
+      "sourceType": "official",
+      "collectedAt": null,
+      "affUrl": "https://varnexa.wavenetaff.com/#/?code=Thua5OyI",
+      "officialSite": "https://wavenet.my/",
+      "intro": "浪网 WaveNet 官网称采用 BGP 多线智能调度与专线级出口，协议为 Shadowsocks，所有节点统一 1 倍率。套餐只有月付，流量从 150GB 到 2TB，另有带独立公网 IP 的定制线路包，提供 Windows、macOS、iOS、Android 客户端。",
+      "plans": [
+        {
+          "name": "浪网 入门",
+          "billing": "month",
+          "priceCNY": 30,
+          "trafficGB": 150,
+          "trafficPeriod": "month",
+          "note": "标注无速率限制"
+        },
+        {
+          "name": "浪网 进阶",
+          "billing": "month",
+          "priceCNY": 70,
+          "trafficGB": 400,
+          "trafficPeriod": "month",
+          "note": "纯专线出口；标注无速率限制"
+        },
+        {
+          "name": "浪网 高端",
+          "billing": "month",
+          "priceCNY": 120,
+          "trafficGB": 800,
+          "trafficPeriod": "month"
+        },
+        {
+          "name": "浪网 商业",
+          "billing": "month",
+          "priceCNY": 200,
+          "trafficGB": 2000,
+          "trafficPeriod": "month",
+          "note": "团队与高并发；标注无速率限制"
+        },
+        {
+          "name": "浪网 定制线路包",
+          "billing": "month",
+          "priceCNY": 640,
+          "trafficGB": 500,
+          "trafficPeriod": "month",
+          "note": "独享专线、独立公网 IP，约 2–3 个工作日交付"
+        }
+      ],
+      "regions": [
+        "官网未列出具体地区（官网称“全球节点”）"
+      ],
+      "lineTypes": [
+        "BGP 多线智能调度",
+        "专线级出口",
+        "独享专线（定制包）"
+      ],
+      "protocols": [
+        "Shadowsocks"
+      ],
+      "clients": [
+        "Windows 10+",
+        "macOS 10.15+",
+        "iOS 12.0+",
+        "Android 5.0+（订阅链接或二维码导入）"
+      ],
+      "aiCompat": "官网称支持 ChatGPT、Claude 等 AI 应用与开发工具（本站未检测）。",
+      "streamingCompat": "官网称支持 Netflix、Hulu、HBO、Disney+、DAZN（本站未检测）。",
+      "suitableFor": [
+        "远程办公、团队协作（进阶、商业档）",
+        "流量需求大的用户（2TB 商业档每GB 约 ¥0.10）",
+        "直播上传与固定出口业务（定制线路包）"
+      ],
+      "notSuitableFor": [
+        "预算低的轻度用户（入门档 ¥30 起，高于多数同类入门价）",
+        "想年付省钱的用户（官网只列月付）"
+      ],
+      "limits": [
+        "所有节点 1 倍率",
+        "节点地区与设备数官网未列明",
+        "官网公开的新用户首单优惠码：lw888",
+        "24/7 在线协助（官网描述）",
+        "退款规则：资料未说明，购买前请向客服确认。"
+      ],
+      "sources": [
+        {
+          "label": "浪网 WaveNet 官网首页（2026-10-20 读取）",
+          "url": "https://wavenet.my/"
+        }
+      ],
+      "verifiedAt": "2026-10-20",
+      "promoCode": "lw888"
     },
     {
       "id": "xingdaomeng",
@@ -1652,7 +1823,8 @@
         "支付：支付宝、微信、USDT"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "nmw888"
     },
     {
       "id": "guangsuyun",
@@ -1809,7 +1981,8 @@
         "据公开资料，部分特殊商品不支持退款；另有测评称节点还覆盖英国、德国、澳大利亚、法国等地区（60+ 节点）。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "AMM"
     },
     {
       "id": "weituyun",
@@ -2051,7 +2224,8 @@
         "支付：支付宝、微信、USDT"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "rabbit"
     },
     {
       "id": "u1s1",
@@ -2224,7 +2398,8 @@
         "退款规则：资料未说明，购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "U1S1"
     },
     {
       "id": "jilianyun",
@@ -2307,7 +2482,8 @@
           "url": "https://jiliancloud.org/"
         }
       ],
-      "verifiedAt": "2026-10-20"
+      "verifiedAt": "2026-10-20",
+      "promoCode": "JLY888"
     },
     {
       "id": "quanqiuyun",
@@ -2518,7 +2694,8 @@
         "支付：支付宝、微信、USDT"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "qq88"
     },
     {
       "id": "guangnianti",
@@ -2618,7 +2795,8 @@
         "退款规则：资料未说明，购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "GN888"
     },
     {
       "id": "sogoyun",
@@ -2799,7 +2977,8 @@
         "客户端说法不一：有资料列出自研客户端及 Shadowrocket、Clash 等，也有资料称第三方客户端不可用。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "SOGO10000"
     },
     {
       "id": "yuzhouyun",
@@ -2954,7 +3133,8 @@
         "退款规则：资料未说明，购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "YUZHOU553"
     },
     {
       "id": "ermaoyun",
@@ -3107,7 +3287,8 @@
         "退款规则：资料未说明，购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "ermao888"
     },
     {
       "id": "yifanyun",
@@ -3257,7 +3438,8 @@
         "退款规则：资料未说明，购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "1FLYYUN"
     },
     {
       "id": "edgenova",
@@ -3447,7 +3629,8 @@
         "支付：支付宝、微信、USDT"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "VA888"
     },
     {
       "id": "kexinyun",
@@ -3602,7 +3785,8 @@
         "支付：支付宝、微信、USDT"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "kxy80"
     },
     {
       "id": "sujie",
@@ -3757,7 +3941,8 @@
         "退款规则：资料未说明，购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "sujie888"
     },
     {
       "id": "kuaili",
@@ -3911,7 +4096,8 @@
         "退款规则：资料未说明，购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "kuaili996"
     },
     {
       "id": "wuyou",
@@ -4066,7 +4252,8 @@
         "客户端变更：据公开资料，自 2026 年 10 月起只能用官方专属客户端，支持哪些平台以官网为准；下单前请确认你的设备可以安装。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "wuyou666"
     },
     {
       "id": "lingmao",
@@ -4169,7 +4356,8 @@
         "客户端变更：据公开资料，自 2026 年 10 月起只能用官方专属客户端，支持哪些平台以官网为准；下单前请确认你的设备可以安装。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "lingmao"
     },
     {
       "id": "flashleap",
@@ -4310,7 +4498,8 @@
         "客户端变更：据公开资料，自 2026 年 10 月起只能用官方专属客户端，支持哪些平台以官网为准；下单前请确认你的设备可以安装。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "shanyue"
     },
     {
       "id": "feiwei",
@@ -4461,7 +4650,8 @@
         "客户端变更：据公开资料，自 2026 年 10 月起只能用官方专属客户端，支持哪些平台以官网为准；下单前请确认你的设备可以安装。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "firefly"
     },
     {
       "id": "kuajie",
@@ -4578,7 +4768,8 @@
           "url": "https://kuajiecloud.homes/"
         }
       ],
-      "verifiedAt": "2026-10-20"
+      "verifiedAt": "2026-10-20",
+      "promoCode": "kuajie"
     },
     {
       "id": "liulianyun",
@@ -4752,7 +4943,8 @@
         "退款规则：资料未说明，购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "ll88"
     },
     {
       "id": "shandianyun",
@@ -4877,7 +5069,8 @@
         "退款规则：资料未说明，购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "sd88"
     },
     {
       "id": "huanqiuyun",
@@ -5028,7 +5221,8 @@
         "退款规则：资料未说明，购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "HQ66"
     },
     {
       "id": "shenxingyun",
@@ -5111,7 +5305,8 @@
         "支付：支付宝、微信、USDT"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "sx0077"
     },
     {
       "id": "yunjieyun",
@@ -5272,7 +5467,8 @@
         "设备数说法不一：有资料标注不限设备，也有测评列出 2–5 台（按套餐不同），购买前请向客服确认。"
       ],
       "sources": [],
-      "verifiedAt": null
+      "verifiedAt": null,
+      "promoCode": "yjx888"
     }
   ]
 }

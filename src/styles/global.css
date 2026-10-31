@@ -491,3 +491,72 @@ a.cat-btn { text-decoration: none; }
   .breadcrumb a { display: inline-block; padding: .45rem 0; }
   main p a, main li a, main td a, main dd a { padding-block: .2em; }
 }
+
+/* ---------- 全站“本站主推”小框（樱花粉边） ---------- */
+.promo { box-sizing: border-box; margin: .6rem auto 0; width: calc(100% - 32px); max-width: var(--maxw); border: 2px solid var(--sakura); border-radius: 14px; background: linear-gradient(135deg, #fff 0%, var(--sakura-soft) 100%); box-shadow: var(--shadow); padding: .45rem .85rem; font-size: .88rem; line-height: 1.55; }
+.promo-in { display: flex; flex-wrap: wrap; align-items: center; gap: .1rem .8rem; }
+.promo p { margin: 0; }
+.promo-badge { display: inline-block; background: var(--sakura-deep); color: #fff; border-radius: 999px; padding: .02rem .65rem; font-size: .78rem; font-weight: 800; letter-spacing: .04em; }
+.promo-brand { font-family: var(--round); font-weight: 800; font-size: 1.02rem; }
+.promo code { font-weight: 700; }
+.promo .btn { padding: .28rem .85rem; font-size: .86rem; box-shadow: none; }
+.promo-why { margin-left: auto; font-size: .76rem; color: var(--muted); }
+.promo-cb, .promo-tg { display: none; }
+@media (max-width: 640px) {
+  /* 手机：默认收成一行，点“查看优惠”展开（CSS 复选框开关，没有脚本） */
+  .promo { position: relative; padding: .3rem .65rem; font-size: .82rem; }
+  .promo-cb { display: block; position: absolute; top: 0; left: 0; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+  .promo-in { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .15rem .5rem; }
+  .promo-badge { grid-area: 1 / 1; }
+  .promo-brand { grid-area: 1 / 2; }
+  .promo-tg { grid-area: 1 / 3; justify-self: end; display: inline-flex; align-items: center; gap: .35rem; min-height: 40px; margin: -.3rem -.65rem -.3rem 0; padding: 0 .75rem 0 .9rem; font-weight: 700; color: var(--sakura-deep); cursor: pointer; border-radius: 0 12px 12px 0; }
+  .promo-tg::after { content: ""; width: .4em; height: .4em; border: solid currentColor; border-width: 0 2px 2px 0; transform: translateY(-.12em) rotate(45deg); }
+  .tg-off, .promo-plan, .promo-code, .promo-in .btn, .promo-why { display: none; }
+  .promo-cb:checked ~ .promo-in .tg-on { display: none; }
+  .promo-cb:checked ~ .promo-in .tg-off { display: inline; }
+  .promo-cb:checked ~ .promo-in .promo-tg::after { transform: translateY(.12em) rotate(-135deg); }
+  .promo-cb:checked ~ .promo-in .promo-plan { display: block; grid-area: 2 / 1 / 3 / 4; margin-top: .1rem; font-size: .8rem; line-height: 1.45; }
+  .promo-cb:checked ~ .promo-in .promo-code { display: block; grid-area: 3 / 1 / 4 / 3; }
+  .promo-cb:checked ~ .promo-in .btn { display: inline-flex; grid-area: 3 / 3; }
+  .promo-cb:checked ~ .promo-in .promo-why { display: block; grid-area: 4 / 1 / 5 / 4; margin: 0; font-size: .74rem; }
+  .promo-cb:focus-visible ~ .promo-in .promo-tg { outline: 2px solid var(--sakura-deep); outline-offset: -3px; }
+}
+@media (min-width: 1700px) and (min-height: 840px) {
+  .promo { position: fixed; top: 84px; left: calc(50% + 634px); margin: 0; width: clamp(190px, calc((100vw - 1240px) / 2 - 56px), 280px); max-width: none; z-index: 44; padding: .85rem .9rem .8rem; text-align: center; }
+  .promo-in { display: grid; justify-items: center; gap: .4rem; }
+  .promo-why { margin: 0; line-height: 1.4; }
+  .promo .btn { width: 100%; }
+}
+@media print { .promo { display: none; } }
+/* 灵动云卡片：樱花色外圈 + “本站主推”角标 */
+.ap-card.star { border: 2px solid var(--sakura); box-shadow: 0 0 0 4px var(--sakura-soft), var(--shadow); }
+.ap-star { position: absolute; top: -12px; right: 16px; z-index: 2; font-weight: 800; font-size: .78rem; color: var(--sakura-deep); background: #fff; border: 2px solid var(--sakura); border-radius: 999px; padding: .02rem .7rem; }
+.ap-card.star .ap-rank { z-index: 2; }
+.lead-story { position: relative; }
+/* 灵动云樱花飘落装饰（灵动云卡片、首页导读）：纯 CSS，只用 translate / rotate / opacity 动画，不触发重排，没有脚本，不含文字。
+   强弱三档由 SakuraPetals.astro 顶部的 LEVEL 决定：含蓄 .petals-soft / 标准（默认）/ 明显 .petals-bold；--k 花瓣大小倍数，--peak 最深不透明度，--c1…--c3 花瓣渐变色 */
+.petals { --k: 1.25; --peak: .9; --c1: #ffe1ea; --c2: var(--sakura); --c3: #e07a9f; position: absolute; inset: 0; z-index: 1; overflow: hidden; border-radius: inherit; pointer-events: none; container-type: size; }
+.petals-soft { --k: .95; --peak: .72; --c1: #fff3f6; --c3: #e48aa8; }
+.petals-bold { --k: 1.55; --peak: 1; --c1: #ffd0de; --c2: #f09ab7; --c3: #d4547d; }
+.petals i { position: absolute; top: 0; left: var(--x); width: calc(var(--s) * var(--k)); height: calc(var(--s) * var(--k)); opacity: 0; animation: petal-fall var(--t) linear var(--d) infinite; }
+.petals i::before { content: ""; display: block; width: 100%; height: 100%; background: linear-gradient(140deg, var(--c1) 0%, var(--c2) 48%, var(--c3) 100%); clip-path: polygon(50% 100%, 70% 86%, 84% 68%, 91% 48%, 90% 29%, 80% 12%, 74% 6%, 67% 4%, 60% 6%, 54% 13%, 50% 24%, 46% 13%, 40% 6%, 33% 4%, 26% 6%, 20% 12%, 10% 29%, 9% 48%, 16% 68%, 30% 86%); animation: petal-sway var(--w) ease-in-out var(--d) infinite alternate, petal-spin var(--r) linear var(--d) infinite var(--dir, normal); }
+@keyframes petal-fall { 0% { translate: 0 -24px; opacity: 0; } 8% { opacity: var(--peak); } 88% { opacity: var(--peak); } 100% { translate: 0 560px; translate: 0 calc(100cqh + 8px); opacity: 0; } }
+@keyframes petal-sway { from { translate: calc(var(--a, 14px) * -1) 0; } to { translate: var(--a, 14px) 0; } }
+@keyframes petal-spin { from { rotate: 0deg; } to { rotate: 360deg; } }
+.petals i:nth-child(1) { --x: 12%; --s: 14px; --t: 11s; --d: -1.7s; --w: 4.2s; --r: 7s; --a: 14px; }
+.petals i:nth-child(2) { --x: 60%; --s: 11px; --t: 13s; --d: -9.1s; --w: 3.6s; --r: 5.5s; --a: 18px; --dir: reverse; }
+.petals i:nth-child(3) { --x: 36%; --s: 17px; --t: 9.5s; --d: -3.8s; --w: 4.6s; --r: 8s; --a: 12px; }
+.petals i:nth-child(4) { --x: 84%; --s: 12px; --t: 12s; --d: -10.2s; --w: 3.9s; --r: 6.5s; --a: 16px; --dir: reverse; }
+.petals i:nth-child(5) { --x: 24%; --s: 15px; --t: 10s; --d: -2.5s; --w: 4.8s; --r: 7.5s; --a: 15px; }
+.petals i:nth-child(6) { --x: 72%; --s: 11px; --t: 13.5s; --d: -7.4s; --w: 3.4s; --r: 6s; --a: 20px; --dir: reverse; }
+.petals i:nth-child(7) { --x: 48%; --s: 14px; --t: 9s; --d: -0.5s; --w: 4.4s; --r: 8.5s; --a: 13px; }
+.petals i:nth-child(8) { --x: 94%; --s: 12px; --t: 12.5s; --d: -7.5s; --w: 3.8s; --r: 5s; --a: 14px; --dir: reverse; }
+.petals i:nth-child(9) { --x: 4%; --s: 13px; --t: 10.5s; --d: -3.5s; --w: 4.1s; --r: 7s; --a: 12px; }
+.petals i:nth-child(10) { --x: 66%; --s: 17px; --t: 11.5s; --d: -9s; --w: 4.7s; --r: 9s; --a: 16px; --dir: reverse; }
+.petals i:nth-child(11) { --x: 18%; --s: 13px; --t: 12.5s; --d: -5.2s; --w: 4.3s; --r: 6.8s; --a: 15px; }
+.petals i:nth-child(12) { --x: 78%; --s: 15px; --t: 10.8s; --d: -8.3s; --w: 3.7s; --r: 7.8s; --a: 17px; --dir: reverse; }
+.petals i:nth-child(13) { --x: 42%; --s: 12px; --t: 13.2s; --d: -11.4s; --w: 4.5s; --r: 5.8s; --a: 13px; }
+.petals i:nth-child(14) { --x: 54%; --s: 16px; --t: 9.8s; --d: -6.1s; --w: 3.5s; --r: 8.8s; --a: 19px; --dir: reverse; }
+.petals i:nth-child(15) { --x: 30%; --s: 12px; --t: 11.8s; --d: -0.9s; --w: 4s; --r: 6.2s; --a: 14px; }
+.petals i:nth-child(16) { --x: 90%; --s: 14px; --t: 10.2s; --d: -4.6s; --w: 4.9s; --r: 7.2s; --a: 11px; --dir: reverse; }
+@media (prefers-reduced-motion: reduce), print { .petals { display: none; } }

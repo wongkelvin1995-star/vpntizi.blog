@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PlanTable from '../../components/PlanTable.astro';
+import PlanDetails from '../../components/PlanDetails.astro';
 import AffButton from '../../components/AffButton.astro';
 import Disclosure from '../../components/Disclosure.astro';
 import { namedAirports, airportUrl, PENDING, BILLING_LABEL, statusLabel, shortName, summarize, monthlyEquivalent, pricePerGB, fmtCNY, type Airport } from '../../lib/airports';
@@ -55,6 +56,8 @@ const faq = [
   { q: `${sn}的注册入口在哪里？`, a: `点击本页的“前往${a.name}官网注册”按钮即可进入注册页（本站推广链接，你支付的价格不变）。机场域名可能更换，第一次购买建议选最短周期试用。` },
 ];
 
+if (a.promoCode) faq.push({ q: `${sn}有优惠码吗？`, a: `本站收录的合作优惠码是 ${a.promoCode}，在官网结算页的优惠码一栏填写。是否生效、优惠幅度以官网结算页为准，本页价格表为购买页标价、未计入优惠码。` });
+
 const li = (arr: string[]) => (arr.length ? arr : null);
 const intro = a.intro || `${a.name}是本站收录的机场品牌（推荐位第 ${a.rank} 位）。本站暂未取得它可靠的套餐价格、节点地区、线路类型和兼容性资料，这些字段统一标为“待核实”，取得官网资料后会补充并注明日期。注册前请以官网实时信息为准。`;
 
@@ -105,7 +108,7 @@ const desc = (S.hasPlans
         {a.aliases.length > 0 && <span>别名：{a.aliases.join(' / ')}</span>}
       </div>
       <Disclosure compact />
-      <div style="margin:1rem 0"><AffButton airport={a} /></div>
+      <div style="margin:1rem 0"><AffButton airport={a} />{a.promoCode && <p class="small" style="margin:.5rem 0 0">本站合作优惠码：<code>{a.promoCode}</code>。结算页填写，是否生效、优惠幅度以官网结算页为准；本页价格表未计入优惠码。</p>}</div>
 
       {S.hasPlans && (
         <section class="panel section" aria-labelledby="sum-h">
@@ -144,6 +147,8 @@ const desc = (S.hasPlans
         <h2>{sn}套餐价格表</h2>
         <PlanTable airport={a} />
       </section>
+
+      <PlanDetails airport={a} />
 
       {shiceFor(a.id).map((r) => <ShiceReport record={r} name={sn} />)}
       {fb && <FeedbackList set={fb} name={sn} />}
@@ -188,6 +193,7 @@ const desc = (S.hasPlans
       <section class="section">
         <h2>资料说明与更新日期</h2>
         {a.sources.length > 0 && <ul>{a.sources.map((s) => <li>{s.label}</li>)}</ul>}
+        {a.sourceNote && <p>{a.sourceNote}</p>}
         <p>{a.status === 'verified'
           ? `套餐价格已于 ${a.verifiedAt} 在官网核对。`
           : `本页资料根据公开信息整理，整理日期 ${a.collectedAt ?? ''}，尚未在官网逐项复核。`}价格、线路与解锁情况以官网实时信息为准。修改记录见 <a href="/tools/ziliao-hezhe/">资料核验与更新记录</a>。</p>
@@ -198,6 +204,7 @@ const desc = (S.hasPlans
       <div class="panel section" style="text-align:center">
         <p style="margin-bottom:.8rem">确认套餐适合自己后，通过本站专属入口前往官网注册：</p>
         <AffButton airport={a} />
+        {a.promoCode && <p class="small" style="margin:.6rem 0 0">合作优惠码：<code>{a.promoCode}</code>（以官网结算页为准）</p>}
       </div>
     </article>
 

@@ -1,0 +1,25 @@
+---
+/** 套餐订阅详情：每个套餐系列 4–5 条要点（plan.details），构建时直接写进 HTML 文本，不依赖脚本 */
+import type { Airport } from '../lib/airports';
+import { fmtCNY, shortName } from '../lib/airports';
+interface Props { airport: Airport }
+const { airport: a } = Astro.props;
+const UNIT: Record<string, string> = { month: '月', quarter: '季', halfyear: '半年', year: '年', payg: '次', onetime: '次' };
+const rows = a.plans.filter((p) => p.details && p.details.length);
+const sn = shortName(a);
+const title = (p: (typeof rows)[number]) => `${/^(灵动|飞V)/.test(p.name) ? '' : `${sn} `}${p.name}｜${fmtCNY(p.priceCNY, p.priceCNY % 1 ? 1 : 0)}/${UNIT[p.billing]}`;
+---
+{rows.length > 0 && (
+  <section class="section" id="plan-details" aria-labelledby="plan-details-h">
+    <h2 id="plan-details-h">{sn}各套餐订阅详情</h2>
+    <p class="small muted">按套餐页截图整理的要点；线路、节点、流媒体与 AI 的可用性以实际节点为准，价格以官网结算页为准。</p>
+    <div class="grid grid-2">
+      {rows.map((p) => (
+        <div class="panel">
+          <h3>{title(p)}</h3>
+          <ul>{p.details!.map((t) => <li>{t}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+  </section>
+)}

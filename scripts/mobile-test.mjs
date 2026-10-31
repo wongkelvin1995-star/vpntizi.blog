@@ -4,7 +4,7 @@
  *  1. 全部页面 × 11 种宽度：横向溢出、顶部栏是否一行放下且按钮互不重叠、
  *     是否有悬浮元素压住正文、图片是否加载成功、脚本报错。
  *  2. 触屏交互：菜单展开与每个导航链接、顶部搜索按钮（输入 → 出结果 → 点进去）、
- *     Telegram / GitHub 图标、推广按钮能点到且链接正确、首页“深入阅读”展开。
+ *     Telegram / GitHub 图标、“本站主推”小框（手机默认收起，点“查看优惠”展开）、推广按钮能点到且链接正确、首页“深入阅读”展开。
  *  3. 慢速网络（模拟 4G）下首页与资料页的加载时间。
  * 用法：npm run build && node scripts/mobile-test.mjs [截图目录]
  */
@@ -192,11 +192,38 @@ for (const vp of VIEWPORTS.filter((v) => [360, 390, 768].includes(v.width))) {
     if (popup) await popup.close();
   }
 
+  // 全站“本站主推”小框：手机（≤640px）默认收成一行，点“查看优惠”展开；更宽的屏幕直接显示、没有开关
+  {
+    await page.goto(BASE + '/zhishi/');
+    const plan = page.locator('.promo .promo-plan');
+    const reg = page.locator('.promo a[data-aff="lingdongyun"]');
+    const tg = page.locator('.promo .promo-tg');
+    if (vp.width <= 640) {
+      ok(!(await plan.isVisible()), '手机端小框应默认收起');
+      const h0 = (await page.locator('.promo').boundingBox()).height;
+      ok(h0 <= 52, `手机端收起的小框高 ${Math.round(h0)}px，应不超过 52px`);
+      const tb = await tg.boundingBox();
+      ok(tb.height >= 34 && tb.width >= 44, `“查看优惠”点击区域太小：${Math.round(tb.width)}×${Math.round(tb.height)}px`);
+      await tg.tap();
+      ok((await plan.isVisible()) && (await page.locator('.promo .promo-code').isVisible()) && (await reg.isVisible()), '点“查看优惠”后没有展开套餐、优惠码和注册按钮');
+      ok(await page.locator('#promo-toggle').isChecked(), '展开后开关状态没有更新');
+      ok((await page.evaluate(() => document.documentElement.scrollWidth)) <= vp.width + 1, '小框展开后页面横向溢出');
+      const [popup] = await Promise.all([page.waitForEvent('popup', { timeout: 3000 }).catch(() => null), reg.tap()]);
+      ok(!!popup, '展开后点“立即注册”没有打开新页面');
+      if (popup) await popup.close();
+      await tg.tap();
+      ok(!(await plan.isVisible()), '再点一次没有收起');
+    } else {
+      ok((await plan.isVisible()) && (await reg.isVisible()), `${vp.width}px 宽度小框应直接显示`);
+      ok(!(await tg.isVisible()), `${vp.width}px 宽度不应出现“查看优惠”开关`);
+    }
+  }
+
   // 推广按钮：能点到、链接正确、属性正确
   for (const id of ['lingdongyun', 'muguang-jiasu', 'feiv', 'wuyou']) {
     await page.goto(BASE + `/jichang/${id}/`);
     const a = affs.find((x) => x.id === id);
-    const btn = page.locator(`a[data-aff="${id}"]`).first();
+    const btn = page.locator(`main a[data-aff="${id}"]`).first();
     await btn.scrollIntoViewIfNeeded();
     const hit = await btn.evaluate((el) => { const r = el.getBoundingClientRect(); const h = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return h === el || el.contains(h); });
     ok(hit, `${id} 推广按钮被遮住`);

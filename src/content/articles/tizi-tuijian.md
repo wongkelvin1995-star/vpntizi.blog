@@ -11,7 +11,7 @@ showTopFour: true
 keywords: ["梯子怎么选", "新手买梯子"]
 aliases: ["梯子推荐", "梯子", "翻墙", "vpn推荐", "好用的梯子", "新手", "第一次"]
 published: 2026-10-20
-updated: 2026-10-23
+updated: 2026-10-31
 related: ["vpn-jichang-qubie", "kexue-shangwang-gongju", "pianyi-jichang-tuijian", "yinsi-anquan-falv"]
 faq:
   - q: "免费梯子能用吗？"
@@ -45,7 +45,7 @@ faq:
 
 上方是本站重点推荐展示的四家机场和价格对比表。按新手最常见的三种情况：
 
-- **想先用一个月试试**：灵动云“拂风”月付 ¥20（100GB/月）、暮光加速基础版月付 ¥20（120GB/月），门槛最低；
+- **想先用一个月试试**：灵动·拂风月付 ¥20（100GB/月）、暮光加速基础版月付 ¥20（120GB/月），门槛最低；
 - **预算很紧、愿意年付**：飞猫云学生版年付 ¥84（每月 50GB，折合 ¥7/月），是四家里折合月价最低的一档；
 - **iPhone、电脑都要用**：飞猫云同时提供自研客户端和通用订阅（Clash、Shadowrocket、v2rayN 都能导入），设置最省事。
 

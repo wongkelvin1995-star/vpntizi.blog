@@ -11,7 +11,7 @@ showTopFour: true
 keywords: ["高速机场推荐"]
 aliases: ["高速", "速度快", "4k", "下载", "带宽", "限速", "mbps", "hysteria2"]
 published: 2026-10-20
-updated: 2026-10-23
+updated: 2026-10-31
 related: ["jichang-yanchi-wendingxing", "zhuanxian-jichang-tuijian", "liumeiti-jiesuo-jichang"]
 faq:
   - q: "看 4K 需要多快的速度？"
