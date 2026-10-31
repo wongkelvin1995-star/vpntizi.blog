@@ -8,15 +8,15 @@
 
 | # | 机场 | 月付起步 | 最大月流量 | 资料状态 |
 |---|---|---|---|---|
-| 1 | [灵动云](https://vpntizi.blog/jichang/lingdongyun/) | ¥20（100GB/月） | 1500GB | 资料整理于 2026-10-20 |
+| 1 | [灵动云](https://vpntizi.blog/jichang/lingdongyun/) | ¥20（100GB/月） | 1500GB | 资料整理于 2026-10-31 |
 | 2 | [暮光加速](https://vpntizi.blog/jichang/muguang-jiasu/) | ¥20（120GB/月） | 1500GB | 资料整理于 2026-10-20 |
 | 3 | [微风网络 Breezenet](https://vpntizi.blog/jichang/breezenet/) | ¥27（200GB/月） | 1200GB | 资料整理于 2026-10-20 |
 | 4 | [飞猫云](https://vpntizi.blog/jichang/feimaoyun/) | ¥25（150GB/月） | 1000GB | 资料整理于 2026-10-20 |
 | 5 | [大佬云](https://vpntizi.blog/jichang/dalaoyun/) | ¥23（130GB/月） | 600GB | 资料整理于 2026-10-20 |
-| 6 | [飞V](https://vpntizi.blog/jichang/feiv/) | ¥9.9（15GB/月） | 3000GB | 官网已核实 2026-10-20 |
-| 7 | [梯子云 LadderCloud](https://vpntizi.blog/jichang/tiziyun/) | ¥25（125GB/月） | 1600GB | 资料整理于 2026-10-20 |
-| 8 | [浪网 WaveNet](https://vpntizi.blog/jichang/wavenet/) | ¥30（150GB/月） | 2000GB | 官网已核实 2026-10-20 |
-| 9 | [隐形人](https://vpntizi.blog/jichang/yinxingren/) | ¥24（144GB/月） | 1600GB | 资料整理于 2026-10-20 |
+| 6 | [隐形人](https://vpntizi.blog/jichang/yinxingren/) | ¥24（144GB/月） | 1600GB | 资料整理于 2026-10-20 |
+| 7 | [飞V](https://vpntizi.blog/jichang/feiv/) | ¥25（150GB/月） | 1800GB | 资料整理于 2026-10-31 |
+| 8 | [梯子云 LadderCloud](https://vpntizi.blog/jichang/tiziyun/) | ¥25（125GB/月） | 1600GB | 资料整理于 2026-10-20 |
+| 9 | [浪网 WaveNet](https://vpntizi.blog/jichang/wavenet/) | ¥30（150GB/月） | 2000GB | 官网已核实 2026-10-20 |
 | 10 | [星岛梦 StarDream](https://vpntizi.blog/jichang/xingdaomeng/) | ¥25（150GB/月） | 1000GB | 资料整理于 2026-10-20 |
 | 11 | [光速云 LightSpeed](https://vpntizi.blog/jichang/guangsuyun/) | ¥17（110GB/月） | 900GB | 资料整理于 2026-10-20 |
 | 12 | [唯兔云（V2云）](https://vpntizi.blog/jichang/weituyun/) | ¥14.9（100GB/月） | 1000GB | 资料整理于 2026-10-20 |
@@ -43,7 +43,7 @@
 | 33 | [神行云](https://vpntizi.blog/jichang/shenxingyun/) | ¥23（120GB/月） | 520GB | 资料整理于 2026-10-20 |
 | 34 | [云界云](https://vpntizi.blog/jichang/yunjieyun/) | ¥25（150GB/月） | 600GB | 资料整理于 2026-10-20 |
 
-资料总表更新：2026-10-22。核验状态与修改记录见 [资料核验与更新记录](https://vpntizi.blog/tools/ziliao-hezhe/)。
+资料总表更新：2026-10-31。核验状态与修改记录见 [资料核验与更新记录](https://vpntizi.blog/tools/ziliao-hezhe/)。
 
 ## 全部文章（26 篇）
 

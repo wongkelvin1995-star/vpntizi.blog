@@ -88,7 +88,7 @@ v2rayN 用于 Windows，v2rayNG 用于安卓，都适合导入机场的通用订
 
 ## 资料更新、推广披露与安全提示
 
-- **资料怎么来、多久更新**：4 家机场的套餐价格已在官网核对并标注“官网已核实”，其余按公开的套餐信息整理并标注整理日期。每次修改都记录在 [资料核验与更新记录](https://vpntizi.blog/tools/ziliao-hezhe/)。
+- **资料怎么来、多久更新**：3 家机场的套餐价格已在官网核对并标注“官网已核实”，其余按公开的套餐信息或站长提供的套餐页截图整理并标注整理日期。每次修改都记录在 [资料核验与更新记录](https://vpntizi.blog/tools/ziliao-hezhe/)。
 - **推广披露**：网站上的“官网注册”按钮含推广合作（AFF）链接。推荐顺序是编辑推荐展示顺序，**不是测速排名**，详见 [推广披露与推荐方法](https://vpntizi.blog/tuiguang-pilu/)。本仓库的链接全部指向博客文章，不直接放推广注册链接。
 - **安全与法律**：客户端只从官方渠道下载，订阅链接不要外传，第一次购买选短周期。不同国家和地区对国际联网与代理工具的规定不同，请遵守所在地法律法规，详见 [隐私、安全与法律注意事项](https://vpntizi.blog/yinsi-anquan-falv/)。
 - **联系**：邮箱 wongkelvin1995@gmail.com · [Telegram](https://t.me/+cKCtour4mqM1NTA9) · [关于本站](https://vpntizi.blog/guanyu/) · [隐私说明](https://vpntizi.blog/yinsi-shuoming/)

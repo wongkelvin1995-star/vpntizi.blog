@@ -44,7 +44,7 @@
 
 ## 性能（Core Web Vitals）
 
-- ✅ 不加载网络字体、无第三方脚本、无大图；CSS 内联或单文件，JS 按页面拆分
+- ✅ 不加载网络字体、无大图；本站自己的脚本按页面拆分、CSS 内联或单文件；除 Cloudflare 开启 Web Analytics 后自动加入的统计脚本外，无第三方脚本（隐私说明已披露）
 - ✅ `_astro/*` 资源一年强缓存
 - 👤 上线后用 PageSpeed Insights 测首页和一篇文章，目标 LCP < 2.5s、CLS < 0.1、INP < 200ms
 

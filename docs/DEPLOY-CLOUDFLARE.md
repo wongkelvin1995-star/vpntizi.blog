@@ -38,6 +38,12 @@ Pages → 连接到 Git → 选择仓库，构建设置：
 
 `*.pages.dev` 预览域名已通过 `public/_headers` 发送 `X-Robots-Tag: noindex`，所有页面的 canonical 也指向正式域名，避免重复收录。
 
+## Cloudflare 自动加入的内容
+
+- **Web Analytics（访问统计）**：Pages 项目开启后，Cloudflare 会给每个页面自动加一段统计脚本。本站隐私说明已如实披露；如果在控制台关闭了它，请同步修改 `src/pages/yinsi-shuoming.astro` 里的“访问统计”一节。
+- **邮件地址混淆（Scrape Shield → Email Address Obfuscation）**：默认开启，会把页面里的邮箱改写成 `[email protected]` 并多加载一个脚本。本站在邮箱外面加了 `<!--email_off-->…<!--/email_off-->` 标记，所以不受影响；以后新增邮箱也要照做。
+- **/jichang/** 没有对应页面，`public/_redirects` 把它 301 到 `/jichang-paihangbang/`。
+
 ## 上线前检查
 
 ```bash
