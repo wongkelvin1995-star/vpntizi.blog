@@ -1,7 +1,7 @@
 ---
 title: "v2rayN与v2rayNG教程：订阅导入与设置"
 h1: "v2rayN / v2rayNG 使用教程（Windows 与安卓）"
-description: "v2rayN 与 v2rayNG 新手教程：从官方 GitHub 下载、添加机场通用订阅、更新订阅与测试真连接延迟、设置路由与系统代理、切换 Xray 和 sing-box 内核。"
+description: "v2rayN 与 v2rayNG 新手教程（Windows 与安卓）：从官方 GitHub 下载、添加机场通用订阅、更新订阅与测试真连接延迟、设置路由与系统代理、切换 Xray 和 sing-box 内核，并附常见问题的处理方法，两个客户端的操作分开讲。"
 summary:
   - "v2rayN 用于 Windows，v2rayNG 用于安卓，都从 2dust 的 GitHub 下载。"
   - "订阅分组设置里添加通用订阅 → 更新订阅 → 测试真连接延迟 → 选节点。"

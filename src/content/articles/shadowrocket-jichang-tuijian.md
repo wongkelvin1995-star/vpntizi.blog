@@ -1,7 +1,7 @@
 ---
 title: "Shadowrocket机场推荐：小火箭订阅怎么选"
 h1: "Shadowrocket 机场推荐：iPhone 用户怎么挑机场"
-description: "Shadowrocket（小火箭）机场推荐：iPhone 用户如何确认机场支持小火箭订阅、协议兼容性、按需连接与规则配置，以及外区 Apple ID 下载与耗电问题。"
+description: "Shadowrocket（小火箭）机场推荐：iPhone 用户如何确认机场支持小火箭订阅、协议兼容性、按需连接与规则配置，以及外区 Apple ID 下载与耗电问题，附一键导入说明、家庭多设备安排和本站重点推荐四家的 iPhone 使用情况。"
 summary:
   - "小火箭需要非中国大陆区 Apple ID 购买下载。"
   - "选机场看是否提供小火箭订阅或一键导入，以及移动网络下的表现。"

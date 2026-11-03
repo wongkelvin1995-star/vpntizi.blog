@@ -1,7 +1,7 @@
 ---
 title: "Clash Verge Rev教程：下载、导入订阅与设置"
 h1: "Clash Verge Rev 使用教程（Windows / macOS）"
-description: "Clash Verge Rev 新手教程：从官方 GitHub 下载安装、导入机场 Clash 订阅、选择策略组与节点、开启系统代理和 TUN 模式，以及常见报错处理方法。"
+description: "Clash Verge Rev 新手教程（Windows / macOS）：先弄懂 Clash 是什么，再按步骤从官方 GitHub 下载安装、导入机场 Clash 订阅、选择策略组与节点、开启系统代理和 TUN 模式，并附推荐设置与常见报错处理。"
 summary:
   - "从官方 GitHub 下载 Clash Verge Rev，不要用网盘里的“汉化版”。"
   - "订阅页粘贴 Clash 订阅 → 代理页选规则模式和节点 → 设置页打开系统代理。"

@@ -1,7 +1,7 @@
 ---
 title: "ChatGPT机场推荐：AI工具节点怎么选"
 h1: "ChatGPT 机场推荐：用 AI 工具该怎么选节点"
-description: "ChatGPT 机场推荐与 AI 工具使用指南：为什么部分节点打不开 ChatGPT、Claude、Gemini，如何选择支持地区和干净 IP，以及账号安全与规则分流设置建议。"
+description: "ChatGPT 机场推荐与 AI 工具使用指南：为什么部分节点打不开 ChatGPT、Claude、Gemini，选机场时如何看支持地区和节点 IP 质量，附账号安全与规则分流设置建议，并整理本站重点推荐四家的 AI 相关资料和资料中宣称支持 ChatGPT 的机场名单。"
 summary:
   - "能打开 Google 不代表能用 ChatGPT，AI 服务对节点出口 IP 要求更高。"
   - "选支持地区的节点，并固定一个地区登录，频繁跨国切换容易触发风控。"

@@ -6,6 +6,7 @@
 
 - ✅ 所有页面静态预渲染为 HTML，正文、H1、链接不依赖 JavaScript
 - ✅ 每页唯一 title、meta description、H1
+- ✅ meta description 全站 120–140 字（审计对短于 120 或长于 160 的可收录页面报提醒；机场资料页由 `src/lib/airports.ts` 的 `metaDescription()` 按数据逐页生成，其余页面手写）
 - ✅ 每页 canonical 指向 `https://vpntizi.blog/...`，统一结尾斜杠
 - ✅ 除 `/search/`、`/404/` 外无 noindex
 - ✅ sitemap.xml 直接列出全部可索引页面（不含 noindex 页面、不被跳转）；旧地址 sitemap-index.xml 保留且内容一致

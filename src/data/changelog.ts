@@ -8,6 +8,7 @@ export interface ChangeEntry {
 }
 
 export const CHANGELOG: ChangeEntry[] = [
+  { date: '2026-11-04', type: '站点', summary: '全站页面在搜索结果里显示的简介（meta 描述）统一重写为 120–140 字；机场资料页的简介改为按各家数据逐页生成（价格、折合月价、线路、节点地区、整理日期），不再共用同一句。页面正文、价格、榜单顺序、推广链接与优惠码均未改动。' },
       { date: '2026-10-31', airportId: 'lingdongyun', type: '价格变更', summary: '灵动云 9 款套餐据站长提供的套餐页截图核对：价格（含月付、季付、半年付、年付金额）、流量与付款方式与原资料一致；线路改为截图标注的 IEPL / IPLC 优化线路（此前写“常规套餐 BGP、穿云 IPLC”）；套餐名称改为官方写法（灵动·拂风等），新增各套餐订阅详情；客户端写明“官方专属客户端，通用订阅需联系客服”。' },
       { date: '2026-10-31', airportId: 'feiv', type: '价格变更', summary: '飞V 套餐据站长提供的套餐页截图整体替换：旧 6 档月付（Lite 至 Enterprise）改为 9 款新套餐（年付标准轻量版、入门/进阶/高端/商业 4 档月付、单次轻量版 3 档流量包、原生IP独享黄金专线），新增订阅详情。资料状态由“官网已核实”改为“资料整理”；设备数与退款规则不再沿用旧说法，待重新核实。' },
       { date: '2026-10-31', airportId: 'muguang-jiasu', type: '核实', summary: '暮光加速客户端说明更新为“官方专属客户端，通用订阅：Clash Verge Rev、ClashParty（需联系客服）”，不再列出 Shadowrocket、v2rayN。' },

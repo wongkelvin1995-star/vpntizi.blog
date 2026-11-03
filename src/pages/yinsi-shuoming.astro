@@ -13,7 +13,7 @@ const jsonLd = [{
   isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
 }];
 ---
-<BaseLayout title="隐私说明：本站收集什么、不收集什么" description="VPN梯子指南隐私说明：本站自己不设 Cookie、不放广告脚本，使用 Cloudflare 网站访问统计（汇总数据）；搜索与计算工具只在浏览器本地运行；托管日志、推广链接与来信如何处理，以及联系方式。" path={path} jsonLd={jsonLd} breadcrumbs={[{ name: '首页', href: '/' }, { name: '隐私说明', href: path }]}>
+<BaseLayout title="隐私说明：本站收集什么、不收集什么" description="VPN梯子指南隐私说明：本站自己不设 Cookie、不放广告脚本，使用 Cloudflare 网站访问统计（只看汇总数据）；搜索与计算工具只在浏览器本地运行；说明托管商会记录的信息、点击推广链接之后对方能看到什么、你来信时的信息如何处理，以及联系方式和更新记录。" path={path} jsonLd={jsonLd} breadcrumbs={[{ name: '首页', href: '/' }, { name: '隐私说明', href: path }]}>
   <div class="prose" style="max-width:780px">
     <h1>隐私说明</h1>
     <p class="meta">更新日期：{UPDATED}</p>

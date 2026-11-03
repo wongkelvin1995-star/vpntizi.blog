@@ -1,7 +1,7 @@
 ---
 title: "Shadowrocket教程：小火箭下载与订阅导入"
 h1: "Shadowrocket（小火箭）使用教程：iPhone 梯子设置步骤"
-description: "Shadowrocket 小火箭新手教程：用外区 Apple ID 下载、导入机场订阅、选择节点与全局路由、添加 VPN 配置、设置订阅自动更新，以及连接失败的处理方法。"
+description: "Shadowrocket 小火箭新手教程（iPhone / iPad）：用外区 Apple ID 下载、导入机场订阅、选择节点并连接，设置订阅自动更新、按需连接等推荐设置，附连接失败等常见问题的处理方法，按下载、导入、连接、设置、排错五步写清。"
 summary:
   - "在 App Store 切换外区账号下载，不要在系统设置里退出 iCloud。"
   - "用机场的一键导入，或右上角“+”选 Subscribe 粘贴订阅。"

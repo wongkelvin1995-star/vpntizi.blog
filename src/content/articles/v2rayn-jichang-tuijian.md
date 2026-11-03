@@ -1,7 +1,7 @@
 ---
 title: "v2rayN机场推荐：通用订阅机场怎么选"
 h1: "v2rayN 机场推荐：Windows 用户怎么挑通用订阅机场"
-description: "v2rayN 机场推荐：Windows 用户如何确认机场提供通用 / V2Ray 订阅、协议与内核兼容性（Xray、sing-box）、路由规则设置，以及与 Clash 订阅的区别。"
+description: "v2rayN 机场推荐：Windows 用户如何确认机场提供通用 / V2Ray 订阅、协议与内核兼容性（Xray、sing-box）、路由规则设置，以及与 Clash 订阅的区别，附看懂节点名称、通用订阅的局限、本站重点推荐四家的 v2rayN 使用情况和导入后的推荐设置。"
 summary:
   - "v2rayN 适合导入机场的“通用订阅”（Base64）。"
   - "通用订阅只有节点、没有分流规则，路由要用 v2rayN 自带的“绕过大陆”。"

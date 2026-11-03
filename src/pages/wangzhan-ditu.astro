@@ -7,7 +7,7 @@ const arts = await getArticles();
 const groups = (['recommend', 'tutorial', 'knowledge', 'safety'] as const).map((c) => ({ c, label: CATEGORY[c].label, items: arts.filter((a) => a.data.category === c) }));
 const path = '/wangzhan-ditu/';
 ---
-<BaseLayout title="网站地图：全部文章、教程与机场资料" description="VPN梯子指南网站地图：列出全部机场推荐专题、客户端教程、新手知识文章、机场资料页与实用工具，方便快速找到需要的内容。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '网站地图', href: path }]}>
+<BaseLayout title="网站地图：全部文章、教程与机场资料" description="VPN梯子指南网站地图：按核心页面、机场推荐、客户端教程、新手知识、安全与法律、机场资料、实用工具七类，列出全站页面入口：首页、机场推荐总览、完整榜单、全部专题与教程文章、34 家机场资料页和 5 个实用工具，按分类排列，方便快速找到需要的内容。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '网站地图', href: path }]}>
   <h1>网站地图</h1>
   <div class="grid grid-2">
     <section class="panel"><h2>核心页面</h2><ul>

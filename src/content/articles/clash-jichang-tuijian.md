@@ -1,7 +1,7 @@
 ---
 title: "Clash机场推荐：Clash Verge订阅怎么选"
 h1: "Clash 机场推荐：用 Clash Verge 的人怎么挑机场"
-description: "Clash 与 Clash Verge 机场推荐：如何确认机场提供 Clash（mihomo）订阅、规则分组是否好用、是否支持新协议，以及自动选择、故障转移分组的使用方法。"
+description: "Clash 与 Clash Verge 机场推荐：如何确认机场提供 Clash（mihomo）订阅，一份好的规则配置长什么样、规则写得差会怎样，是否支持新协议，自动选择与故障转移分组怎么用，并附本站重点推荐四家的 Clash 使用情况和拿到订阅之后的设置。"
 summary:
   - "Clash 用户要确认机场提供 Clash（mihomo）订阅。"
   - "好用的配置有自动选择、故障转移和按地区、按用途的分组。"

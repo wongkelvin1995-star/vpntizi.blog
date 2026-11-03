@@ -28,7 +28,7 @@ const bestFirst = ranked[0], bestLast = ranked[ranked.length - 1];
 const lo = bestFirst.o.per ?? 0, hi = bestLast.o.per ?? 1;
 const bestText = `${lo.toFixed(3)}/GB，比最高的 ${bestLast.r.name} 便宜 ${(100 - (lo / hi) * 100).toFixed(0)}%`;
 ---
-<BaseLayout title="每GB套餐价格计算器：折合月价与单价对比" description="机场套餐每GB价格计算器：输入实际付款、付费周期和流量，自动计算折合月价、周期总流量和每GB成本，支持多个套餐并排比较，找出真正的高性价比套餐。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '每GB价格计算器', href: path }]}>
+<BaseLayout title="每GB套餐价格计算器：折合月价与单价对比" description="机场套餐每GB价格计算器：输入实际付款、付费周期和流量，自动算出折合月价、周期总流量和每GB成本，支持多个套餐并排比较，也可一键载入本站已核实的套餐，附计算公式（折合月价 = 实际付款 ÷ 周期月数），并解答折合月价与实际付款的区别、不限量套餐怎么算。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '每GB价格计算器', href: path }]}>
   <h1>每GB套餐价格计算器</h1>
   <p>把要比较的套餐逐行填进去：<strong>实际付款</strong>填下单要付的钱，<strong>流量</strong>填官网写的数字，并选择流量是每月重置还是整个周期共用。计算器会把“实际付款”和“折合月价”分开显示。</p>
   <div class="table-wrap">

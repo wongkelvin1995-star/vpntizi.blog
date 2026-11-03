@@ -1,7 +1,7 @@
 ---
 title: "sing-box教程：SFA、SFI、SFM图形客户端入门"
 h1: "sing-box 使用教程：SFA / SFI / SFM 入门"
-description: "sing-box 新手教程：了解 sing-box 内核与官方图形客户端 SFA（安卓）、SFI（iOS）、SFM（macOS），添加远程配置、启动服务与切换节点，以及配置格式注意事项。"
+description: "sing-box 新手教程：说明官方图形客户端 SFA（安卓）、SFI（iOS）、SFM（macOS）适合谁（机场需提供 sing-box JSON 订阅），按步骤安装、添加远程配置、启动并切换节点，附配置格式注意事项、配置结构速览和常见问题处理。"
 summary:
   - "sing-box 官方客户端：安卓 SFA、iOS SFI、Mac SFM，免费开源。"
   - "只能导入 sing-box 格式（JSON）的订阅，不能直接用 Clash 订阅。"

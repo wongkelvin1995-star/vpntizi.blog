@@ -4,7 +4,7 @@ import PlanTable from '../../components/PlanTable.astro';
 import PlanDetails from '../../components/PlanDetails.astro';
 import AffButton from '../../components/AffButton.astro';
 import Disclosure from '../../components/Disclosure.astro';
-import { namedAirports, airportUrl, PENDING, BILLING_LABEL, statusLabel, shortName, summarize, monthlyEquivalent, pricePerGB, fmtCNY, type Airport } from '../../lib/airports';
+import { namedAirports, airportUrl, PENDING, BILLING_LABEL, statusLabel, shortName, summarize, monthlyEquivalent, pricePerGB, fmtCNY, metaDescription, type Airport } from '../../lib/airports';
 import FaqList from '../../components/FaqList.astro';
 import ShiceReport from '../../components/ShiceReport.astro';
 import { shiceFor } from '../../data/shice';
@@ -87,9 +87,7 @@ const jsonLd: Record<string, unknown>[] = [
 ];
 
 const title = `${sn}机场怎么样？2026 套餐价格与注册入口`;
-const desc = (S.hasPlans
-  ? `${sn}怎么样？${[S.monthly && `月付 ${fmtCNY(S.monthly.priceCNY, S.monthly.priceCNY % 1 ? 1 : 0)} 起（${gb(S.monthly.trafficGB)}/月）`, S.yearly && `年付 ${fmtCNY(S.yearly.priceCNY, 0)} 起`, a.lineTypes[0] && a.lineTypes[0].replace(/（.*?）/g, '')].filter(Boolean).join('，')}。整理${sn}全部套餐的实付价格、折合月价、每GB成本、流量规则、客户端与购买限制，注明整理日期。`
-  : `${sn}机场资料页：注册入口、套餐价格与线路资料整理，未核实项标注待核实。`).slice(0, 158);
+const desc = metaDescription(a);
 ---
 <BaseLayout
   title={title.length > 40 ? `${sn}机场怎么样？套餐价格与注册` : title}

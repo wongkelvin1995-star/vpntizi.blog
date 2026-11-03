@@ -60,7 +60,7 @@ for (const p of pages) {
   if (!desc) fail(`${route} 缺少 meta description`);
   else {
     if (descs.has(desc)) fail(`description 重复：${descs.get(desc)} 与 ${route}`); else descs.set(desc, route);
-    if (desc.length < 50 || desc.length > 160) warn(`${route} description 长度 ${desc.length}，建议 50–160`);
+    if (!isNoindex && (desc.length < 120 || desc.length > 160)) warn(`${route} description 长度 ${desc.length}，建议 120–160（Bing 会提示过短的描述）`);
   }
   const h1s = html.match(/<h1[\s>]/g) || [];
   if (h1s.length !== 1) fail(`${route} H1 数量为 ${h1s.length}（应为 1）`);

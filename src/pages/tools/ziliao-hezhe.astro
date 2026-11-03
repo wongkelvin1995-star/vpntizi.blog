@@ -13,7 +13,7 @@ const stats = {
 const fieldsDone = (a: (typeof airports)[number]) =>
   [a.intro, a.plans.length, a.regions.length, a.lineTypes.length, a.protocols.length, a.clients.length, a.aiCompat, a.streamingCompat, a.suitableFor.length, a.notSuitableFor.length, a.limits.length].filter(Boolean).length;
 ---
-<BaseLayout title="机场资料核验状态与更新记录" description="公开 34 家机场资料的核验状态、核实与整理日期、字段完成度与历次修改记录，可按状态筛选，方便读者判断数据是否可靠、是否过期。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '资料核验与更新记录', href: path }]}>
+<BaseLayout title="机场资料核验状态与更新记录" description="机场资料核验状态与更新记录（免费在线工具）：公开 34 家机场资料的核验状态（官网已核实、公开资料整理、暂无资料）、核实与整理日期、字段完成度，附历次修改记录和核验规则（价格记购买页标价、不叠加优惠码，超过 90 天未复核会重新核对），可按状态筛选。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '资料核验与更新记录', href: path }]}>
   <h1>机场资料核验与更新记录</h1>
   <p>本页公开每家机场资料的核验进度。“官网已核实”表示价格与套餐已在官网核对；“公开资料整理”表示套餐数据按公开信息整理并注明整理日期，尚待官网复核；“暂无资料”表示品牌已收录、注册入口可用，但还没有可靠的套餐数据。资料总表最近检查：{LAST_REVIEWED}。</p>
   <div class="grid grid-4 section">

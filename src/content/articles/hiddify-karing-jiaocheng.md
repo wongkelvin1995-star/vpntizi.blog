@@ -1,7 +1,7 @@
 ---
 title: "Hiddify与Karing教程：全平台客户端入门"
 h1: "Hiddify 与 Karing 使用教程：一个软件用遍所有设备"
-description: "Hiddify 与 Karing 新手教程：两款基于 sing-box 内核、支持 Windows、macOS、安卓、iOS 的全平台客户端，教你下载安装、导入各种格式订阅、选择节点与常用设置。"
+description: "Hiddify 与 Karing 新手教程：两款基于 sing-box 内核、支持 Windows、macOS、安卓、iOS 的全平台客户端，教你下载安装、导入各种格式订阅、选择节点与常用设置，并说明两者的区别，以及想一个软件用遍所有设备时的常见问题处理。"
 summary:
   - "Hiddify 和 Karing 都支持全平台，能自动识别 Clash、通用和 sing-box 订阅。"
   - "Hiddify 界面极简，一键连接；Karing 设置项更多，中文更完整。"

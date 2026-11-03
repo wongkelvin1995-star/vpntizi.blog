@@ -17,7 +17,7 @@ const jsonLd = [{
   mainEntity: { '@type': 'Organization', name: SITE.name, url: SITE.url, email: SITE.email, sameAs: [SITE.telegram, SITE.github] },
 }];
 ---
-<BaseLayout title="关于VPN梯子指南：网站定位与资料维护方式" description="关于VPN梯子指南：网站定位、内容原则、机场资料如何整理与更新、推荐顺序与推广合作说明、本站不做什么，以及资料纠错的邮箱与 Telegram 联系方式。" path={path} jsonLd={jsonLd} breadcrumbs={[{ name: '首页', href: '/' }, { name: '关于本站', href: path }]}>
+<BaseLayout title="关于VPN梯子指南：网站定位与资料维护方式" description="关于VPN梯子指南：网站定位与内容原则（不虚构数据、实付与折合价分开标注）、机场资料如何整理与多久更新、推荐顺序与推广合作说明、本站不做什么（不运营代理服务、不卖账号），以及资料纠错的邮箱与 Telegram 联系方式，纠错被采纳后记入更新记录。" path={path} jsonLd={jsonLd} breadcrumbs={[{ name: '首页', href: '/' }, { name: '关于本站', href: path }]}>
   <div class="prose" style="max-width:780px">
     <h1>关于{SITE.name}</h1>
     <p>{SITE.name}（{SITE.domain}）是一个面向中文新手的网络工具知识站。目前有 {articleCount} 篇文章、{TOOLS.length} 个在线工具和 {airports.length} 家机场资料页，内容覆盖机场与 VPN 的基础知识、客户端安装与订阅导入教程、套餐价格比较和常见故障排查。</p>

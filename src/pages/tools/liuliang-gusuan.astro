@@ -17,7 +17,7 @@ const faq = [
   { q: '流量是按上传加下载一起算吗？', a: '多数机场按上传加下载合计计算，少数只算下载或按倍率计算（如 0.5x、2x 节点），以各家规则为准。' },
 ];
 ---
-<BaseLayout title="机场流量使用量估算器：每月需要多少GB" description="在线估算每月机场流量需求：按刷网页、AI 对话、短视频、720p/1080p/4K 视频、视频会议时长与下载量计算，并给出建议套餐档位。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '流量估算器', href: path }]}>
+<BaseLayout title="机场流量使用量估算器：每月需要多少GB" description="机场流量使用量估算器：按每天刷网页、AI 对话、短视频、720p / 1080p / 4K 视频、视频会议的小时数与每月下载量，在线估算每月需要多少 GB，并给出含余量的建议套餐档位，附各类视频的码率参考说明，数据只在本机计算，不收集输入。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '实用工具', href: '/tools/' }, { name: '流量估算器', href: path }]}>
   <h1>流量使用量估算器</h1>
   <p>填写你<strong>每天通过代理</strong>做各项活动的大致小时数，工具会算出每月需要的流量，并给出建议购买的套餐档位。数据只在本机计算。</p>
   <form class="panel tool-form" id="traffic-form" onsubmit="return false">

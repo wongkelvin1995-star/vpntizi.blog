@@ -5,7 +5,7 @@ import { getArticles, articleUrl } from '../lib/content';
 const list = (await getArticles()).filter((a) => a.data.category === 'tutorial');
 const path = '/jiaocheng/';
 ---
-<BaseLayout title="客户端教程合集：Windows、Mac、安卓、iOS" description="代理客户端教程合集：Clash Verge Rev、ClashParty、Shadowrocket、v2rayN / v2rayNG、sing-box、Hiddify 与 Karing 的下载、订阅导入和常见设置，按设备分类。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '客户端教程', href: path }]}>
+<BaseLayout title="客户端教程合集：Windows、Mac、安卓、iOS" description="代理客户端教程合集：Clash Verge Rev、ClashParty、Shadowrocket、v2rayN / v2rayNG、sing-box、Hiddify 与 Karing 的下载、订阅导入和常见设置，按 Windows、Mac、安卓、iOS 设备分类。" path={path} breadcrumbs={[{ name: '首页', href: '/' }, { name: '客户端教程', href: path }]}>
   <h1>客户端教程：梯子软件按设备怎么选</h1>
   <p>机场只提供订阅链接，真正负责连接的是客户端，也就是常说的梯子 App。下面的教程都按“下载 → 导入订阅 → 选择节点 → 开启代理 → 排查问题”的顺序写，不确定该用哪个，请先用 <a href="/tools/kehuduan-xuanze/">客户端选择助手</a>。</p>
   <div class="table-wrap section">

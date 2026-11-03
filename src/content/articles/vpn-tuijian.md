@@ -1,7 +1,7 @@
 ---
 title: "翻墙VPN推荐2026：商业VPN和机场怎么选"
 h1: "翻墙 VPN 推荐 2026：商业 VPN 还是机场？"
-description: "2026 翻墙 VPN 怎么选：Astrill、ExpressVPN、Surfshark 等商业 VPN 适合短期来华，长期在国内用机场更便宜。附快连停运说明、价格差距与按场景选择表。"
+description: "2026 翻墙 VPN 怎么选：Astrill、ExpressVPN、Surfshark 等商业 VPN 适合短期来华，长期在国内用机场更便宜。附商业 VPN 和机场的区别、为什么多数人长期用机场、快连（LetsVPN）停运说明、价格差距与按场景选择表。"
 category: recommend
 showTopFour: true
 summary:

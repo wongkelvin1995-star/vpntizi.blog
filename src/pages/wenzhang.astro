@@ -16,7 +16,7 @@ const listed = [...articles].sort((x, y) => ORDER[x.data.category] - ORDER[y.dat
 ---
 <BaseLayout
   title={`全部文章：机场选择、客户端教程与新手知识（${articles.length} 篇）`}
-  description={`VPN梯子指南全部 ${articles.length} 篇文章：VPN 与机场基础、机场选择与套餐比较、节点线路、Clash / Shadowrocket / v2rayN 客户端教程、订阅导入与故障排查，可按分类筛选。`}
+  description={`VPN梯子指南全部 ${articles.length} 篇文章，分机场推荐、客户端教程、新手知识、安全与法律四类：机场选择与套餐比较、节点线路与延迟、Clash / Shadowrocket / v2rayN 教程、订阅导入与故障排查、VPN 与机场基础，点分类按钮即可筛选。`}
   path={path}
   breadcrumbs={[{ name: '首页', href: '/' }, { name: '全部文章', href: path }]}
 >

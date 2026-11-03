@@ -1,7 +1,7 @@
 ---
 title: "ClashParty教程：安装、导入订阅与常用设置"
 h1: "ClashParty 使用教程（原 Mihomo Party）"
-description: "ClashParty（原 Mihomo Party）新手教程：官方渠道下载安装、添加机场 Clash 订阅、切换规则模式与节点、开启系统代理和虚拟网卡，以及与 Clash Verge Rev 的区别。"
+description: "ClashParty（原 Mihomo Party）新手教程：官方渠道下载安装、添加机场 Clash 订阅、切换规则模式与节点、开启系统代理和虚拟网卡，介绍常用的实用功能，说明与 Clash Verge Rev 的区别，并附常见问题的处理方法。"
 summary:
   - "ClashParty 就是原来的 Mihomo Party，和 Clash Verge Rev 用同一内核。"
   - "导入 Clash 订阅 → 选规则模式 → 打开系统代理，三步即可上网。"
