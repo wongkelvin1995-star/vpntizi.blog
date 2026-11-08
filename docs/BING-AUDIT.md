@@ -36,7 +36,7 @@
 
 | 类别 | 检查项 | 结果 |
 |---|---|---|
-| 抓取 | 静态 HTML 预渲染，正文不依赖 JS | ✅ 77 个页面 |
+| 抓取 | 静态 HTML 预渲染，正文不依赖 JS | ✅ 78 个页面 |
 | 抓取 | robots.txt 允许抓取、声明 sitemap；/search/ 禁抓且 noindex | ✅ |
 | 抓取 | 外部阻塞资源 | ✅ 已移除 Google Fonts，字体随站点发布（约 28KB） |
 | 索引 | 每页唯一 title / description / H1 / canonical | ✅ 0 重复 |

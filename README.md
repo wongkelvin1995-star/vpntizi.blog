@@ -2,7 +2,7 @@
 
 **VPN梯子指南（vpntizi.blog）** 是一个面向中文用户的 VPN、机场选择及网络工具知识博客。
 
-网站整理了 34 家机场服务的资料，包括套餐价格、线路类型、节点地区、客户端支持和选购方法，并收录 26 篇新手教程与 5 项实用工具。我们希望帮助第一次接触 VPN 或机场的读者理解不同工具的区别，选择适合自己的服务，并学会客户端安装、订阅导入和常见连接问题的排查。
+网站整理了 34 家机场服务的资料，包括套餐价格、线路类型、节点地区、客户端支持和选购方法，并收录 27 篇新手教程与 5 项实用工具。我们希望帮助第一次接触 VPN 或机场的读者理解不同工具的区别，选择适合自己的服务，并学会客户端安装、订阅导入和常见连接问题的排查。
 
 ### 👉 [访问官方网站：vpntizi.blog](https://vpntizi.blog/)
 
@@ -28,7 +28,7 @@
 | 客户端教程 | Clash Verge Rev、ClashParty、Shadowrocket、v2rayN / v2rayNG、sing-box、Hiddify、Karing | [打开客户端教程](https://vpntizi.blog/jiaocheng/) |
 | 新手知识 | VPN 和机场区别、线路、流量估算、节点延迟、订阅导入、安全与法律 | [打开新手知识](https://vpntizi.blog/zhishi/) |
 
-全部 26 篇文章按栏目列在 [全部文章](https://vpntizi.blog/wenzhang/)。
+全部 27 篇文章按栏目列在 [全部文章](https://vpntizi.blog/wenzhang/)。
 
 ## 免费实用工具
 

@@ -97,4 +97,7 @@ export const KEYWORD_MAP: KeywordTarget[] = [
   { keyword: 'iPhone 梯子', core: 'iPhone 梯子', url: '/shadowrocket-jiaocheng/', intent: '苹果手机用什么梯子客户端' },
   { keyword: '梯子软件', core: '梯子软件', url: '/jiaocheng/', intent: '按设备选梯子客户端' },
   { keyword: '稳定的梯子', core: '不掉线的梯子', url: '/wending-jichang-tuijian/', intent: '晚高峰不掉线' },
+  // —— 2026-11-08 榜单怎么看 / 哪个梯子好用 ——
+  { keyword: '哪个梯子好用', core: '哪个梯子好用', url: '/nage-tizi-haoyong/', intent: '评估类：没有绝对最好，先看懂榜单再按需求选' },
+  { keyword: '机场榜单怎么看', core: '机场榜单怎么看', url: '/nage-tizi-haoyong/', intent: '怎么判断榜单可信：排序依据、推广披露、数据日期' },
 ];

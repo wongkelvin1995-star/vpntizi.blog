@@ -15,7 +15,8 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const SITE = 'https://vpntizi.blog';
 const HOST = 'vpntizi.blog';
-const ENDPOINT = 'https://api.indexnow.org/indexnow';
+// 用 Bing 自己的地址：提交记录会出现在 Bing Webmaster Tools 的 IndexNow 页（2026-11-04 实测 api.indexnow.org 返回 202 但后台不登记）
+const ENDPOINT = 'https://www.bing.com/indexnow';
 const PENDING = '.indexnow-pending.json';
 const args = process.argv.slice(2);
 const dry = args.includes('--dry-run');

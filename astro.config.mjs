@@ -15,7 +15,7 @@ const PAGE_DATES = {"yinsi-shuoming": "2026-10-31", "guanyu": "2026-10-31", "jic
 // 页面模板与站点文字最近一次修改的日期（资料页简介、推荐顺序等）；与资料总表日期取较新者
 const TEMPLATE_DATE = '2026-10-23';
 // 全站 meta description 重写的日期（Bing 提示描述过短）：所有页面的 HTML 都因此改变，lastmod 取各页自己的日期与此日期中较新者。上线当天改成实际上线日期。
-const META_DATE = '2026-11-04';
+const META_DATE = '2026-11-08';
 /** @param {string} a @param {string} b */
 const newer = (a, b) => (a > b ? a : b);
 

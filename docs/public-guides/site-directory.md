@@ -45,7 +45,7 @@
 
 资料总表更新：2026-10-31。核验状态与修改记录见 [资料核验与更新记录](https://vpntizi.blog/tools/ziliao-hezhe/)。
 
-## 全部文章（26 篇）
+## 全部文章（27 篇）
 
 ### 机场推荐
 
@@ -78,6 +78,7 @@
 - [机场流量怎么估算？每月需要多少GB](https://vpntizi.blog/jichang-liuliang-guji/)
 - [机场节点怎么选？延迟与稳定性判断方法](https://vpntizi.blog/jichang-yanchi-wendingxing/)
 - [梯子工具有哪些？科学上网与翻墙工具分类](https://vpntizi.blog/kexue-shangwang-gongju/)
+- [哪个梯子好用？VPN榜单与机场榜单怎么看、怎么选](https://vpntizi.blog/nage-tizi-haoyong/)
 - [VPN和机场有什么区别？新手一文看懂](https://vpntizi.blog/vpn-jichang-qubie/)
 
 ### 安全与法律

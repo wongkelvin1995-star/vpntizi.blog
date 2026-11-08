@@ -21,7 +21,7 @@ npm run prelaunch    # 上线前严格检查
 | `src/data/changelog.ts` | 资料核验与更新记录 |
 | `src/data/keywords.ts` | 关键词 → 唯一主页面映射 |
 | `src/data/site.ts` | 站点名称、联系方式、验证码、推广声明 |
-| `src/content/articles/` | 26 篇原创文章（Markdown） |
+| `src/content/articles/` | 27 篇原创文章（Markdown） |
 | `src/pages/tools/` | 5 个实用工具 |
 | `scripts/` | 数据校验、SEO 审计、搜索测试、链接与点击检查、手机检查、IndexNow、Bing 状态 |
 | `docs/` | 部署、Bing、检查清单、90 天计划、关键词表 |

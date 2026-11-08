@@ -52,6 +52,6 @@
 ## 上线后（Bing）
 
 - 👤 Bing Webmaster 验证所有权并提交 sitemap
-- 👤 `npm run indexnow:all` 返回 200/202
+- 👤 `npm run indexnow:all` 返回 200/202（脚本提交到 Bing 自己的地址 `https://www.bing.com/indexnow`，记录会出现在 Bing 后台 IndexNow 页；云端环境访问不了 Bing 时，经站长电脑的浏览器提交）
 - 👤 URL 检查确认 Bing 能看到正文
 - 👤 7 天后查看收录数量；14 天后查看搜索性能
