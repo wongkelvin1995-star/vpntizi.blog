@@ -8,10 +8,15 @@ summary:
   - "用 AI 的流量很少，入门档就够，重点是节点 IP 质量。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "服务商宣称支持 ChatGPT、Claude，官网另提到 Midjourney；本站未检测，AI 服务会限制部分节点 IP，以实际使用为准。"
+  muguang-jiasu: "服务商宣称支持 ChatGPT、Claude（本站未检测）；协议为 VLESS 与 Shadowsocks，通用订阅要联系客服获取。"
+  breezenet: "服务商宣称支持 ChatGPT、Claude，并称全节点提供住宅 IP（本站未检测）；新订单只能用官方专属客户端。"
+  feimaoyun: "服务商宣称支持 ChatGPT、Claude（本站未检测）；客户端选择多，Clash、Shadowrocket、v2rayN 都能导入订阅。"
 keywords: ["ChatGPT 机场推荐"]
 aliases: ["chatgpt", "openai", "gpt", "claude", "gemini", "ai", "人工智能", "不支持地区", "unsupported"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["liumeiti-jiesuo-jichang", "iepl-iplc-qubie", "dingyue-daoru-wenti"]
 faq:
   - q: "为什么提示“地区不支持”？"

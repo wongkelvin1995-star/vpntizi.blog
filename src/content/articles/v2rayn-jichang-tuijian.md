@@ -8,10 +8,15 @@ summary:
   - "机场用 Hysteria2 等新协议时，v2rayN 会调用 sing-box 内核，记得更新到最新版。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "资料没有列出 v2rayN；通用订阅支持的是 Clash Verge Rev、ClashParty（需联系客服），Windows 上可以用这两款。"
+  muguang-jiasu: "本站资料目前没有列出 v2rayN，需先向客服确认；Clash Verge Rev、ClashParty 的通用订阅要联系客服。"
+  breezenet: "据公开资料，2026 年 10 月起新订单只能用官方专属客户端，不支持 v2rayN。"
+  feimaoyun: "通用订阅明确列出 v2rayN，可以直接导入；也支持 Clash 系和 Shadowrocket。"
 keywords: ["v2rayN 机场推荐"]
 aliases: ["v2rayn", "v2ray", "xray", "vmess", "vless", "通用订阅", "windows", "base64"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["v2rayn-v2rayng-jiaocheng", "clash-jichang-tuijian", "dingyue-daoru-wenti"]
 faq:
   - q: "v2rayN 和 Clash Verge 哪个好？"

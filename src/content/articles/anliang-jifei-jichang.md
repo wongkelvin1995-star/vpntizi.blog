@@ -8,10 +8,15 @@ summary:
   - "不限时包每GB普遍比包月贵，资料中最低约 ¥0.60/GB。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "不限时包有三档：闲云 150GB ¥199、惊云 400GB ¥499、飞云 800GB ¥899，每GB约 ¥1.12–1.33，用完为止、不按月清零。"
+  muguang-jiasu: "不限时包有三档：轻量包 150GB ¥219、标准包 400GB ¥529、大容量包 800GB ¥959，每GB约 ¥1.20–1.46。"
+  breezenet: "不限时包有两档：信风 270GB ¥200、长风 570GB ¥370，长风每GB约 ¥0.65，是这四家里最低的。"
+  feimaoyun: "只有一档 1000GB 不限时套餐 ¥680，每GB ¥0.68，适合一次买足、长期慢慢用。"
 keywords: ["按量计费机场"]
 aliases: ["按量", "不限时", "流量包", "一次性", "不过期", "备用", "低频"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["jichang-liuliang-guji", "pianyi-jichang-tuijian", "wending-jichang-tuijian"]
 faq:
   - q: "按量计费的流量真的永不过期吗？"

@@ -8,10 +8,15 @@ summary:
   - "低价套餐常见陷阱：限速、高倍率节点、只能 1 台设备、流量不按月重置。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "拂风月付 ¥20（100GB）门槛低；“穿云”年付 ¥99（每月 70GB），折合 ¥8.25/月。"
+  muguang-jiasu: "基础版月付 ¥20 有 120GB，比同价的灵动·拂风多 20GB；年付轻量版 ¥109（每月 70GB）。"
+  breezenet: "入门不便宜（月付 ¥27 起），但大流量单价低：御风年付每GB约 ¥0.085，是这四家里最低的。"
+  feimaoyun: "学生版年付 ¥84（每月 50GB），折合 ¥7/月，是这四家里折合月价最低的。"
 keywords: ["便宜机场推荐", "便宜稳定机场", "高性价比机场推荐", "性价比机场"]
 aliases: ["便宜", "低价", "性价比", "省钱", "实惠", "学生", "白菜价", "每gb"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["jichang-liuliang-guji", "anliang-jifei-jichang", "wending-jichang-tuijian"]
 faq:
   - q: "几块钱一个月的机场能用吗？"

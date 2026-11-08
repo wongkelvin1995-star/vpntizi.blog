@@ -23,6 +23,8 @@ const articles = defineCollection({
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
     /** 推荐类文章：在正文前插入前四家重点介绍卡片 */
     showTopFour: z.boolean().default(false),
+    /** 四家卡片按本文主题写的说明（机场 id → 一句话），有则替换卡片里的通用简介；数字由 npm run check:notes 核对 */
+    topFourNotes: z.record(z.string(), z.string()).optional(),
     noindex: z.boolean().default(false),
   }),
 });

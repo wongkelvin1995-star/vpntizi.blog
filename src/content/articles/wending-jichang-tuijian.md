@@ -8,10 +8,15 @@ summary:
   - "先买短周期，备一份按量流量包，主力出问题时可以马上切换。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "套餐页标注 IEPL / IPLC 优化线路，节点覆盖 15 个地区，一个地区不好用可以换。本站没有做长期实测。"
+  muguang-jiasu: "BGP 智能路由加专线出口，没写明 IEPL 还是 IPLC；服务商称提供 24 小时客服。本站没有做长期实测。"
+  breezenet: "多数资料标注 IPLC 专线与三网优化入口，也有资料写 IEPL，说法不一。本站没有做长期实测。"
+  feimaoyun: "IEPL 专线，服务商称高峰不降速；资料提示热门时段香港节点偶有排队。本站没有做长期实测。"
 keywords: ["稳定机场推荐"]
 aliases: ["稳定", "不掉线", "断流", "靠谱", "长期", "晚高峰", "不跑路"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["jichang-yanchi-wendingxing", "iepl-iplc-qubie", "zhuanxian-jichang-tuijian"]
 faq:
   - q: "运营时间长的机场一定稳定吗？"

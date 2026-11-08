@@ -4,6 +4,11 @@ h1: "翻墙 VPN 推荐 2026：商业 VPN 还是机场？"
 description: "2026 翻墙 VPN 怎么选：Astrill、ExpressVPN、Surfshark 等商业 VPN 适合短期来华，长期在国内用机场更便宜。附商业 VPN 和机场的区别、为什么多数人长期用机场、快连（LetsVPN）停运说明、价格差距与按场景选择表。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "按流量订阅，月付 ¥20 起（100GB）；提供官方专属客户端，通用订阅需联系客服。"
+  muguang-jiasu: "月付 ¥20 起（120GB），协议为 VLESS 与 Shadowsocks；服务商资料称由新加坡团队运营。"
+  breezenet: "新订单用官方 App，下载登录即用，用法最接近传统 VPN；月付 ¥27 起（200GB）。"
+  feimaoyun: "学生版年付 ¥84 起（每月 50GB）；有自研客户端，也支持通用订阅。"
 summary:
   - "短期来华、不想折腾：选商业 VPN，并且要在入境前装好、付好款。"
   - "长期在国内每天用：选机场，入门年付折合每月不到 10 元，是商业 VPN 的十分之一左右。"
@@ -11,7 +16,7 @@ summary:
 keywords: ["VPN 推荐", "翻墙 VPN"]
 aliases: ["vpn推荐", "翻墙vpn", "astrill", "expressvpn", "surfshark", "快连", "letsvpn", "商业vpn", "中国能用的vpn"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["vpn-jichang-qubie", "mianfei-vpn", "tizi-tuijian", "yinsi-anquan-falv"]
 faq:
   - q: "在国外好用的 VPN，回国为什么连不上？"

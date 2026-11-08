@@ -8,10 +8,15 @@ summary:
   - "不想买小火箭，可以用免费的 sing-box（SFI）或 Karing。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "资料列有 Shadowrocket，但通用订阅需要联系客服申请；默认用官方专属客户端。"
+  muguang-jiasu: "本站资料目前没有列出 Shadowrocket，购买前请先向客服确认；客户端以官方专属客户端为主。"
+  breezenet: "据公开资料，2026 年 10 月起新订单不再提供订阅链接，不能用 Shadowrocket。"
+  feimaoyun: "支持通用订阅直接导入 Shadowrocket，另有自研客户端可选。"
 keywords: ["Shadowrocket 机场推荐"]
 aliases: ["shadowrocket", "小火箭", "火箭", "ios", "iphone", "ipad", "苹果", "外区"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["shadowrocket-jiaocheng", "sing-box-jiaocheng", "dingyue-daoru-wenti"]
 faq:
   - q: "Shadowrocket 可以用 Clash 订阅吗？"

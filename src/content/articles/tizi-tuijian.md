@@ -8,10 +8,15 @@ summary:
   - "第三步按预算选套餐：先买月付试用，确认晚高峰稳定后再续长周期。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "新手可以先买拂风月付 ¥20（100GB）试一个月，满意再换“穿云”年付 ¥99；通用订阅需联系客服。"
+  muguang-jiasu: "从基础版月付 ¥20（120GB）起步；默认用官方专属客户端，想用 Clash 要先联系客服。"
+  breezenet: "乘风月付 ¥27（200GB）；新订单只能用官方专属客户端，下单前先确认手机、电脑能装。"
+  feimaoyun: "学生版年付 ¥84 最省，但要一次付一年；想先试就买星耀版月付 ¥25（150GB）。"
 keywords: ["梯子怎么选", "新手买梯子"]
 aliases: ["梯子推荐", "梯子", "翻墙", "vpn推荐", "好用的梯子", "新手", "第一次"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["vpn-jichang-qubie", "kexue-shangwang-gongju", "pianyi-jichang-tuijian", "yinsi-anquan-falv"]
 faq:
   - q: "免费梯子能用吗？"

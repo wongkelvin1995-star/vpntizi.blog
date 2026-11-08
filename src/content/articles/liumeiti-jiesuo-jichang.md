@@ -8,10 +8,15 @@ summary:
   - "看剧费流量：每天 2 小时 1080p 约每月 180GB，建议选 300GB 以上档位。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "服务商宣称支持 Netflix、Disney+、HBO；历史检测中部分节点的 TikTok、Abema 未通过。本站未检测，解锁随节点变化。"
+  muguang-jiasu: "服务商宣称支持 Netflix、Hulu、HBO、Disney+、DAZN，是这四家里列出平台最多的。本站未检测。"
+  breezenet: "服务商宣称支持 Netflix、Disney+，并称全节点为住宅 IP。本站未检测，解锁随节点变化。"
+  feimaoyun: "服务商宣称支持 Netflix、Disney+、TikTok，套餐注明原生 IP 线路。本站未检测。"
 keywords: ["流媒体解锁机场", "Netflix 机场推荐"]
 aliases: ["netflix", "奈飞", "网飞", "流媒体", "解锁", "disney", "youtube", "油管", "hbo", "自制剧"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["chatgpt-jichang-tuijian", "gaosu-jichang-tuijian", "jichang-liuliang-guji"]
 faq:
   - q: "“仅解锁自制剧”是什么意思？"

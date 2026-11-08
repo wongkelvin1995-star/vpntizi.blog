@@ -4,8 +4,9 @@ import { airportUrl, monthlyEquivalent, pricePerGB, fmtCNY, PENDING, BILLING_LAB
 import AffButton from './AffButton.astro';
 import SakuraPetals from './SakuraPetals.astro';
 
-interface Props { airport: Airport; featured?: boolean; headingLevel?: 'h2' | 'h3'; showRank?: boolean }
-const { airport: a, featured = false, headingLevel = 'h3', showRank = true } = Astro.props;
+/** note：按所在文章主题写的一句说明，有则替换通用简介 */
+interface Props { airport: Airport; featured?: boolean; headingLevel?: 'h2' | 'h3'; showRank?: boolean; note?: string }
+const { airport: a, featured = false, headingLevel = 'h3', showRank = true, note } = Astro.props;
 const H = headingLevel;
 
 const cheapest = [...a.plans].sort((x, y) => x.priceCNY - y.priceCNY)[0];
@@ -24,7 +25,7 @@ const list = (arr: string[]) => (arr.length ? arr.join('、') : PENDING);
   <div>
     <span class:list={['tag', a.status === 'verified' ? 'green' : a.sourceType === 'third-party' ? 'violet' : 'warn']}>{statusLabel(a)}</span>
   </div>
-  <p class="small" style="color:var(--text-2);margin:0">{intro}</p>
+  <p class="small" style="color:var(--text-2);margin:0">{note ?? intro}</p>
   <dl>
     <dt>起步价</dt>
     <dd>{cheapest ? `${fmtCNY(cheapest.priceCNY)}（${BILLING_LABEL[cheapest.billing]}实付）` : <span class="pending">{PENDING}</span>}</dd>

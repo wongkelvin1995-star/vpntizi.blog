@@ -8,10 +8,15 @@ summary:
   - "前四家中飞猫云全线标注 IEPL，微风网络标注 IPLC 专线，灵动云在套餐页标注全部套餐使用 IEPL / IPLC 优化线路。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "套餐页标注全部 9 款套餐走 IEPL / IPLC 优化线路，另有独立 IP 的至尊私人定制（¥680/月）。"
+  muguang-jiasu: "只标注“专线出口”，没写明是 IEPL 还是 IPLC；另有 ¥680/月的独享私人定制节点。"
+  breezenet: "多数资料标注 IPLC 专线，也有资料写 IEPL，以官网为准；另有三网优化入口。"
+  feimaoyun: "主打 IEPL 专线，另有独享原生 IP 的定制套餐（¥550/月，500GB）。"
 keywords: ["专线机场推荐", "IEPL 机场推荐", "IPLC 机场推荐"]
 aliases: ["专线", "iepl", "iplc", "内网专线", "中转", "企业", "远程办公"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["iepl-iplc-qubie", "wending-jichang-tuijian", "gaosu-jichang-tuijian"]
 faq:
   - q: "专线机场为什么流量少、价格高？"

@@ -8,10 +8,15 @@ summary:
   - "原版 Clash 已停更，请用 Clash Verge Rev、ClashParty 等 mihomo 内核客户端。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "默认用官方专属客户端；Clash Verge Rev、ClashParty 的通用订阅要联系客服申请。"
+  muguang-jiasu: "同样以官方专属客户端为主，Clash Verge Rev、ClashParty 的通用订阅需联系客服获取。"
+  breezenet: "据公开资料，2026 年 10 月起新订单不再提供订阅链接，用不了 Clash；已有订阅链接的老用户不受影响。"
+  feimaoyun: "直接支持 Clash 系通用订阅，另有自研客户端，也能导入 Shadowrocket、v2rayN、Stash。"
 keywords: ["Clash 机场推荐", "Clash Verge 机场推荐", "机场推荐 Clash"]
 aliases: ["clash", "clash verge", "verge", "mihomo", "clash meta", "规则", "分流", "yaml", "小猫咪"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["clash-verge-jiaocheng", "clashparty-jiaocheng", "dingyue-daoru-wenti"]
 faq:
   - q: "原版 Clash 停更了，还能用吗？"

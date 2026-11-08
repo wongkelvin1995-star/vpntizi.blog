@@ -16,6 +16,8 @@ const PAGE_DATES = {"yinsi-shuoming": "2026-10-31", "guanyu": "2026-10-31", "jic
 const TEMPLATE_DATE = '2026-10-23';
 // 全站 meta description 重写的日期（Bing 提示描述过短）：所有页面的 HTML 都因此改变，lastmod 取各页自己的日期与此日期中较新者。上线当天改成实际上线日期。
 const META_DATE = '2026-11-08';
+// 34 个机场资料页新增“怎么选套餐：本站建议”的日期（只影响 /jichang/*）；上线当天改成实际上线日期
+const NOTES_DATE = '2026-11-08';
 /** @param {string} a @param {string} b */
 const newer = (a, b) => (a > b ? a : b);
 
@@ -34,7 +36,8 @@ export default defineConfig({
       serialize(item) {
         const slug = item.url.replace(SITE, '').replace(/^\/|\/$/g, '');
         const base = slug === '' ? '2026-10-31' : ART[slug] || PAGE_DATES[slug] || newer(DATA_DATE, TEMPLATE_DATE);
-        item.lastmod = new Date(newer(base, META_DATE)).toISOString();
+        const withNotes = slug.startsWith('jichang/') ? newer(base, NOTES_DATE) : base;
+        item.lastmod = new Date(newer(withNotes, META_DATE)).toISOString();
         if (item.url === SITE + '/') item.priority = 1.0;
         else if (/\/(jichang-tuijian|jichang-paihangbang)\/$/.test(item.url)) item.priority = 0.9;
         else item.priority = 0.7;

@@ -11,6 +11,7 @@ import { shiceFor } from '../../data/shice';
 import FeedbackList from '../../components/FeedbackList.astro';
 import { fankuiFor } from '../../data/fankui';
 import { SITE } from '../../data/site';
+import { AIRPORT_NOTES } from '../../data/airport-notes';
 
 export function getStaticPaths() {
   return namedAirports.map((a) => ({ params: { id: a.id }, props: { a } }));
@@ -140,6 +141,14 @@ const desc = metaDescription(a);
       )}
 
       <section class="section"><h2>{sn}是什么机场</h2><p>简单说，{sn}是一款机场类梯子：按套餐订阅节点，在客户端里导入后使用。</p><p>{intro}</p></section>
+
+      {AIRPORT_NOTES[a.id] && (
+        <section class="section" aria-labelledby="pick-h">
+          <h2 id="pick-h">{sn}怎么选套餐：本站建议</h2>
+          <p>{AIRPORT_NOTES[a.id]}</p>
+          <p class="small muted">依据本站整理的套餐资料撰写（{statusLabel(a)}），不是实测结论；价格以官网结算页为准。</p>
+        </section>
+      )}
 
       <section class="section">
         <h2>{sn}套餐价格表</h2>

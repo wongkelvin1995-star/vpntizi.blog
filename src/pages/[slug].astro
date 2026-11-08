@@ -70,7 +70,7 @@ const jsonLd = [
         </section>
       ) : <p class="lead" style="color:var(--text-2)">{d.description}</p>}
 
-      {d.showTopFour && <TopFour />}
+      {d.showTopFour && <TopFour notes={d.topFourNotes} />}
 
       <div class="prose section">
         <Content />

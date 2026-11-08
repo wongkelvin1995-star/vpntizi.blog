@@ -8,10 +8,15 @@ summary:
   - "大流量用户先算每GB价格：1TB 以上的套餐月付每GB多在 ¥0.10–0.20。"
 category: recommend
 showTopFour: true
+topFourNotes:
+  lingdongyun: "套餐页标注 IEPL / IPLC 优化线路、不限速，节点覆盖 15 个地区；本站没有做测速。"
+  muguang-jiasu: "BGP 智能路由加专线出口；基础版、标准版、至尊版标注不限速，旗舰版没写明。本站没有做测速。"
+  breezenet: "IPLC 专线加三网优化入口，标注不限速、不限同时在线设备。本站没有做测速。"
+  feimaoyun: "IEPL 专线，服务商称节点最高 2.5Gbps、高峰不降速；资料提示热门时段香港节点偶有排队。"
 keywords: ["高速机场推荐"]
 aliases: ["高速", "速度快", "4k", "下载", "带宽", "限速", "mbps", "hysteria2"]
 published: 2026-10-20
-updated: 2026-10-31
+updated: 2026-11-08
 related: ["jichang-yanchi-wendingxing", "zhuanxian-jichang-tuijian", "liumeiti-jiesuo-jichang"]
 faq:
   - q: "看 4K 需要多快的速度？"
